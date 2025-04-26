@@ -3,7 +3,7 @@ import { AuthError, AuthResponse, User } from '@supabase/supabase-js';
 import { Observable, from, map } from 'rxjs';
 import { supabase } from '../../db/supabase.client';
 
-// Define available table names as a type-safe enum
+
 export enum TableName {
   Boxes = 'boxes',
   Flashcards = 'flashcards',
