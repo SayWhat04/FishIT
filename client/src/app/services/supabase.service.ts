@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthError, AuthResponse, User } from '@supabase/supabase-js';
 import { Observable, from, map } from 'rxjs';
-import { supabase } from '../../db/supabase.client';
+import { supabase } from '../../../../server/src/db/supabase.client';
 
 
 export enum TableName {

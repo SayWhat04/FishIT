@@ -10,22 +10,26 @@ alwaysApply: true
 ## Tech Stack
 
 - TypeScript 5
-- Angular 17
+- Angular 19
 - Tailwind 4
-- Shadcn/ui
+- Express 
 
 ## Project Structure
 
 When introducing changes to the project, always follow the directory structure below:
 
-- `./src` - source code
-- `./src/pages/api` - API endpoints
-- `./src/db` - Supabase clients and types
-- `./src/types.ts` - Shared types for backend and frontend (Entities, DTOs)
-- `./src/components` - Client-side components written in Angular
-- `./src/lib` - Services and helpers 
-- `./src/assets` - static internal assets
-- `./public` - public assets
+- `./client/src` - Angular frontend source code
+- `./client/src/assets` - static internal assets
+- `./client/src/environment` - environment definition
+- `./client/src/styles` - styles shared by Angular components
+- `./client/src/app/components` - Angular components
+- `./client/src/app/components` - Angular services
+- `./client/src/app/shared` - code shared between Angular components and services
+- `./server/src` - Express backend source code
+- `./server/src/api` - Express api code
+- `./server/src/db` - Supabase clients
+- `./server/src/types` - backend types
+- `./shared` - code shared between backend and frontend
 
 When modifying the directory structure, always update this section.
 

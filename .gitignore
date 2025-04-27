@@ -1,42 +1,58 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# Monorepo: all node_modules and builds
+**/node_modules/
+**/dist/
+**/build/
+**/out-tsc/
 
-# Node
-/node_modules
-/server/node_modules
-npm-debug.log
-yarn-error.log
+# TypeScript and linters
+*.tsbuildinfo
+.eslintcache
+.nyc_output/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs and tmp
+*.log
+*.tmp
+*.orig
+
+# Angular CLI
+**/.angular/cache/
+client/.angular/config.json
+
+# Supabase (it also has its own .gitignore)
+# Supabase already includes:
+#   .branches
+#   .temp
+#   .env.keys
+#   .env.local
+#   .env.*.local
 
 # IDEs and editors
 .idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
-
-# Visual Studio Code
+*.iml
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
+  !.vscode/settings.json
+  !.vscode/tasks.json
+  !.vscode/launch.json
+  !.vscode/extensions.json
+.history/
 
-# Miscellaneous
-/.angular/cache
+# Developer tools / AI
+.cursor/
+.ai/
+
+# Cache and others
 .sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
+.connect.lock
+libpeerconnection.log
 testem.log
-/typings
+typings/
 
 # System files
 .DS_Store

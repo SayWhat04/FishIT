@@ -11,7 +11,7 @@ Główne cechy produktu:
 - Integracja z algorytmem spaced repetition (FSRS)
 - Prosty system kont użytkowników do przechowywania fiszek
 
-FishIT jest przeznaczony dla osób chcących efektywnie posiąść nową wiedzę, bez względu na dziedzinę. Aplikacja będzie dostępna jako darmowa usługa webowa w języku polskim, oparta na technologiach Angular 17 (frontend) i Supabase (backend).
+FishIT jest przeznaczony dla osób chcących efektywnie posiąść nową wiedzę, bez względu na dziedzinę. Aplikacja będzie dostępna jako darmowa usługa webowa w języku polskim, oparta na technologiach Angular 19 (frontend) i Supabase + Express (backend).
 
 ## 2. Problem użytkownika
 

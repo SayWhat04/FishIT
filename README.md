@@ -42,6 +42,8 @@ FishIT is a web application designed to solve a common problem in education - th
   - PostgreSQL database
   - Built-in user authentication
   - SDK for Backend-as-a-Service
+- **Express**
+   - Proxy Backend
 
 ### AI Integration
 - **OpenRouter.ai**:

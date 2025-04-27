@@ -195,7 +195,6 @@
 
 ## 4. Validation and Business Logic
 
-
 ### Boxes
 - Name: required, unique per user
 - Description: optional
@@ -233,9 +232,3 @@
 - `status`: enum ['accepted','rejected','edited']
 - `generation_info`: flexible JSONB metadata
 - RLS ensures users only see their own logs
-
-### Study Sessions
-- Session `status`: enum ['active','paused','ended']
-- Review `difficulty`: integer 1-4
-- Progress and review logs persisted in `review_logs`
-- Next flashcard selection driven by FSRS algorithm

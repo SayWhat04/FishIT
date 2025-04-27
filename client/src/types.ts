@@ -1,4 +1,4 @@
-import { Json, Tables, TablesInsert, TablesUpdate } from './db/database.types';
+import { Json, Tables, TablesInsert, TablesUpdate } from '../../server/src/types/database.types';
 
 // Data Transfer Objects (DTOs) reflecting database rows
 export type BoxDto = Tables<'boxes'>; // corresponds to public.boxes.Row
