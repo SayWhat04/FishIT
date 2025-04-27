@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import apiRoutes from './api/routes';
 
 // Load environment variables from .env file
-dotenv.config();
+dotenv.config({ path: '.env' });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,11 +12,10 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-// 
-// // API routes with authentication
-// TODO: This is not working, need to fix it
-// app.use("/api", authMiddleware, apiRoutes);
-// 
+
+// API routes
+app.use("/api", apiRoutes);
+
 // Health check endpoint
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
