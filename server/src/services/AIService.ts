@@ -1,36 +1,14 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-// import { environment } from '../config/environment';
-
-// Local type definition to match the GenerateFlashcardsCommand
-interface GenerateFlashcardsCommand {
-  text: string;
-  count: number;
-}
-
-// Local type definition to match the FlashcardSuggestionDto
-interface FlashcardSuggestionDto {
-  id: string;
-  front: string;
-  back: string;
-  generation_info: any;
-}
-
-// Local type definition to match the GenerateFlashcardsResponseDto
-interface GenerateFlashcardsResponseDto {
-  suggestions: FlashcardSuggestionDto[];
-}
-
-// Load environment variables
-// dotenv.config();
+import { GenerateFlashcardsCommand, FlashcardSuggestionDto, GenerateFlashcardsResponseDto } from '../../../shared/types/dto';
+import { environment } from '../config/environment';
 
 export class AIService {
   private readonly apiKey: string;
   private readonly apiUrl: string;
 
   constructor() {
-    this.apiKey = process.env.OPENROUTER_API_KEY || '';
-    this.apiUrl = process.env.OPENROUTER_URL || '';
+    this.apiKey = environment.openRouter.apiKey;
+    this.apiUrl = environment.openRouter.url;
 
     if (!this.apiKey) {
       console.warn('OPENROUTER_API_KEY is not set in environment variables');
