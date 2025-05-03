@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { GenerateFlashcardsCommand, FlashcardSuggestionDto, GenerateFlashcardsResponseDto } from '../../../shared/types/dto';
+import { FlashcardSuggestionDto, GenerateFlashcardsResponseDto } from '../../../shared/types/dto';
+import { GenerateFlashcardsCommand } from '../../../shared/types/commands';
 import { environment } from '../config/environment';
 
 export class AIService {

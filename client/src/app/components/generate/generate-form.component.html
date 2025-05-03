@@ -1,0 +1,63 @@
+<form [formGroup]="form" class="flex flex-col gap-4">
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Paste your text here</mat-label>
+    <textarea 
+      matInput 
+      formControlName="text" 
+      rows="10" 
+      placeholder="Paste your text here (max 10000 characters)">
+    </textarea>
+    <mat-hint align="end">{{ form.get('text')?.value?.length || 0 }}/10000</mat-hint>
+    @if (form.get('text')?.invalid && form.get('text')?.touched) {
+      <mat-error>
+        @if (form.get('text')?.errors?.['required']) {
+          Text is required
+        }
+        @if (form.get('text')?.errors?.['maxlength']) {
+          Text cannot exceed 10000 characters
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-full md:w-1/3">
+    <mat-label>Number of flashcards</mat-label>
+    <input 
+      matInput 
+      type="number" 
+      formControlName="count" 
+      min="1" 
+      max="50">
+    <mat-hint>Enter a number between 1 and 50</mat-hint>
+    @if (form.get('count')?.invalid && form.get('count')?.touched) {
+      <mat-error>
+        @if (form.get('count')?.errors?.['required']) {
+          Number of flashcards is required
+        }
+        @if (form.get('count')?.errors?.['min']) {
+          Minimum value is 1
+        }
+        @if (form.get('count')?.errors?.['max']) {
+          Maximum value is 50
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <div class="flex justify-end gap-4">
+    <button 
+      mat-button 
+      type="button"
+      (click)="clear()">
+      Clear
+    </button>
+    <button 
+      mat-raised-button 
+      color="primary" 
+      type="button"
+      [disabled]="!form.valid || getLoadingState()"
+      (click)="submit()">
+      Generate
+    </button>
+  </div>
+</form> 

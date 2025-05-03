@@ -1,0 +1,43 @@
+<div class="mb-4">
+  <div class="flex justify-between items-center mb-2">
+    <h2 class="text-xl font-semibold">Flashcards to Review</h2>
+    <div class="space-x-2">
+      <button 
+        mat-stroked-button 
+        color="primary" 
+        (click)="acceptAll()" 
+        [disabled]="_suggestions.length === 0">
+        Accept All
+      </button>
+      <button 
+        mat-stroked-button 
+        color="warn" 
+        (click)="rejectAll()" 
+        [disabled]="_suggestions.length === 0">
+        Reject All
+      </button>
+    </div>
+  </div>
+  
+  <div class="flex gap-3 mb-4">
+    <mat-chip color="primary" selected>{{ acceptedCount }} Accepted</mat-chip>
+    <mat-chip color="warn" selected>{{ rejectedCount }} Rejected</mat-chip>
+    <mat-chip color="accent" selected>{{ editingCount }} Editing</mat-chip>
+  </div>
+  
+  @if (_suggestions.length === 0) {
+    <div class="p-6 text-center bg-gray-100 rounded-lg">
+      <p class="text-gray-600">No flashcards to review. Generate some first.</p>
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 gap-4">
+      @for (suggestion of _suggestions; track suggestion.id) {
+        <app-review-item 
+          [suggestion]="suggestion" 
+          (statusChange)="onStatusChange(suggestion, $event)" 
+          (edit)="onFlashcardEdit(suggestion, $event)">
+        </app-review-item>
+      }
+    </div>
+  }
+</div> 
