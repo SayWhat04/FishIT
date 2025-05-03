@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { ReviewListComponent } from './review-list.component';
 import { BoxService } from '../../services/box.service';
 import { BoxDto } from '@shared/types/dto';
@@ -19,6 +20,7 @@ import { ReviewFlashcard } from '@shared/types/reviewTypes';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
+    MatCardModule,
     ReviewListComponent
   ],
   templateUrl: './review-page.component.html',

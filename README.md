@@ -34,7 +34,6 @@ FishIT is a web application designed to solve a common problem in education - th
 ### Frontend
 - **Angular** (v19.2.0)
 - **TypeScript** (v5.7.2)
-- **Tailwind CSS** (v4) for styling
 - **RxJS** (v7.8.0)
 
 ### Backend

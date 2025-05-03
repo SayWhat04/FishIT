@@ -7,11 +7,11 @@ export const routes: Routes = [
   {
     path: 'generate',
     component: GeneratePageComponent,
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   },
   {
     path: 'review',
     component: ReviewPageComponent,
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   }
 ];
