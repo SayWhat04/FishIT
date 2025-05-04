@@ -10,7 +10,7 @@ interface GenerateFlashcardsCommand {
 export const validateGenerateFlashcards = (req: Request, res: Response, next: NextFunction) => {
   try {
     const { text, count } = req.body as Partial<GenerateFlashcardsCommand>;
-    
+
     // Validate text field
     if (!text) {
       return res.status(400).json({ error: 'Text is required' });
@@ -47,6 +47,7 @@ export const validateGenerateFlashcards = (req: Request, res: Response, next: Ne
     
     // If validation passes, proceed to the next middleware/controller
     next();
+    return undefined;
   } catch (error) {
     console.error('Validation error:', error);
     return res.status(500).json({ error: 'Internal server error during validation' });

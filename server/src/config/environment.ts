@@ -1,20 +1,29 @@
 import dotenv from 'dotenv';
 import path from 'path';
 
-// Load environment variables
+
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
-export const environment = {
+
+function getEnvVar(key: string, required = true): string {
+  const value = process.env[key];
+
+  if (required && !value) {
+    throw new Error(`Missing required environment variable: ${key}`);
+  }
+  return value!;
+}
+
+export const config = {
   supabase: {
-    url: process.env.SUPABASE_URL || '',
-    key: process.env.SUPABASE_KEY || '',
-    serviceKey: process.env.SUPABASE_SERVICE_KEY || ''
+    url: getEnvVar('SUPABASE_URL'),
+    serviceKey: getEnvVar('SUPABASE_SERVICE_KEY')
   },
   openRouter: {
-    apiKey: process.env.OPENROUTER_API_KEY || '',
-    url: process.env.OPENROUTER_URL || ''
+    apiKey: getEnvVar('OPENROUTER_API_KEY'),
+    url: getEnvVar('OPENROUTER_URL')
   },
   server: {
-    port: process.env.PORT ? parseInt(process.env.PORT) : 3000
+    port: getEnvVar('PORT', false) ? parseInt(getEnvVar('PORT', false)) : 3000
   }
 };

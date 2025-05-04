@@ -1,7 +1,6 @@
-import { Request, Response, NextFunction } from 'express';
 import rateLimitMiddleware from 'express-rate-limit';
 
-// Create a rate limiter middleware
+
 export const rateLimit = (options: {
   windowMs: number;
   max: number;

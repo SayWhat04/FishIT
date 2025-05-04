@@ -1,15 +1,17 @@
 import axios from 'axios';
 import { FlashcardSuggestionDto, GenerateFlashcardsResponseDto } from '../../../shared/types/dto';
 import { GenerateFlashcardsCommand } from '../../../shared/types/commands';
-import { environment } from '../config/environment';
+import { config } from '../config/environment';
 
 export class AIService {
   private readonly apiKey: string;
   private readonly apiUrl: string;
 
   constructor() {
-    this.apiKey = environment.openRouter.apiKey;
-    this.apiUrl = environment.openRouter.url;
+    this.apiKey = config.openRouter.apiKey;
+    this.apiUrl = config.openRouter.url;
+
+    console.log('this.apiKey: ', this.apiKey)
 
     if (!this.apiKey) {
       console.warn('OPENROUTER_API_KEY is not set in environment variables');
@@ -22,6 +24,10 @@ export class AIService {
    * @returns A promise resolving to flashcard suggestions
    */
   async generateFlashcards(command: GenerateFlashcardsCommand): Promise<GenerateFlashcardsResponseDto> {
+    
+    
+    console.log('this.apiKey: ', this.apiKey)
+    
     try {
       if (!this.apiKey) {
         throw new Error('OPENROUTER_API_KEY is not configured');

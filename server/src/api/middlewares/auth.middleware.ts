@@ -1,22 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-import { resolve } from 'path';
+import { config } from '../../config/environment';
 
-// Load environment variables from .env file
-// Try to load from project root and server directory
-dotenv.config();
-dotenv.config({ path: resolve(__dirname, '../../../.env') });
 
-console.log('Env vars check:', {
-  SUPABASE_URL: process.env.SUPABASE_URL,
-  SUPABASE_KEY: Boolean(process.env.SUPABASE_KEY),
-  SUPABASE_SERVICE_KEY: Boolean(process.env.SUPABASE_SERVICE_KEY)
-});
-
-// Initialize Supabase client - REPLACE THESE VALUES with your actual Supabase credentials
-const supabaseUrl = process.env.SUPABASE_URL || '';
-const supabaseKey = process.env.SUPABASE_SERVICE_KEY || '';
+const supabaseUrl = config.supabase.url;
+const supabaseKey = config.supabase.serviceKey;
 
 if (!supabaseUrl || supabaseUrl === '') {
   console.error('CRITICAL: You need to set the SUPABASE_URL environment variable');
@@ -53,7 +41,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
       email: data.user.email
     };
     
-    next();
+    return next();
   } catch (error) {
     console.error('Auth middleware error:', error);
     return res.status(500).json({ error: 'Internal server error during authentication' });

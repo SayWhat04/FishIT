@@ -22,10 +22,10 @@ router.post("/flashcards", validateGenerateFlashcards as unknown as RequestHandl
   try {
     // Extract validated data from request body
     const { text, count } = req.body;
-    
+
     // Call the AI service to generate flashcards
     const result = await aiService.generateFlashcards({ text, count });
-    
+
     // Return the flashcard suggestions
     res.status(200).json(result);
   } catch (error: unknown) {

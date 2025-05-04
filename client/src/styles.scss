@@ -8,16 +8,15 @@
 // Define the Azure & Blue theme
 $azure-primary: mat.$blue-palette;
 $azure-accent: mat.$cyan-palette;
-$azure-warn: mat.$red-palette;
+$azure-error: mat.$red-palette;
 
 // Global styles
 html, body { 
     @include mat.theme((
         color: (
           primary: $azure-primary,
-          accent: $azure-accent,
-          warn: $azure-warn,
-          theme-type: light,
+          tertiary: $azure-accent,
+          theme-type: light
         ),
         typography: Roboto,
         density: 0
@@ -59,21 +58,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 // Page header
-///.page-header {
-///  margin-bottom: 2rem;
-///  
-///  h1 {
-///    font-size: 1.75rem;
-///    font-weight: bold;
-///    margin-bottom: 0.5rem;
-///    color: map.get($azure-primary, 800);
-///  }
-///  
-///  p {
-///    color: #555;
-///    margin-bottom: 0.5rem;
-///  }
-///}
+// .page-header {
+//   margin-bottom: 2rem;
+//   
+//   h1 {
+//     font-size: 1.75rem;
+//     font-weight: bold;
+//     margin-bottom: 0.5rem;
+//     color: map.get($azure-primary, 800);
+//   }
+//   
+//   p {
+//     color: #555;
+//     margin-bottom: 0.5rem;
+//   }
+// }
 
 // Responsive adjustments
 @media (max-width: 768px) {
