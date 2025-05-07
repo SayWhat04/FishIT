@@ -44,8 +44,7 @@ export const validateGenerateFlashcards = (req: Request, res: Response, next: Ne
     if (count < 1 || count > 50) {
       return res.status(400).json({ error: 'Count must be between 1 and 50' });
     }
-    
-    // If validation passes, proceed to the next middleware/controller
+
     next();
     return undefined;
   } catch (error) {

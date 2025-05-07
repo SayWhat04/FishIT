@@ -11,8 +11,6 @@ export class AIService {
     this.apiKey = config.openRouter.apiKey;
     this.apiUrl = config.openRouter.url;
 
-    console.log('this.apiKey: ', this.apiKey)
-
     if (!this.apiKey) {
       console.warn('OPENROUTER_API_KEY is not set in environment variables');
     }
@@ -25,13 +23,11 @@ export class AIService {
    */
   async generateFlashcards(command: GenerateFlashcardsCommand): Promise<GenerateFlashcardsResponseDto> {
     
-    
-    console.log('this.apiKey: ', this.apiKey)
-    
+      
     try {
-      if (!this.apiKey) {
-        throw new Error('OPENROUTER_API_KEY is not configured');
-      }
+      // if (!this.apiKey) {
+      //   throw new Error('OPENROUTER_API_KEY is not configured');
+      // }
 
       // Prepare the prompt for the AI model
       const prompt = this.buildPrompt(command.text, command.count);
@@ -40,7 +36,7 @@ export class AIService {
       const response = await axios.post(
         `${this.apiUrl}/chat/completions`,
         {
-          model: 'openai/gpt-3.5-turbo', // Default model, can be made configurable
+          model: 'openai/o4-mini', // Default model, can be made configurable
           messages: [
             {
               role: 'system',
