@@ -5,12 +5,15 @@ import { auth } from "../middlewares/auth.middleware";
 const router = express.Router();
 
 // Apply auth middleware to all box routes
-router.use(auth as unknown as RequestHandler);
+// router.use(auth as unknown as RequestHandler);
+
+// Mock user ID for development
+const MOCK_USER_ID = '667e737d-2e28-4ae2-9a73-e29a39544f9b';
 
 // Get all boxes for the current user
 router.get("/", (async (req, res) => {
   try {
-    const userId = (req as any).user.id;
+    const userId = MOCK_USER_ID;
     
     const { data: boxes, error } = await supabase
       .from('boxes')
@@ -37,7 +40,7 @@ router.get("/", (async (req, res) => {
 // Get a specific box by ID
 router.get("/:id", (async (req, res) => {
   try {
-    const userId = (req as any).user.id;
+    const userId = MOCK_USER_ID;
     const boxId = req.params['id'];
 
     const { data: box, error } = await supabase
@@ -62,7 +65,7 @@ router.get("/:id", (async (req, res) => {
 // Create a new box
 router.post("/", (async (req, res) => {
   try {
-    const userId = (req as any).user.id;
+    const userId = MOCK_USER_ID;
     const { name, description } = req.body;
 
     const { data: box, error } = await supabase
@@ -89,7 +92,7 @@ router.post("/", (async (req, res) => {
 // Update a box
 router.put("/:id", (async (req, res) => {
   try {
-    const userId = (req as any).user.id;
+    const userId = MOCK_USER_ID;
     const boxId = req.params['id'];
     const { name, description } = req.body;
 
@@ -116,7 +119,7 @@ router.put("/:id", (async (req, res) => {
 // Delete a box
 router.delete("/:id", (async (req, res) => {
   try {
-    const userId = (req as any).user.id;
+    const userId = MOCK_USER_ID;
     const boxId = req.params['id'];
 
     const { error } = await supabase
@@ -131,6 +134,60 @@ router.delete("/:id", (async (req, res) => {
   } catch (error) {
     console.error('Error deleting box:', error);
     res.status(500).json({ error: 'Failed to delete box' });
+  }
+}) as RequestHandler);
+
+// Bulk create flashcards for a box
+router.post("/:id/flashcards/bulk", (async (req, res) => {
+  try {
+    const userId = MOCK_USER_ID;
+    const boxId = req.params['id'];
+    const flashcards = Array.isArray(req.body) ? req.body : req.body.flashcards;
+
+    // Validate input
+    if (!Array.isArray(flashcards)) {
+      return res.status(400).json({ error: 'Flashcards must be an array' });
+    }
+
+    // First verify the box exists and belongs to the user
+    const { data: box, error: boxError } = await supabase
+      .from('boxes')
+      .select('id')
+      .eq('id', boxId)
+      .eq('user_id', userId)
+      .single();
+
+    if (boxError) throw boxError;
+    if (!box) {
+      return res.status(404).json({ error: 'Box not found' });
+    }
+
+    // Prepare flashcards data with box_id
+    const flashcardsData = flashcards.map(flashcard => ({
+      ...flashcard,
+      box_id: boxId,
+      user_id: userId,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    }));
+
+    // Insert flashcards
+    const { data: createdFlashcards, error: insertError } = await supabase
+      .from('flashcards')
+      .insert(flashcardsData)
+      .select();
+
+    if (insertError) throw insertError;
+
+    res.status(201).json({
+      items: createdFlashcards,
+      meta: {
+        total: createdFlashcards.length
+      }
+    });
+  } catch (error) {
+    console.error('Error creating bulk flashcards:', error);
+    res.status(500).json({ error: 'Failed to create flashcards' });
   }
 }) as RequestHandler);
 

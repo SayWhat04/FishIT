@@ -1,0 +1,29 @@
+<header class="bg-white shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex">
+        <div class="flex-shrink-0 flex items-center">
+          <a routerLink="/" class="text-xl font-bold text-gray-900">FishIT</a>
+        </div>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="openAddBoxDialog()">
+          <mat-icon>add</mat-icon>
+          New Box
+        </button>
+        
+        <button 
+          mat-raised-button 
+          color="accent"
+          (click)="navigateToGenerate()">
+          <mat-icon>auto_awesome</mat-icon>
+          Generate
+        </button>
+      </div>
+    </div>
+  </div>
+</header> 

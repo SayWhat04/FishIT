@@ -41,16 +41,18 @@ export class ReviewPageComponent implements OnInit {
     this.loadBoxes();
     
     // Get suggestions from router state
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as { suggestions: ReviewFlashcard[] } | undefined;
+    const state = this.router.getCurrentNavigation()?.extras.state as { suggestions: ReviewFlashcard[] } | undefined;
+    const historyState = history.state as { suggestions: ReviewFlashcard[] } | undefined;
     
-    if (!state?.suggestions || state.suggestions.length === 0) {
+    const suggestions = state?.suggestions || historyState?.suggestions;
+    
+    if (!suggestions || suggestions.length === 0) {
       this.snackBar.open('No flashcards to review. Please generate some first.', 'OK', { duration: 5000 });
       this.router.navigate(['/generate']);
       return;
     }
     
-    this.suggestions.set(state.suggestions);
+    this.suggestions.set(suggestions);
   }
   
   private loadBoxes(): void {

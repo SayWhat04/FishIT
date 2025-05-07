@@ -21,17 +21,23 @@
 }
 
 .app-content {
+  min-height: calc(100vh - 64px - 48px); // viewport height - header height - footer height
+  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
-  min-height: calc(100vh - 140px);
 }
 
 .app-footer {
-  padding: 1rem;
-  text-align: center;
-  color: #0078d4;
-  font-size: 0.875rem;
+  height: 48px;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .footer-content {
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
 }
 
 // Dodatkowe style
