@@ -1,0 +1,39 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+  <app-auth-input
+    formControlName="email"
+    label="Email"
+    type="email"
+    placeholder="Enter your email"
+    [errorMessage]="getErrorMessage('email')"
+  ></app-auth-input>
+
+  <app-auth-input
+    formControlName="password"
+    label="Password"
+    type="password"
+    placeholder="Enter your password"
+    [errorMessage]="getErrorMessage('password')"
+  ></app-auth-input>
+
+  <div class="flex justify-end">
+    <a routerLink="/forgot-password" class="text-sm text-blue-600 hover:text-blue-800">
+      Forgot password?
+    </a>
+  </div>
+
+  <app-auth-error [message]="errorMessage"></app-auth-error>
+
+  <app-auth-button
+    text="Sign In"
+    color="primary"
+    [loading]="loading"
+    [disabled]="loginForm.invalid"
+  ></app-auth-button>
+
+  <div class="text-center text-sm text-gray-600">
+    Don't have an account?
+    <a routerLink="/register" class="text-blue-600 hover:text-blue-800">
+      Sign up
+    </a>
+  </div>
+</form> 

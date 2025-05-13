@@ -1,0 +1,11 @@
+<button
+  mat-raised-button
+  [color]="color"
+  [disabled]="disabled || loading"
+  class="w-full"
+  type="submit">
+  @if (loading) {
+    <mat-spinner diameter="20" class="mr-2"></mat-spinner>
+  }
+  {{ text }}
+</button> 

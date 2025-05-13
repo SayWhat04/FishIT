@@ -1,0 +1,49 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+  <app-auth-input
+    formControlName="username"
+    label="Username"
+    type="text"
+    placeholder="Choose a username"
+    [errorMessage]="getErrorMessage('username')"
+  ></app-auth-input>
+
+  <app-auth-input
+    formControlName="email"
+    label="Email"
+    type="email"
+    placeholder="Enter your email"
+    [errorMessage]="getErrorMessage('email')"
+  ></app-auth-input>
+
+  <app-auth-input
+    formControlName="password"
+    label="Password"
+    type="password"
+    placeholder="Create a password"
+    [errorMessage]="getErrorMessage('password')"
+  ></app-auth-input>
+
+  <app-auth-input
+    formControlName="confirmPassword"
+    label="Confirm Password"
+    type="password"
+    placeholder="Confirm your password"
+    [errorMessage]="getErrorMessage('confirmPassword')"
+  ></app-auth-input>
+
+  <app-auth-error [message]="errorMessage"></app-auth-error>
+
+  <app-auth-button
+    text="Create Account"
+    color="primary"
+    [loading]="loading"
+    [disabled]="registerForm.invalid"
+  ></app-auth-button>
+
+  <div class="text-center text-sm text-gray-600">
+    Already have an account?
+    <a routerLink="/login" class="text-blue-600 hover:text-blue-800">
+      Sign in
+    </a>
+  </div>
+</form> 

@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+button {
+  height: 48px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  transition: all 0.2s ease-in-out;
+  
+  &:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  &:not(:disabled):active {
+    transform: translateY(0);
+  }
+}
+
+mat-spinner {
+  display: inline-block;
+  margin-right: 8px;
+  
+  ::ng-deep circle {
+    stroke: currentColor;
+  }
+} 
