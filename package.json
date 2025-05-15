@@ -10,7 +10,12 @@
     "start:dev": "concurrently \"npm run start:client\" \"npm run start:server\"",
     "build:client": "cd client && npm run build",
     "build:server": "cd server && npm run build",
-    "build": "npm run build:client && npm run build:server"
+    "build": "npm run build:client && npm run build:server",
+    "test:client": "cd client && npm test",
+    "test:server": "cd server && npm test",
+    "test:e2e": "cd client && npm run e2e:run",
+    "test": "npm run test:server && npm run test:client",
+    "test:all": "npm run test && npm run test:e2e"
   },
   "private": true,
   "dependencies": {

@@ -8,6 +8,7 @@
 - [Tech Stack](#tech-stack)
 - [Getting Started Locally](#getting-started-locally)
 - [Available Scripts](#available-scripts)
+- [Testing Strategy](#testing-strategy)
 - [Project Scope](#project-scope)
 - [Project Status](#project-status)
 - [License](#license)
@@ -49,6 +50,16 @@ FishIT is a web application designed to solve a common problem in education - th
   - Access to various AI models (including Claude-3.7-sonnet)
   - Managed API limits and costs
   
+### Testing Frameworks
+- **Frontend Testing**:
+  - Jasmine & Karma for Angular unit tests
+  - Cypress & Playwright for end-to-end tests
+  - Lighthouse for performance testing
+- **Backend Testing**:
+  - Jest for Express unit tests
+  - Supertest for API testing
+  - k6 for performance testing
+
 ### CI/CD & Hosting
 - **GitHub Actions** for CI/CD pipelines
 - **DigitalOcean** for hosting (Docker)
@@ -92,6 +103,34 @@ FishIT is a web application designed to solve a common problem in education - th
 - `npm run watch` - Builds the application and watches for changes
 - `npm test` - Runs the test suite
 - `npm run ng` - Runs Angular CLI commands
+
+## Testing Strategy
+
+FishIT implements a comprehensive testing approach covering all layers of the application:
+
+### Types of Tests
+
+- **Unit Tests**: Testing individual components, services, and API endpoints
+- **Integration Tests**: Testing data flow between frontend and backend, Supabase integration, and AI services
+- **End-to-End Tests**: Testing complete user scenarios from registration to flashcard usage
+- **Performance Tests**: Testing API response times, frontend loading speed, and user capacity
+- **Security Tests**: Testing API vulnerabilities, authentication security, and financial limits
+
+### Testing Environments
+
+- **Development**: Local environment with dependencies and local Supabase server
+- **Testing**: Dedicated server environment with isolated Supabase database and test API keys
+- **Production**: DigitalOcean environment with production database and API keys
+
+### Quality Criteria
+
+- 80% code coverage for unit tests
+- API response time below 300ms for 95% of requests
+- Frontend loading in under 2 seconds
+- Support for 100+ concurrent users
+- No critical or high security vulnerabilities
+
+The full testing plan implementation follows a phased approach over a 7-week period, with dedicated resources for frontend, backend, and AI integration testing.
 
 ## Project Scope
 
