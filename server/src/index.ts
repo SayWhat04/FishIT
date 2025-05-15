@@ -1,10 +1,12 @@
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import 'express-async-errors';
 import winston from 'winston';
 import apiRoutes from './api/routes';
 import { config } from './config/environment';
 import { Request, Response, NextFunction } from 'express';
+import authRoutes from './api/auth.routes';
 
 // Konfiguracja Winston logger
 const logger = winston.createLogger({
@@ -26,6 +28,7 @@ const PORT = config.server.port;
 
 // Middleware
 app.use(cors());
+app.use(helmet());
 app.use(express.json());
 
 // Request logging middleware
@@ -36,6 +39,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // API routes
 app.use("/api", apiRoutes);
+app.use('/api/auth', authRoutes);
 
 // Health check endpoint
 app.get("/health", (req, res) => {

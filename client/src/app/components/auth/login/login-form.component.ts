@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthInputComponent } from '../auth-input.component';
 import { AuthButtonComponent } from '../auth-button.component';
 import { AuthErrorComponent } from '../auth-error.component';
+import { AuthService } from '../../../services/auth.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login-form',
@@ -24,7 +26,11 @@ export class LoginFormComponent {
   loading = false;
   errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
@@ -51,8 +57,19 @@ export class LoginFormComponent {
     if (this.loginForm.valid) {
       this.loading = true;
       this.errorMessage = null;
-      // TODO: Implement login logic
-      console.log(this.loginForm.value);
+      
+      const { email, password } = this.loginForm.value;
+      
+      this.authService.login(email, password)
+        .pipe(finalize(() => this.loading = false))
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/generate']); // Przekierowanie do generowania fiszek po zalogowaniu
+          },
+          error: (err) => {
+            this.errorMessage = err?.error?.message || 'Login failed. Please check your credentials.';
+          }
+        });
     }
   }
 } 
