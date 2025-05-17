@@ -4,8 +4,7 @@ import { auth } from "../middlewares/auth.middleware";
 
 const router = express.Router();
 
-// Apply auth middleware to all box routes
-// router.use(auth as unknown as RequestHandler);
+router.use(auth as unknown as RequestHandler);
 
 // Mock user ID for development
 const MOCK_USER_ID = '667e737d-2e28-4ae2-9a73-e29a39544f9b';
@@ -50,15 +49,22 @@ router.get("/:id", (async (req, res) => {
       .eq('user_id', userId)
       .single();
 
-    if (error) throw error;
+    if (error) {
+      res.status(500).json({ error: 'Database error' });
+      return;
+    }
+    
     if (!box) {
-      return res.status(404).json({ error: 'Box not found' });
+      res.status(404).json({ error: 'Box not found' });
+      return;
     }
 
     res.json(box);
+    return;
   } catch (error) {
     console.error('Error fetching box:', error);
     res.status(500).json({ error: 'Failed to fetch box' });
+    return;
   }
 }) as RequestHandler);
 
@@ -104,15 +110,22 @@ router.put("/:id", (async (req, res) => {
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) {
+      res.status(500).json({ error: 'Database error' });
+      return;
+    }
+    
     if (!box) {
-      return res.status(404).json({ error: 'Box not found' });
+      res.status(404).json({ error: 'Box not found' });
+      return;
     }
 
     res.json(box);
+    return;
   } catch (error) {
     console.error('Error updating box:', error);
     res.status(500).json({ error: 'Failed to update box' });
+    return;
   }
 }) as RequestHandler);
 
@@ -146,7 +159,8 @@ router.post("/:id/flashcards/bulk", (async (req, res) => {
 
     // Validate input
     if (!Array.isArray(flashcards)) {
-      return res.status(400).json({ error: 'Flashcards must be an array' });
+      res.status(400).json({ error: 'Flashcards must be an array' });
+      return;
     }
 
     // First verify the box exists and belongs to the user
@@ -157,9 +171,14 @@ router.post("/:id/flashcards/bulk", (async (req, res) => {
       .eq('user_id', userId)
       .single();
 
-    if (boxError) throw boxError;
+    if (boxError) {
+      res.status(500).json({ error: 'Database error' });
+      return;
+    }
+    
     if (!box) {
-      return res.status(404).json({ error: 'Box not found' });
+      res.status(404).json({ error: 'Box not found' });
+      return;
     }
 
     // Prepare flashcards data with box_id
@@ -177,7 +196,10 @@ router.post("/:id/flashcards/bulk", (async (req, res) => {
       .insert(flashcardsData)
       .select();
 
-    if (insertError) throw insertError;
+    if (insertError) {
+      res.status(500).json({ error: 'Failed to insert flashcards' });
+      return;
+    }
 
     res.status(201).json({
       items: createdFlashcards,
@@ -185,9 +207,11 @@ router.post("/:id/flashcards/bulk", (async (req, res) => {
         total: createdFlashcards.length
       }
     });
+    return;
   } catch (error) {
     console.error('Error creating bulk flashcards:', error);
     res.status(500).json({ error: 'Failed to create flashcards' });
+    return;
   }
 }) as RequestHandler);
 
