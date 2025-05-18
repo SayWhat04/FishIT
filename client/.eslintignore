@@ -1,0 +1,14 @@
+# dependencies
+/node_modules
+/dist
+/.angular
+
+# e2e
+/cypress/videos
+/cypress/screenshots
+/cypress/fixtures
+
+# misc
+npm-debug.log
+yarn-error.log
+.sass-cache 
