@@ -1,6 +1,6 @@
 # FishIT
 
-> AI-powered flashcard generation and spaced repetition learning tool
+> AI-powered flashcard generation and spaced repetition learning tool.
 
 ## Table of Contents
 
