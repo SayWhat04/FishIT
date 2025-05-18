@@ -6,17 +6,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-auth-button',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatProgressSpinnerModule
-  ],
+  imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './auth-button.component.html',
-  styleUrls: ['./auth-button.component.scss']
+  styleUrls: ['./auth-button.component.scss'],
 })
 export class AuthButtonComponent {
   @Input() text = '';
   @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
   @Input() disabled = false;
   @Input() loading = false;
-} 
+}

@@ -15,9 +15,9 @@ import { AuthErrorComponent } from '../auth-error.component';
     RouterModule,
     AuthInputComponent,
     AuthButtonComponent,
-    AuthErrorComponent
+    AuthErrorComponent,
   ],
-  templateUrl: './forgot-password-form.component.html'
+  templateUrl: './forgot-password-form.component.html',
 })
 export class ForgotPasswordFormComponent {
   forgotPasswordForm: FormGroup;
@@ -26,7 +26,7 @@ export class ForgotPasswordFormComponent {
 
   constructor(private fb: FormBuilder) {
     this.forgotPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
     });
   }
 
@@ -51,4 +51,4 @@ export class ForgotPasswordFormComponent {
       console.log(this.forgotPasswordForm.value);
     }
   }
-} 
+}

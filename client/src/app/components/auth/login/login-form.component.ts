@@ -17,9 +17,9 @@ import { finalize } from 'rxjs';
     RouterModule,
     AuthInputComponent,
     AuthButtonComponent,
-    AuthErrorComponent
+    AuthErrorComponent,
   ],
-  templateUrl: './login-form.component.html'
+  templateUrl: './login-form.component.html',
 })
 export class LoginFormComponent {
   loginForm: FormGroup;
@@ -33,7 +33,7 @@ export class LoginFormComponent {
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
@@ -57,19 +57,21 @@ export class LoginFormComponent {
     if (this.loginForm.valid) {
       this.loading = true;
       this.errorMessage = null;
-      
+
       const { email, password } = this.loginForm.value;
-      
-      this.authService.login(email, password)
-        .pipe(finalize(() => this.loading = false))
+
+      this.authService
+        .login(email, password)
+        .pipe(finalize(() => (this.loading = false)))
         .subscribe({
           next: () => {
             this.router.navigate(['/generate']); // Przekierowanie do generowania fiszek po zalogowaniu
           },
-          error: (err) => {
-            this.errorMessage = err?.error?.message || 'Login failed. Please check your credentials.';
-          }
+          error: err => {
+            this.errorMessage =
+              err?.error?.message || 'Login failed. Please check your credentials.';
+          },
         });
     }
   }
-} 
+}

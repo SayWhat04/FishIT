@@ -7,8 +7,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   standalone: true,
   imports: [CommonModule, MatProgressBarModule],
   templateUrl: './generation-progress.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GenerationProgressComponent {
   @Input() isLoading = false;
-} 
+}

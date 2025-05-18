@@ -18,10 +18,10 @@ import { CreateBoxCommand } from '@shared/types/commands';
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   templateUrl: './add-box-dialog.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddBoxDialogComponent {
   private fb = inject(FormBuilder);
@@ -31,25 +31,25 @@ export class AddBoxDialogComponent {
 
   form: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-    description: ['', [Validators.maxLength(500)]]
+    description: ['', [Validators.maxLength(500)]],
   });
 
   onSubmit(): void {
     if (this.form.valid) {
       const command: CreateBoxCommand = {
         name: this.form.get('name')?.value,
-        description: this.form.get('description')?.value
+        description: this.form.get('description')?.value,
       };
 
       this.boxService.createBox(command).subscribe({
-        next: (box) => {
+        next: box => {
           this.snackBar.open('Box created successfully', 'OK', { duration: 3000 });
           this.dialogRef.close(box);
         },
-        error: (error) => {
+        error: error => {
           console.error('Error creating box:', error);
           this.snackBar.open('Failed to create box. Please try again.', 'OK', { duration: 5000 });
-        }
+        },
       });
     }
   }
@@ -57,4 +57,4 @@ export class AddBoxDialogComponent {
   onCancel(): void {
     this.dialogRef.close();
   }
-} 
+}

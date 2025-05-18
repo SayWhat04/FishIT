@@ -15,9 +15,9 @@ import { AuthErrorComponent } from '../auth-error.component';
     RouterModule,
     AuthInputComponent,
     AuthButtonComponent,
-    AuthErrorComponent
+    AuthErrorComponent,
   ],
-  templateUrl: './reset-password-form.component.html'
+  templateUrl: './reset-password-form.component.html',
 })
 export class ResetPasswordFormComponent {
   resetPasswordForm: FormGroup;
@@ -25,14 +25,22 @@ export class ResetPasswordFormComponent {
   errorMessage: string | null = null;
 
   constructor(private fb: FormBuilder) {
-    this.resetPasswordForm = this.fb.group({
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
-      ]],
-      confirmPassword: ['', [Validators.required]]
-    }, { validators: this.passwordMatchValidator });
+    this.resetPasswordForm = this.fb.group(
+      {
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.pattern(
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+            ),
+          ],
+        ],
+        confirmPassword: ['', [Validators.required]],
+      },
+      { validators: this.passwordMatchValidator }
+    );
   }
 
   passwordMatchValidator(form: FormGroup) {
@@ -71,4 +79,4 @@ export class ResetPasswordFormComponent {
       console.log(this.resetPasswordForm.value);
     }
   }
-} 
+}

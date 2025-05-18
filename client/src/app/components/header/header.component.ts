@@ -9,13 +9,9 @@ import { AddBoxDialogComponent } from '../boxes/add-box-dialog.component';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule
-  ],
+  imports: [CommonModule, MatButtonModule, MatIconModule],
   templateUrl: './header.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   private router = inject(Router);
@@ -23,7 +19,7 @@ export class HeaderComponent {
 
   openAddBoxDialog(): void {
     const dialogRef = this.dialog.open(AddBoxDialogComponent, {
-      width: '500px'
+      width: '500px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -37,4 +33,4 @@ export class HeaderComponent {
   navigateToGenerate(): void {
     this.router.navigate(['/generate']);
   }
-} 
+}

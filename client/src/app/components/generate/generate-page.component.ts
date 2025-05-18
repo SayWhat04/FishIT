@@ -13,36 +13,40 @@ import { GenerateFlashcardsResponseDto } from '@shared/types/dto';
   standalone: true,
   imports: [CommonModule, GenerateFormComponent, GenerationProgressComponent],
   templateUrl: './generate-page.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GeneratePageComponent {
   private generateService = inject(GenerateService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
-  
+
   isLoading = signal<boolean>(false);
-  
+
   handleGenerate(request: GenerateFlashcardsCommand): void {
     this.isLoading.set(true);
-    
+
     this.generateService.generate(request).subscribe({
       next: (response: GenerateFlashcardsResponseDto) => {
         this.isLoading.set(false);
-        this.router.navigate(['/review'], { 
-          state: { suggestions: response.suggestions } 
+        this.router.navigate(['/review'], {
+          state: { suggestions: response.suggestions },
         });
       },
-      error: (error) => {
+      error: error => {
         this.isLoading.set(false);
-        
+
         if (error.status === 429) {
-          this.snackBar.open('Too many requests. Please try again later.', 'OK', { duration: 5000 });
+          this.snackBar.open('Too many requests. Please try again later.', 'OK', {
+            duration: 5000,
+          });
         } else if (error.status === 400) {
-          this.snackBar.open('Invalid form data. Please check your inputs.', 'OK', { duration: 5000 });
+          this.snackBar.open('Invalid form data. Please check your inputs.', 'OK', {
+            duration: 5000,
+          });
         } else {
           this.snackBar.open('Server error occurred. Please try again.', 'OK', { duration: 5000 });
         }
-      }
+      },
     });
   }
-} 
+}

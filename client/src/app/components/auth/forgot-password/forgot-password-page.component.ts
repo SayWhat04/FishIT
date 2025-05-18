@@ -7,18 +7,14 @@ import { ForgotPasswordFormComponent } from '../forgot-password/forgot-password-
 @Component({
   selector: 'app-forgot-password-page',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    AuthLayoutComponent,
-    ForgotPasswordFormComponent
-  ],
+  imports: [CommonModule, RouterModule, AuthLayoutComponent, ForgotPasswordFormComponent],
   template: `
     <app-auth-layout
       title="Reset Password"
-      subtitle="Enter your email to receive a password reset link">
+      subtitle="Enter your email to receive a password reset link"
+    >
       <app-forgot-password-form></app-forgot-password-form>
     </app-auth-layout>
-  `
+  `,
 })
-export class ForgotPasswordPageComponent {} 
+export class ForgotPasswordPageComponent {}

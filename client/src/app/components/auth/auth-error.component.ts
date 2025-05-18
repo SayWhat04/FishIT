@@ -9,8 +9,8 @@ import { fadeInOut } from '../../animations/fade.animation';
   imports: [CommonModule, MatIconModule],
   templateUrl: './auth-error.component.html',
   styleUrls: ['./auth-error.component.scss'],
-  animations: [fadeInOut]
+  animations: [fadeInOut],
 })
 export class AuthErrorComponent {
   @Input() message: string | null = null;
-} 
+}

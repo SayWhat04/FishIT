@@ -6,7 +6,7 @@ import { map, tap } from 'rxjs';
 export const authGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  
+
   return authService.isAuthenticated().pipe(
     tap(isAuthenticated => {
       if (!isAuthenticated) {
@@ -15,4 +15,4 @@ export const authGuard: CanActivateFn = () => {
     }),
     map(isAuthenticated => isAuthenticated)
   );
-}; 
+};

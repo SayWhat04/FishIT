@@ -5,14 +5,14 @@ import { BoxDto, BoxesListResponseDto } from '@shared/types/dto';
 import { CreateBoxCommand, UpdateBoxCommand } from '@shared/types/commands';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BoxService {
   private http = inject(HttpClient);
-  
+
   // Cache the boxes to avoid multiple requests
   private boxesCache = signal<BoxDto[]>([]);
-  
+
   /**
    * Get all boxes for the current user
    */
@@ -21,7 +21,7 @@ export class BoxService {
     if (this.boxesCache().length > 0) {
       return of(this.boxesCache());
     }
-    
+
     // Otherwise fetch from API
     return this.http.get<BoxesListResponseDto>('/api/boxes').pipe(
       map(response => response.items),
@@ -32,7 +32,7 @@ export class BoxService {
       })
     );
   }
-  
+
   /**
    * Get a specific box by ID
    */
@@ -44,7 +44,7 @@ export class BoxService {
       })
     );
   }
-  
+
   /**
    * Create a new box
    */
@@ -60,7 +60,7 @@ export class BoxService {
       })
     );
   }
-  
+
   /**
    * Update an existing box
    */
@@ -68,9 +68,7 @@ export class BoxService {
     return this.http.put<BoxDto>(`/api/boxes/${boxId}`, command).pipe(
       tap(updatedBox => {
         // Update the box in cache
-        this.boxesCache.update(boxes => 
-          boxes.map(box => box.id === boxId ? updatedBox : box)
-        );
+        this.boxesCache.update(boxes => boxes.map(box => (box.id === boxId ? updatedBox : box)));
       }),
       catchError(error => {
         console.error(`Error updating box ${boxId}:`, error);
@@ -78,7 +76,7 @@ export class BoxService {
       })
     );
   }
-  
+
   /**
    * Delete a box
    */
@@ -86,9 +84,7 @@ export class BoxService {
     return this.http.delete<void>(`/api/boxes/${boxId}`).pipe(
       tap(() => {
         // Remove the box from cache
-        this.boxesCache.update(boxes => 
-          boxes.filter(box => box.id !== boxId)
-        );
+        this.boxesCache.update(boxes => boxes.filter(box => box.id !== boxId));
       }),
       catchError(error => {
         console.error(`Error deleting box ${boxId}:`, error);
@@ -96,7 +92,7 @@ export class BoxService {
       })
     );
   }
-  
+
   /**
    * Add flashcards to a box
    */
@@ -108,11 +104,11 @@ export class BoxService {
       })
     );
   }
-  
+
   /**
    * Clear the boxes cache to force a fresh fetch on next request
    */
   clearCache(): void {
     this.boxesCache.set([]);
   }
-} 
+}

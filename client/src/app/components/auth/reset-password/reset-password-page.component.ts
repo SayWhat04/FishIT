@@ -7,18 +7,11 @@ import { ResetPasswordFormComponent } from '../reset-password/reset-password-for
 @Component({
   selector: 'app-reset-password-page',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    AuthLayoutComponent,
-    ResetPasswordFormComponent
-  ],
+  imports: [CommonModule, RouterModule, AuthLayoutComponent, ResetPasswordFormComponent],
   template: `
-    <app-auth-layout
-      title="Set New Password"
-      subtitle="Create a new password for your account">
+    <app-auth-layout title="Set New Password" subtitle="Create a new password for your account">
       <app-reset-password-form></app-reset-password-form>
     </app-auth-layout>
-  `
+  `,
 })
-export class ResetPasswordPageComponent {} 
+export class ResetPasswordPageComponent {}

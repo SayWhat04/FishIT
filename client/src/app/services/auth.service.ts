@@ -13,38 +13,40 @@ interface AuthResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
   private authToken = signal<string | null>(localStorage.getItem('authToken'));
-  
+
   // Getter dla tokenu do wykorzystania w interceptorze HTTP
   getToken(): string | null {
     return this.authToken();
   }
-  
+
   // Sprawdzenie czy użytkownik jest zalogowany
   isAuthenticated(): Observable<boolean> {
     // Jeśli mamy token w pamięci, uznajemy użytkownika za zalogowanego
     if (this.authToken()) {
-      return this.http.get<{ authenticated: boolean }>('/api/auth/session', {
-        headers: this.getAuthHeaders()
-      }).pipe(
-        map(response => response.authenticated),
-        catchError(() => {
-          // W przypadku błędu weryfikacji tokena, wylogowujemy użytkownika
-          this.clearSession();
-          return of(false);
+      return this.http
+        .get<{ authenticated: boolean }>('/api/auth/session', {
+          headers: this.getAuthHeaders(),
         })
-      );
+        .pipe(
+          map(response => response.authenticated),
+          catchError(() => {
+            // W przypadku błędu weryfikacji tokena, wylogowujemy użytkownika
+            this.clearSession();
+            return of(false);
+          })
+        );
     }
-    
+
     // W przeciwnym razie nie jesteśmy zalogowani
     return of(false);
   }
-  
+
   // Logowanie użytkownika
   login(email: string, password: string): Observable<boolean> {
     return this.http.post<AuthResponse>('/api/auth/login', { email, password }).pipe(
@@ -58,7 +60,7 @@ export class AuthService {
       })
     );
   }
-  
+
   // Rejestracja nowego użytkownika
   register(email: string, password: string, username?: string): Observable<boolean> {
     return this.http.post<AuthResponse>('/api/auth/register', { email, password, username }).pipe(
@@ -75,12 +77,12 @@ export class AuthService {
       })
     );
   }
-  
+
   // Wylogowanie użytkownika
   logout(): Observable<void> {
     // Nagłówki z aktualnym tokenem
     const headers = this.getAuthHeaders();
-    
+
     return this.http.post<void>('/api/auth/logout', {}, { headers }).pipe(
       tap(() => {
         this.clearSession();
@@ -94,15 +96,15 @@ export class AuthService {
       })
     );
   }
-  
+
   // Tworzenie nagłówków z tokenem autoryzacji
   private getAuthHeaders(): HttpHeaders {
     const token = this.authToken();
     return new HttpHeaders({
-      'Authorization': token ? `Bearer ${token}` : ''
+      Authorization: token ? `Bearer ${token}` : '',
     });
   }
-  
+
   // Zapisanie sesji po pomyślnym logowaniu
   private setSession(authResult: AuthResponse): void {
     if (authResult.token) {
@@ -110,10 +112,10 @@ export class AuthService {
       this.authToken.set(authResult.token);
     }
   }
-  
+
   // Wyczyszczenie sesji po wylogowaniu
   private clearSession(): void {
     localStorage.removeItem('authToken');
     this.authToken.set(null);
   }
-} 
+}

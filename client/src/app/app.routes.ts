@@ -11,32 +11,32 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
-    component: LoginPageComponent
+    component: LoginPageComponent,
   },
   {
     path: 'register',
-    component: RegisterPageComponent
+    component: RegisterPageComponent,
   },
   {
     path: 'forgot-password',
-    component: ForgotPasswordPageComponent
+    component: ForgotPasswordPageComponent,
   },
   {
     path: 'reset-password',
-    component: ResetPasswordPageComponent
+    component: ResetPasswordPageComponent,
   },
   {
     path: 'generate',
     component: GeneratePageComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'review',
     component: ReviewPageComponent,
-    canActivate: [authGuard]
-  }
+    canActivate: [authGuard],
+  },
 ];

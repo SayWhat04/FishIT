@@ -1,6 +1,11 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,16 +19,16 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => AuthInputComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  templateUrl: './auth-input.component.html'
+  templateUrl: './auth-input.component.html',
 })
 export class AuthInputComponent implements ControlValueAccessor {
   @Input() label = '';
@@ -60,4 +65,4 @@ export class AuthInputComponent implements ControlValueAccessor {
     this.onChange(value);
     this.onTouched();
   }
-} 
+}
