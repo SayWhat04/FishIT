@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BoxService } from '../../services/box.service';
 import { CreateBoxCommand } from '@shared/types/commands';
+import { MatIconModule } from '@angular/material/icon';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 @Component({
   selector: 'app-add-box-dialog',
@@ -19,20 +21,26 @@ import { CreateBoxCommand } from '@shared/types/commands';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
+    TextFieldModule,
   ],
   templateUrl: './add-box-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddBoxDialogComponent {
   private fb = inject(FormBuilder);
-  private dialogRef = inject(MatDialogRef);
+  private dialogRef = inject(MatDialogRef<AddBoxDialogComponent>);
   private boxService = inject(BoxService);
   private snackBar = inject(MatSnackBar);
 
-  form: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-    description: ['', [Validators.maxLength(500)]],
-  });
+  form: FormGroup;
+
+  constructor() {
+    this.form = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      description: ['', [Validators.maxLength(500)]],
+    });
+  }
 
   onSubmit(): void {
     if (this.form.valid) {

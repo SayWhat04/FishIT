@@ -32,71 +32,322 @@ body {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-// Card styles
-.mat-card {
-  margin-bottom: 1rem;
-  border-radius: 8px !important;
-  box-shadow: 0 2px 6px rgba(0, 100, 200, 0.08) !important;
-  background-color: #ffffff;
-  border-left: 3px solid map.get($azure-primary, 500);
+// COMPREHENSIVE HEADER BUTTONS STYLING - Multiple selectors for maximum coverage
+.header-actions button.header-btn-elegant,
+.header-actions .header-btn-elegant,
+button.header-btn-elegant,
+.mat-mdc-outlined-button.header-btn-elegant,
+.mat-stroked-button.header-btn-elegant {
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  background: transparent !important;
+  
+  // Text styling
+  .mdc-button__label,
+  .mat-button-wrapper,
+  span {
+    color: white !important;
+  }
+  
+  // Icon styling  
+  .mat-icon,
+  mat-icon,
+  .material-icons {
+    color: white !important;
+  }
+  
+  // Ripple effect
+  .mdc-button__ripple {
+    color: white !important;
+  }
+  
+  // Border styling
+  .mdc-outlined-button__outline {
+    border-color: rgba(255, 255, 255, 0.9) !important;
+  }
+  
+  &:hover,
+  &:focus {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #1976d2 !important;
+    
+    .mdc-button__label,
+    .mat-button-wrapper,
+    span {
+      color: #1976d2 !important;
+    }
+    
+    .mat-icon,
+    mat-icon,
+    .material-icons {
+      color: #1976d2 !important;
+    }
+  }
+  
+  &.accent-elegant:hover,
+  &.accent-elegant:focus {
+    color: #ff6b6b !important;
+    
+    .mdc-button__label,
+    .mat-button-wrapper,
+    span {
+      color: #ff6b6b !important;
+    }
+    
+    .mat-icon,
+    mat-icon,
+    .material-icons {
+      color: #ff6b6b !important;
+    }
+  }
 }
 
-// Form field styles
+// Enhanced Card styles
+.mat-mdc-card {
+  margin-bottom: 1rem;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 100, 200, 0.08) !important;
+  background-color: #ffffff;
+  border-left: 4px solid #2196f3;
+  transition: box-shadow 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 6px 20px rgba(0, 100, 200, 0.12) !important;
+  }
+}
+
+// Enhanced Form field styles
 .mat-mdc-form-field {
   width: 100%;
   margin-bottom: 1rem;
+  
+  &.full-width {
+    width: 100%;
+  }
+  
+  &.number-field {
+    max-width: 300px;
+    
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }
+  }
 }
 
-// Page container
+// Generate card specific styles
+.generate-card {
+  max-width: 800px;
+  margin: 2rem auto;
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    margin: 1rem;
+  }
+}
+
+// Progress card styles
+.progress-card {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 400px;
+  
+  .progress-container {
+    padding: 2rem;
+    
+    .generating-icon {
+      font-size: 3rem;
+      height: 3rem;
+      width: 3rem;
+      color: #00bcd4;
+      margin-bottom: 1rem;
+      animation: pulse 2s infinite;
+    }
+    
+    h3 {
+      margin-bottom: 1.5rem;
+      color: #1976d2;
+    }
+    
+    .progress-text {
+      margin-top: 1rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Dialog enhancements
+.dialog-container {
+  .dialog-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    
+    .dialog-icon {
+      font-size: 3rem;
+      height: 3rem;
+      width: 3rem;
+      color: #2196f3;
+      margin-bottom: 1rem;
+    }
+    
+    .dialog-subtitle {
+      color: #666;
+      margin-bottom: 0;
+      font-size: 0.95rem;
+    }
+  }
+  
+  .dialog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .dialog-actions {
+    margin-top: 2rem;
+    padding: 1rem 0 0 0;
+    border-top: 1px solid #e0e0e0;
+  }
+}
+
+// Page container enhanced
 .page-container {
   background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 100, 200, 0.07);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 100, 200, 0.07);
   padding: 2rem;
   margin-bottom: 2rem;
-  border-top: 4px solid map.get($azure-primary, 500);
+  border-top: 4px solid #2196f3;
 }
 
-// Page header
-// .page-header {
-//   margin-bottom: 2rem;
-//   
-//   h1 {
-//     font-size: 1.75rem;
-//     font-weight: bold;
-//     margin-bottom: 0.5rem;
-//     color: map.get($azure-primary, 800);
-//   }
-//   
-//   p {
-//     color: #555;
-//     margin-bottom: 0.5rem;
-//   }
-// }
-
-// Responsive adjustments
+// Enhanced responsive adjustments
 @media (max-width: 768px) {
   .page-container {
     padding: 1.5rem;
+    margin: 1rem;
   }
   
-  .page-header h1 {
-    font-size: 1.5rem;
+  .app-content {
+    padding: 1rem;
   }
 }
 
+// Enhanced button styles
 .mat-mdc-raised-button.mat-primary {
   margin-left: 0.5rem;
+  border-radius: 8px;
 }
 
-// Azure specific styles
+// App layout styles
+.app-container {
+  height: 100vh;
+  
+  .app-sidenav {
+    width: 280px;
+    
+    .mat-mdc-list-item {
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      
+      &.mdc-list-item--activated {
+        background-color: rgba(33, 150, 243, 0.1);
+        color: #1976d2;
+      }
+    }
+  }
+}
+
 .app-header {
   background: linear-gradient(135deg, #0078d4 0%, #004e8c 100%) !important;
+  box-shadow: 0 2px 10px rgba(0, 60, 120, 0.15);
+  
+  .app-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 2rem;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .desktop-nav {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .menu-button {
+    margin-right: 1rem;
+  }
+}
+
+.app-content {
+  min-height: calc(100vh - 64px - 48px);
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .app-footer {
+  height: 48px;
   background-color: #f0f7ff !important;
   border-top: 1px solid #d0e7ff !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .footer-content {
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+}
+
+// Snackbar styles
+.success-snackbar {
+  background-color: #4caf50 !important;
+  color: white !important;
+}
+
+.error-snackbar {
+  background-color: #f44336 !important;
+  color: white !important;
+}
+
+// Animations
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+// Additional utility classes
+.full-width {
+  width: 100% !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-2 {
+  margin-top: 1rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
 }
 
 .mat-toolbar.mat-primary {

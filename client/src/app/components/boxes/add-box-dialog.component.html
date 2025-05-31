@@ -1,15 +1,20 @@
-<h2 mat-dialog-title>Create New Box</h2>
-
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="dialog-container">
   <mat-dialog-content>
-    <div class="flex flex-col gap-4">
-      <mat-form-field appearance="outline">
+    <div class="dialog-header">
+      <mat-icon class="dialog-icon">inventory_2</mat-icon>
+      <h2 mat-dialog-title>Create New Flashcard Box</h2>
+      <p class="dialog-subtitle">Organize your flashcards into themed collections</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="dialog-form">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Box Name</mat-label>
         <input 
           matInput 
           formControlName="name" 
-          placeholder="Enter box name"
+          placeholder="e.g., Spanish Vocabulary"
           required>
+        <mat-icon matPrefix>label</mat-icon>
         @if (form.get('name')?.invalid && form.get('name')?.touched) {
           <mat-error>
             @if (form.get('name')?.errors?.['required']) {
@@ -25,14 +30,16 @@
         }
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Description (Optional)</mat-label>
         <textarea 
           matInput 
           formControlName="description" 
-          placeholder="Enter box description"
-          rows="3">
+          placeholder="Brief description of what this box contains..."
+          rows="3"
+          cdkTextareaAutosize>
         </textarea>
+        <mat-icon matPrefix>description</mat-icon>
         @if (form.get('description')?.invalid && form.get('description')?.touched) {
           <mat-error>
             @if (form.get('description')?.errors?.['maxlength']) {
@@ -41,10 +48,10 @@
           </mat-error>
         }
       </mat-form-field>
-    </div>
+    </form>
   </mat-dialog-content>
 
-  <mat-dialog-actions align="end">
+  <mat-dialog-actions align="end" class="dialog-actions">
     <button 
       mat-button 
       type="button"
@@ -56,7 +63,8 @@
       color="primary" 
       type="submit"
       [disabled]="!form.valid">
-      Create
+      <mat-icon>add</mat-icon>
+      Create Box
     </button>
   </mat-dialog-actions>
-</form> 
+</div> 

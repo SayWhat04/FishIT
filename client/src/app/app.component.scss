@@ -1,70 +1,215 @@
-.app-header {
-  box-shadow: 0 2px 10px rgba(0, 60, 120, 0.15);
-}
+// App-specific styles - main layout handled in global styles.scss
 
-.app-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-right: 2rem;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.spacer {
-  flex: 1 1 auto;
-}
-
-.active-link {
-  background-color: rgba(255, 255, 255, 0.15);
-  font-weight: 500;
-  border-bottom: 3px solid #ffffff;
-}
-
-.app-content {
-  min-height: calc(100vh - 64px - 48px); // viewport height - header height - footer height
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.app-footer {
-  height: 48px;
-  background-color: #f3f4f6;
+// Header actions specific styling
+.header-actions {
   display: flex;
+  gap: 1rem;
   align-items: center;
-  justify-content: center;
+}
+
+// Option 1: Enhanced raised button styles
+.header-btn {
+  min-width: 120px;
+  height: 40px;
+  border-radius: 20px !important;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s ease;
   
-  .footer-content {
-    color: #6b7280;
-    font-size: 0.875rem;
+  mat-icon {
+    margin-right: 8px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  &.header-btn-primary {
+    background: linear-gradient(45deg, #ff6b6b, #ff8e53) !important;
+    color: white !important;
+    
+    &:hover {
+      background: linear-gradient(45deg, #ff5252, #ff7043) !important;
+    }
   }
 }
 
-// Dodatkowe style
-.action-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 2rem;
+// Option 2: FAB-style buttons
+.header-fab {
+  margin: 0 0.5rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
+// Option 3: Chip-style buttons
+.header-chips {
+  gap: 1rem;
+  
+  .header-chip {
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    &.header-chip-primary {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      
+      mat-icon {
+        color: white;
+      }
+    }
+    
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+// Option 4: Elegant stroked buttons (POPRAWIONE - wymuszenie białego koloru)
+.header-actions .header-btn-elegant.mat-mdc-outlined-button {
+  min-width: 110px !important;
+  height: 36px !important;
+  border-radius: 18px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  border: 2px solid rgba(255, 255, 255, 0.9) !important;
+  background: transparent !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+  
+  .mat-icon {
+    margin-right: 6px !important;
+    font-size: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+    color: white !important;
+  }
+  
+  .mdc-button__label {
+    color: white !important;
+  }
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #1976d2 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3) !important;
+    
+    .mat-icon {
+      color: #1976d2 !important;
+    }
+    
+    .mdc-button__label {
+      color: #1976d2 !important;
+    }
+  }
+  
+  &.primary-elegant {
+    border-color: rgba(255, 255, 255, 0.8) !important;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.95) !important;
+      color: #1976d2 !important;
+      
+      .mdc-button__label {
+        color: #1976d2 !important;
+      }
+    }
+  }
+  
+  &.accent-elegant {
+    border-color: rgba(255, 255, 255, 0.9) !important;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.95) !important;
+      color: #ff6b6b !important;
+      
+      .mat-icon {
+        color: #ff6b6b !important;
+      }
+      
+      .mdc-button__label {
+        color: #ff6b6b !important;
+      }
+    }
+  }
+}
+
+// Option 5: Minimalistic icon buttons with labels
+.icon-btn-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  
+  button {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  
+  .btn-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+// Responsive adjustments for smaller screens
 @media (max-width: 768px) {
   .app-content {
     padding: 1rem;
   }
   
-  .page-container {
-    padding: 1.5rem;
+  .header-actions {
+    gap: 0.5rem;
   }
-}
-
-// Azure & Blue theme custom styles
-a[mat-button] {
-  color: white;
-  opacity: 0.9;
-  transition: all 0.2s ease;
   
-  &:hover {
-    opacity: 1;
-    background-color: rgba(255, 255, 255, 0.1);
+  .header-btn {
+    min-width: 100px;
+    font-size: 0.875rem;
+    
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+    }
   }
-}
+  
+  .header-chip {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+  }
+  
+  .header-actions .header-btn-elegant.mat-mdc-outlined-button {
+    min-width: 90px !important;
+    font-size: 0.875rem !important;
+  }
+  
+  .icon-btn-group {
+    .btn-label {
+      font-size: 0.65rem;
+    }
+  }
+} 

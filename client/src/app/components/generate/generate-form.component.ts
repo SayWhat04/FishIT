@@ -11,12 +11,28 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TextFieldModule } from '@angular/cdk/text-field';
 import { GenerateFlashcardsCommand } from '@shared/types/commands';
 
 @Component({
   selector: 'app-generate-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    TextFieldModule,
+  ],
   templateUrl: './generate-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
