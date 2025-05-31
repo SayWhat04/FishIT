@@ -25,6 +25,11 @@ export class HeaderComponent {
     const dialogRef = this.dialog.open(AddBoxDialogComponent, {
       width: '500px',
       maxWidth: '95vw',
+      maxHeight: '90vh',
+      autoFocus: true,
+      restoreFocus: true,
+      panelClass: 'custom-dialog-container',
+      disableClose: false,
     });
 
     dialogRef.afterClosed().subscribe(result => {

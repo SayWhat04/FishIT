@@ -1,7 +1,7 @@
 <mat-card [ngClass]="{
   'border-green-500 border-2': isAccepted,
   'border-red-500 border-2': isRejected,
-  'border-blue-500 border-2': isEditing
+  'border-purple-500 border-2': isEditing
 }" class="mb-4">
   <mat-card-content>
     @if (isEditing && editedSuggestion) {

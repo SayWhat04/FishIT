@@ -25,6 +25,7 @@ import { TextFieldModule } from '@angular/cdk/text-field';
     TextFieldModule,
   ],
   templateUrl: './add-box-dialog.component.html',
+  styleUrls: ['./add-box-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddBoxDialogComponent {

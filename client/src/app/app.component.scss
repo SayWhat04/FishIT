@@ -31,11 +31,11 @@
   }
   
   &.header-btn-primary {
-    background: linear-gradient(45deg, #ff6b6b, #ff8e53) !important;
+    background: linear-gradient(45deg, #e91e63, #9c27b0) !important;
     color: white !important;
     
     &:hover {
-      background: linear-gradient(45deg, #ff5252, #ff7043) !important;
+      background: linear-gradient(45deg, #d81b60, #8e24aa) !important;
     }
   }
 }
@@ -67,7 +67,7 @@
     }
     
     &.header-chip-primary {
-      background: linear-gradient(45deg, #667eea, #764ba2);
+      background: linear-gradient(45deg, #9c27b0, #673ab7);
       color: white;
       
       mat-icon {
@@ -105,18 +105,19 @@
     color: white !important;
   }
   
-  &:hover {
+  &:hover,
+  &:focus {
     background: rgba(255, 255, 255, 0.95) !important;
-    color: #1976d2 !important;
+    color: #9c27b0 !important;
     transform: translateY(-1px) !important;
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3) !important;
     
     .mat-icon {
-      color: #1976d2 !important;
+      color: #9c27b0 !important;
     }
     
     .mdc-button__label {
-      color: #1976d2 !important;
+      color: #9c27b0 !important;
     }
   }
   
@@ -125,10 +126,10 @@
     
     &:hover {
       background: rgba(255, 255, 255, 0.95) !important;
-      color: #1976d2 !important;
+      color: #9c27b0 !important;
       
       .mdc-button__label {
-        color: #1976d2 !important;
+        color: #9c27b0 !important;
       }
     }
   }
@@ -138,14 +139,14 @@
     
     &:hover {
       background: rgba(255, 255, 255, 0.95) !important;
-      color: #ff6b6b !important;
+      color: #e91e63 !important;
       
       .mat-icon {
-        color: #ff6b6b !important;
+        color: #e91e63 !important;
       }
       
       .mdc-button__label {
-        color: #ff6b6b !important;
+        color: #e91e63 !important;
       }
     }
   }
