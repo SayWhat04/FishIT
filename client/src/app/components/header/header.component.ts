@@ -50,6 +50,18 @@ export class HeaderComponent {
     this.router.navigate(['/generate']);
   }
 
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.showSuccess('Logged out successfully!');
+      },
+      error: (error) => {
+        console.error('Logout failed:', error);
+        this.showError('Logout failed. Please try again.');
+      }
+    });
+  }
+
   private showSuccess(message: string): void {
     this.snackBar.open(message, 'Close', {
       duration: 3000,
