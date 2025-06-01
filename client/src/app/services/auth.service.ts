@@ -19,6 +19,21 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
   private authToken = signal<string | null>(localStorage.getItem('authToken'));
+  
+  // Public signal for UI reactivity
+  public isLoggedIn = signal<boolean>(false);
+
+  constructor() {
+    this.refreshAuthState();
+  }
+
+  // Refresh authentication state based on localStorage
+  private refreshAuthState(): void {
+    const token = localStorage.getItem('authToken');
+    const hasValidToken = !!token && token.trim() !== '';
+    this.authToken.set(token);
+    this.isLoggedIn.set(hasValidToken);
+  }
 
   // Getter dla tokenu do wykorzystania w interceptorze HTTP
   getToken(): string | null {
@@ -110,6 +125,7 @@ export class AuthService {
     if (authResult.token) {
       localStorage.setItem('authToken', authResult.token);
       this.authToken.set(authResult.token);
+      this.isLoggedIn.set(true);
     }
   }
 
@@ -117,5 +133,6 @@ export class AuthService {
   private clearSession(): void {
     localStorage.removeItem('authToken');
     this.authToken.set(null);
+    this.isLoggedIn.set(false);
   }
 }

@@ -4,7 +4,7 @@
       <div class="flex">
       </div>
       
-      <div class="header-actions">
+      <div class="header-actions" *ngIf="isAuthenticated()">
         <button 
           mat-stroked-button
           (click)="openAddBoxDialog()"

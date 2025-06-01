@@ -8,6 +8,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBoxDialogComponent } from '../boxes/add-box-dialog.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,10 @@ export class HeaderComponent {
   private router = inject(Router);
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
+  private authService = inject(AuthService);
+
+  // Check if user is authenticated using the AuthService signal
+  protected isAuthenticated = this.authService.isLoggedIn;
 
   openAddBoxDialog(): void {
     const dialogRef = this.dialog.open(AddBoxDialogComponent, {
