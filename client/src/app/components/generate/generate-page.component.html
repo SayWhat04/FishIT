@@ -8,7 +8,9 @@
     (generate)="handleGenerate($event)">
   </app-generate-form>
   
-  <app-generation-progress 
-    [isLoading]="isLoading()">
-  </app-generation-progress>
+  @if (isLoading()) {
+    <app-generation-progress 
+      [isLoading]="isLoading()">
+    </app-generation-progress>
+  }
 </div> 
