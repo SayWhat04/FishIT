@@ -4,8 +4,19 @@ import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 interface AuthResponse {
-  token: string;
-  user: {
+  token?: string;
+  user?: {
+    id: string;
+    email: string;
+    username?: string;
+  };
+  message?: string;
+}
+
+interface RegistrationResponse {
+  message: string;
+  token?: string;
+  user?: {
     id: string;
     email: string;
     username?: string;
@@ -66,7 +77,11 @@ export class AuthService {
   login(email: string, password: string): Observable<boolean> {
     return this.http.post<AuthResponse>('/api/auth/login', { email, password }).pipe(
       tap(response => {
-        this.setSession(response);
+        if (response.token) {
+          this.setSession(response);
+        } else {
+          throw new Error('No authentication token received');
+        }
       }),
       map(() => true),
       catchError(error => {
@@ -78,12 +93,11 @@ export class AuthService {
 
   // Rejestracja nowego użytkownika
   register(email: string, password: string, username?: string): Observable<boolean> {
-    return this.http.post<AuthResponse>('/api/auth/register', { email, password, username }).pipe(
+    return this.http.post<RegistrationResponse>('/api/auth/register', { email, password, username }).pipe(
       tap(response => {
-        // Supabase może wymagać potwierdzenia email i nie zwrócić tokenu
-        if (response.token) {
-          this.setSession(response);
-        }
+        // Po rejestracji nie zapisujemy sesji - użytkownik musi się zalogować osobno
+        // Token nie powinien być zwracany po rejestracji
+        console.log('Registration successful:', response.message);
       }),
       map(() => true),
       catchError(error => {
@@ -122,7 +136,7 @@ export class AuthService {
 
   // Zapisanie sesji po pomyślnym logowaniu
   private setSession(authResult: AuthResponse): void {
-    if (authResult.token) {
+    if (authResult.token && authResult.user) {
       localStorage.setItem('authToken', authResult.token);
       this.authToken.set(authResult.token);
       this.isLoggedIn.set(true);

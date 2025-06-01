@@ -71,19 +71,8 @@ router.post('/register', (req, res) => {
       return handleAuthError(error, res);
     }
 
-    if (data.session) {
-      return res.status(200).json({
-        token: data.session.access_token,
-        user: {
-          id: data.user?.id,
-          email: data.user?.email,
-          username: data.user?.user_metadata?.username
-        }
-      });
-    }
-
     return res.status(200).json({ 
-      message: 'Registration successful. Please check your email to confirm your account.'
+      message: 'Registration successful. Please check your email to confirm your account and then sign in.'
     });
   }).catch(error => {
     console.error('Unexpected error during registration:', error);

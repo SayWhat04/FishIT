@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { AuthInputComponent } from '../auth-input.component';
 import { AuthButtonComponent } from '../auth-button.component';
 import { AuthErrorComponent } from '../auth-error.component';
@@ -25,15 +25,26 @@ export class LoginFormComponent {
   loginForm: FormGroup;
   loading = false;
   errorMessage: string | null = null;
+  successMessage: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
+    });
+
+    // Sprawdź czy użytkownik został przekierowany po rejestracji
+    this.route.queryParams.subscribe(params => {
+      if (params['registered'] === 'true') {
+        this.successMessage = 'Registration successful! Please check your email to confirm your account, then sign in.';
+        // Usuń parametr z URL
+        this.router.navigate(['/login'], { replaceUrl: true });
+      }
     });
   }
 
@@ -57,6 +68,7 @@ export class LoginFormComponent {
     if (this.loginForm.valid) {
       this.loading = true;
       this.errorMessage = null;
+      this.successMessage = null;
 
       const { email, password } = this.loginForm.value;
 

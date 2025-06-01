@@ -134,8 +134,10 @@ export class RegisterFormComponent implements OnInit {
         .pipe(finalize(() => (this.loading = false)))
         .subscribe({
           next: () => {
-            // Przekierowanie do strony logowania po pomyślnej rejestracji
-            this.router.navigate(['/login']);
+            // Przekierowanie do strony logowania po pomyślnej rejestracji z komunikatem
+            this.router.navigate(['/login'], { 
+              queryParams: { registered: 'true' } 
+            });
           },
           error: err => {
             this.errorMessage = err?.error?.message || 'Registration failed. Please try again.';
