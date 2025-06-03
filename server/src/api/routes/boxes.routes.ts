@@ -6,13 +6,15 @@ const router = express.Router();
 
 router.use(auth as unknown as RequestHandler);
 
-// Mock user ID for development
-const MOCK_USER_ID = '667e737d-2e28-4ae2-9a73-e29a39544f9b';
-
 // Get all boxes for the current user
 router.get("/", (async (req, res) => {
   try {
-    const userId = MOCK_USER_ID;
+    const userId = req.user?.id;
+    
+    if (!userId) {
+      res.status(401).json({ error: 'User not authenticated' });
+      return;
+    }
     
     const { data: boxes, error } = await supabase
       .from('boxes')
@@ -39,8 +41,13 @@ router.get("/", (async (req, res) => {
 // Get a specific box by ID
 router.get("/:id", (async (req, res) => {
   try {
-    const userId = MOCK_USER_ID;
+    const userId = req.user?.id;
     const boxId = req.params['id'];
+
+    if (!userId) {
+      res.status(401).json({ error: 'User not authenticated' });
+      return;
+    }
 
     const { data: box, error } = await supabase
       .from('boxes')
@@ -71,8 +78,13 @@ router.get("/:id", (async (req, res) => {
 // Create a new box
 router.post("/", (async (req, res) => {
   try {
-    const userId = MOCK_USER_ID;
+    const userId = req.user?.id;
     const { name, description } = req.body;
+
+    if (!userId) {
+      res.status(401).json({ error: 'User not authenticated' });
+      return;
+    }
 
     const { data: box, error } = await supabase
       .from('boxes')
@@ -98,9 +110,14 @@ router.post("/", (async (req, res) => {
 // Update a box
 router.put("/:id", (async (req, res) => {
   try {
-    const userId = MOCK_USER_ID;
+    const userId = req.user?.id;
     const boxId = req.params['id'];
     const { name, description } = req.body;
+
+    if (!userId) {
+      res.status(401).json({ error: 'User not authenticated' });
+      return;
+    }
 
     const { data: box, error } = await supabase
       .from('boxes')
@@ -132,8 +149,13 @@ router.put("/:id", (async (req, res) => {
 // Delete a box
 router.delete("/:id", (async (req, res) => {
   try {
-    const userId = MOCK_USER_ID;
+    const userId = req.user?.id;
     const boxId = req.params['id'];
+
+    if (!userId) {
+      res.status(401).json({ error: 'User not authenticated' });
+      return;
+    }
 
     const { error } = await supabase
       .from('boxes')
@@ -153,9 +175,14 @@ router.delete("/:id", (async (req, res) => {
 // Bulk create flashcards for a box
 router.post("/:id/flashcards/bulk", (async (req, res) => {
   try {
-    const userId = MOCK_USER_ID;
+    const userId = req.user?.id;
     const boxId = req.params['id'];
     const flashcards = Array.isArray(req.body) ? req.body : req.body.flashcards;
+
+    if (!userId) {
+      res.status(401).json({ error: 'User not authenticated' });
+      return;
+    }
 
     // Validate input
     if (!Array.isArray(flashcards)) {
@@ -185,7 +212,6 @@ router.post("/:id/flashcards/bulk", (async (req, res) => {
     const flashcardsData = flashcards.map(flashcard => ({
       ...flashcard,
       box_id: boxId,
-      user_id: userId,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString()
     }));

@@ -59,7 +59,8 @@ export class ReviewPageComponent implements OnInit {
   }
 
   private loadBoxes(): void {
-    this.boxService.getBoxes().subscribe({
+    // Force refresh to ensure we get boxes for the current user
+    this.boxService.getBoxes(true).subscribe({
       next: boxes => {
         this.boxes.set(boxes);
         if (boxes.length > 0) {

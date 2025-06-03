@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBoxDialogComponent } from '../boxes/add-box-dialog.component';
 import { AuthService } from '../../services/auth.service';
+import { BoxService } from '../../services/box.service';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +23,7 @@ export class HeaderComponent {
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
   private authService = inject(AuthService);
+  private boxService = inject(BoxService);
 
   // Check if user is authenticated using the AuthService signal
   protected isAuthenticated = this.authService.isLoggedIn;
@@ -40,8 +42,8 @@ export class HeaderComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.showSuccess('Box created successfully!');
-        // Box was created successfully, refresh the current view
-        window.location.reload();
+        // Box service automatically updates cache when creating box
+        // No need to reload the page or clear cache manually
       }
     });
   }

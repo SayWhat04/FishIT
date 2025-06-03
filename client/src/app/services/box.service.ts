@@ -10,22 +10,31 @@ import { CreateBoxCommand, UpdateBoxCommand } from '@shared/types/commands';
 export class BoxService {
   private http = inject(HttpClient);
 
-  // Cache the boxes to avoid multiple requests
+  // Cache the boxes to avoid multiple requests within the same user session
   private boxesCache = signal<BoxDto[]>([]);
+  private cacheTimestamp = 0;
+  private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
   /**
    * Get all boxes for the current user
    */
-  getBoxes(): Observable<BoxDto[]> {
-    // If we have cached boxes, return them
-    if (this.boxesCache().length > 0) {
+  getBoxes(forceRefresh = false): Observable<BoxDto[]> {
+    const now = Date.now();
+    const isCacheValid = this.boxesCache().length > 0 && 
+                         (now - this.cacheTimestamp) < this.CACHE_DURATION;
+
+    // If we have valid cached boxes and no force refresh, return them
+    if (!forceRefresh && isCacheValid) {
       return of(this.boxesCache());
     }
 
     // Otherwise fetch from API
     return this.http.get<BoxesListResponseDto>('/api/boxes').pipe(
       map(response => response.items),
-      tap(boxes => this.boxesCache.set(boxes)),
+      tap(boxes => {
+        this.boxesCache.set(boxes);
+        this.cacheTimestamp = now;
+      }),
       catchError(error => {
         console.error('Error fetching boxes:', error);
         return throwError(() => error);
@@ -110,5 +119,6 @@ export class BoxService {
    */
   clearCache(): void {
     this.boxesCache.set([]);
+    this.cacheTimestamp = 0;
   }
 }

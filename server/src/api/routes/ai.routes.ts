@@ -14,7 +14,7 @@ const aiRateLimiter = rateLimit({
   message: "Too many requests, please try again later",
 });
 
-// router.use(auth as unknown as RequestHandler);
+router.use(auth as unknown as RequestHandler);
 router.use(aiRateLimiter as unknown as RequestHandler);
 
 // POST /ai/flashcards - Generate flashcards from text

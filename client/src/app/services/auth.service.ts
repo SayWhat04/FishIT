@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { BoxService } from './box.service';
 
 interface AuthResponse {
   token?: string;
@@ -29,6 +30,7 @@ interface RegistrationResponse {
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
+  private boxService = inject(BoxService);
   private authToken = signal<string | null>(localStorage.getItem('authToken'));
   
   // Public signal for UI reactivity
@@ -78,6 +80,8 @@ export class AuthService {
     return this.http.post<AuthResponse>('/api/auth/login', { email, password }).pipe(
       tap(response => {
         if (response.token) {
+          // Clear all cached data before setting new session
+          this.boxService.clearCache();
           this.setSession(response);
         } else {
           throw new Error('No authentication token received');
@@ -148,5 +152,7 @@ export class AuthService {
     localStorage.removeItem('authToken');
     this.authToken.set(null);
     this.isLoggedIn.set(false);
+    // Clear all cached data when clearing session
+    this.boxService.clearCache();
   }
 }
