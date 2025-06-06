@@ -241,4 +241,126 @@ router.post("/:id/flashcards/bulk", (async (req, res) => {
   }
 }) as RequestHandler);
 
+// Get all flashcards for a specific box
+router.get("/:id/flashcards", (async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    const boxId = req.params['id'];
+
+    if (!userId) {
+      res.status(401).json({ error: 'User not authenticated' });
+      return;
+    }
+
+    // First verify the box exists and belongs to the user
+    const { data: box, error: boxError } = await supabase
+      .from('boxes')
+      .select('id')
+      .eq('id', boxId)
+      .eq('user_id', userId)
+      .single();
+
+    if (boxError) {
+      res.status(500).json({ error: 'Database error' });
+      return;
+    }
+    
+    if (!box) {
+      res.status(404).json({ error: 'Box not found' });
+      return;
+    }
+
+    // Get flashcards for the box
+    const { data: flashcards, error: flashcardsError } = await supabase
+      .from('flashcards')
+      .select('*')
+      .eq('box_id', boxId)
+      .eq('is_deleted', false)
+      .order('created_at', { ascending: false });
+
+    if (flashcardsError) {
+      res.status(500).json({ error: 'Failed to fetch flashcards' });
+      return;
+    }
+
+    res.json({
+      items: flashcards,
+      meta: {
+        total: flashcards.length,
+        page: 1,
+        pageSize: flashcards.length
+      }
+    });
+    return;
+  } catch (error) {
+    console.error('Error fetching flashcards:', error);
+    res.status(500).json({ error: 'Failed to fetch flashcards' });
+    return;
+  }
+}) as RequestHandler);
+
+// Create a single flashcard for a box
+router.post("/:id/flashcards", (async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    const boxId = req.params['id'];
+    const { front, back, is_ai_generated = false } = req.body;
+
+    if (!userId) {
+      res.status(401).json({ error: 'User not authenticated' });
+      return;
+    }
+
+    // Validate input
+    if (!front || !back) {
+      res.status(400).json({ error: 'Front and back are required' });
+      return;
+    }
+
+    // First verify the box exists and belongs to the user
+    const { data: box, error: boxError } = await supabase
+      .from('boxes')
+      .select('id')
+      .eq('id', boxId)
+      .eq('user_id', userId)
+      .single();
+
+    if (boxError) {
+      res.status(500).json({ error: 'Database error' });
+      return;
+    }
+    
+    if (!box) {
+      res.status(404).json({ error: 'Box not found' });
+      return;
+    }
+
+    // Create flashcard
+    const { data: flashcard, error: insertError } = await supabase
+      .from('flashcards')
+      .insert([{
+        front,
+        back,
+        box_id: boxId,
+        is_ai_generated,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      }])
+      .select()
+      .single();
+
+    if (insertError) {
+      res.status(500).json({ error: 'Failed to create flashcard' });
+      return;
+    }
+
+    res.status(201).json(flashcard);
+    return;
+  } catch (error) {
+    console.error('Error creating flashcard:', error);
+    res.status(500).json({ error: 'Failed to create flashcard' });
+    return;
+  }
+}) as RequestHandler);
+
 export default router; 

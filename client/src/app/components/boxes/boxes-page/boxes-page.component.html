@@ -1,0 +1,206 @@
+<div class="boxes-page-container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="title-section">
+        <h1 class="page-title">
+          <mat-icon class="title-icon">inventory_2</mat-icon>
+          My Flashcard Boxes
+        </h1>
+        <p class="page-subtitle">
+          Organize and manage your flashcard collections
+        </p>
+      </div>
+      
+      <div class="header-actions">
+        <button 
+          mat-raised-button 
+          color="primary" 
+          (click)="onCreateBox()"
+          class="create-box-btn">
+          <mat-icon>add</mat-icon>
+          New Box
+        </button>
+        
+        <button 
+          mat-icon-button 
+          (click)="onRefresh()"
+          matTooltip="Refresh boxes"
+          class="refresh-btn">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-section">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search boxes</mat-label>
+      <input 
+        matInput 
+        [ngModel]="searchQuery()"
+        (ngModelChange)="onSearchChange($event)"
+        placeholder="Search by name or description..."
+        autocomplete="off">
+      <mat-icon matPrefix>search</mat-icon>
+      @if (searchQuery()) {
+        <button 
+          matSuffix 
+          mat-icon-button 
+          (click)="onSearchChange('')"
+          matTooltip="Clear search">
+          <mat-icon>clear</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="loading-container">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p class="loading-text">Loading your boxes...</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error() && !isLoading()) {
+    <div class="error-container">
+      <mat-icon class="error-icon">error_outline</mat-icon>
+      <h3>Something went wrong</h3>
+      <p>{{ error() }}</p>
+      <button mat-raised-button color="primary" (click)="onRefresh()">
+        <mat-icon>refresh</mat-icon>
+        Try Again
+      </button>
+    </div>
+  }
+
+  <!-- Empty State -->
+  @if (!isLoading() && !error() && filteredBoxes().length === 0 && !searchQuery()) {
+    <div class="empty-state">
+      <mat-icon class="empty-icon">inventory_2</mat-icon>
+      <h3>No boxes yet</h3>
+      <p>Create your first flashcard box to get started with learning!</p>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        (click)="onCreateBox()"
+        class="create-first-box-btn">
+        <mat-icon>add</mat-icon>
+        Create Your First Box
+      </button>
+    </div>
+  }
+
+  <!-- No Search Results -->
+  @if (!isLoading() && !error() && filteredBoxes().length === 0 && searchQuery()) {
+    <div class="no-results">
+      <mat-icon class="no-results-icon">search_off</mat-icon>
+      <h3>No boxes found</h3>
+      <p>No boxes match your search: "<strong>{{ searchQuery() }}</strong>"</p>
+      <button mat-button (click)="onSearchChange('')">
+        <mat-icon>clear</mat-icon>
+        Clear Search
+      </button>
+    </div>
+  }
+
+  <!-- Boxes Grid -->
+  @if (!isLoading() && !error() && filteredBoxes().length > 0) {
+    <div class="boxes-grid">
+      @for (box of filteredBoxes(); track box.id) {
+        <mat-card class="box-card" [class.box-card-highlighted]="false">
+          <mat-card-header class="box-header">
+            <div class="box-title-section">
+              <mat-card-title class="box-title">{{ box.name }}</mat-card-title>
+              @if (box.description) {
+                <mat-card-subtitle class="box-description">
+                  {{ box.description }}
+                </mat-card-subtitle>
+              }
+            </div>
+            
+            <div class="box-menu">
+              <button 
+                mat-icon-button 
+                [matMenuTriggerFor]="boxMenu"
+                matTooltip="More actions">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              
+              <mat-menu #boxMenu="matMenu">
+                <button mat-menu-item (click)="onViewBox(box.id)">
+                  <mat-icon>visibility</mat-icon>
+                  <span>View Details</span>
+                </button>
+                <button mat-menu-item (click)="onEditBox(box)">
+                  <mat-icon>edit</mat-icon>
+                  <span>Edit Box</span>
+                </button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item (click)="onDeleteBox(box)" class="delete-item">
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete Box</span>
+                </button>
+              </mat-menu>
+            </div>
+          </mat-card-header>
+
+          <mat-card-content class="box-content">
+            <div class="box-stats">
+              <div class="stat-item">
+                <mat-icon class="stat-icon">quiz</mat-icon>
+                <span class="stat-label">Flashcards:</span>
+                <span class="stat-value">{{ getFlashcardCount(box) }}</span>
+              </div>
+              
+              <div class="stat-item">
+                <mat-icon class="stat-icon">schedule</mat-icon>
+                <span class="stat-label">Created:</span>
+                <span class="stat-value">{{ formatDate(box.created_at) }}</span>
+              </div>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions class="box-actions">
+            <button 
+              mat-button 
+              (click)="onViewBox(box.id)"
+              class="action-btn view-btn">
+              <mat-icon>visibility</mat-icon>
+              View
+            </button>
+            
+            <button 
+              mat-raised-button 
+              color="primary" 
+              (click)="onStartStudy(box.id)"
+              class="action-btn study-btn"
+              [disabled]="getFlashcardCount(box) === 0">
+              <mat-icon>school</mat-icon>
+              Study
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+
+    <!-- Results Summary -->
+    <div class="results-summary">
+      @if (searchQuery()) {
+        <p class="results-text">
+          Showing {{ filteredBoxes().length }} of {{ boxes().length }} boxes
+          @if (filteredBoxes().length !== boxes().length) {
+            matching "{{ searchQuery() }}"
+          }
+        </p>
+      } @else {
+        <p class="results-text">
+          {{ boxes().length }} box{{ boxes().length === 1 ? '' : 'es' }} total
+        </p>
+      }
+    </div>
+  }
+</div> 

@@ -1,0 +1,86 @@
+<div class="dialog-container">
+  <mat-dialog-content class="dialog-content">
+    <div class="dialog-header">
+      <mat-icon class="dialog-icon">edit</mat-icon>
+      <h2 mat-dialog-title class="dialog-title">Edit Flashcard Box</h2>
+      <p class="dialog-subtitle">Update your flashcard box information</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="dialog-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Box Name</mat-label>
+        <input 
+          matInput 
+          formControlName="name" 
+          placeholder="e.g., Spanish Vocabulary"
+          required>
+        <mat-icon matPrefix>label</mat-icon>
+        @if (form.get('name')?.invalid && form.get('name')?.touched) {
+          <mat-error>
+            @if (form.get('name')?.errors?.['required']) {
+              Name is required
+            }
+            @if (form.get('name')?.errors?.['minlength']) {
+              Name must be at least 3 characters
+            }
+            @if (form.get('name')?.errors?.['maxlength']) {
+              Name cannot exceed 100 characters
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description (Optional)</mat-label>
+        <textarea 
+          matInput 
+          formControlName="description" 
+          placeholder="Brief description of what this box contains..."
+          rows="3"
+          cdkTextareaAutosize
+          [cdkAutosizeMaxRows]="5">
+        </textarea>
+        <mat-icon matPrefix>description</mat-icon>
+        @if (form.get('description')?.invalid && form.get('description')?.touched) {
+          <mat-error>
+            @if (form.get('description')?.errors?.['maxlength']) {
+              Description cannot exceed 500 characters
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button 
+      mat-button 
+      type="button"
+      class="reset-btn"
+      (click)="onReset()"
+      matTooltip="Reset to original values">
+      <mat-icon>restore</mat-icon>
+      Reset
+    </button>
+    
+    <div class="action-buttons">
+      <button 
+        mat-button 
+        type="button"
+        class="cancel-btn"
+        (click)="onCancel()">
+        Cancel
+      </button>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        type="submit"
+        class="submit-btn"
+        [disabled]="!form.valid"
+        (click)="onSubmit()">
+        <mat-icon>save</mat-icon>
+        Save Changes
+      </button>
+    </div>
+  </mat-dialog-actions>
+</div> 

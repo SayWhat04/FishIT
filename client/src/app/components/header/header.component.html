@@ -7,6 +7,16 @@
       <div class="header-actions" *ngIf="isAuthenticated()">
         <button 
           mat-stroked-button
+          routerLink="/boxes"
+          matTooltip="View and manage your flashcard boxes"
+          matTooltipPosition="below"
+          class="header-btn-elegant">
+          <mat-icon>inventory_2</mat-icon>
+          My Boxes
+        </button>
+        
+        <button 
+          mat-stroked-button
           (click)="openAddBoxDialog()"
           matTooltip="Create new flashcard box"
           matTooltipPosition="below"

@@ -1,0 +1,87 @@
+<div class="dialog-container">
+  <mat-dialog-content class="dialog-content">
+    <div class="dialog-header">
+      <mat-icon class="dialog-icon">warning</mat-icon>
+      <h2 mat-dialog-title class="dialog-title">Delete Flashcard Box?</h2>
+      <p class="dialog-subtitle">This action cannot be undone</p>
+    </div>
+
+    <div class="dialog-body">
+      <div class="box-info">
+        <div class="box-name">
+          <mat-icon class="info-icon">inventory_2</mat-icon>
+          <span class="box-name-text">"{{ box.name }}"</span>
+        </div>
+        
+        @if (box.description) {
+          <div class="box-description">
+            <mat-icon class="info-icon">description</mat-icon>
+            <span class="description-text">{{ box.description }}</span>
+          </div>
+        }
+        
+        <div class="flashcard-count">
+          <mat-icon class="info-icon">quiz</mat-icon>
+          <span class="count-text">
+            {{ getFlashcardCount() }} {{ getFlashcardText() }}
+          </span>
+        </div>
+      </div>
+
+      <div class="warning-section">
+        <div class="warning-item">
+          <mat-icon class="warning-icon">delete_forever</mat-icon>
+          <span>The box and all its flashcards will be permanently deleted</span>
+        </div>
+        
+        <div class="warning-item">
+          <mat-icon class="warning-icon">history</mat-icon>
+          <span>Your learning progress for these flashcards will be lost</span>
+        </div>
+        
+        <div class="warning-item">
+          <mat-icon class="warning-icon">block</mat-icon>
+          <span>This action cannot be undone</span>
+        </div>
+      </div>
+
+      @if (getFlashcardCount() > 0) {
+        <div class="danger-notice">
+          <mat-icon class="danger-icon">error</mat-icon>
+          <p class="danger-text">
+            <strong>Warning:</strong> This box contains {{ getFlashcardCount() }} 
+            {{ getFlashcardText() }}. All flashcards and your learning progress will be lost forever.
+          </p>
+        </div>
+      }
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button 
+      mat-button 
+      type="button"
+      class="cancel-btn"
+      (click)="onCancel()"
+      [disabled]="isDeleting">
+      <mat-icon>close</mat-icon>
+      Cancel
+    </button>
+    
+    <button 
+      mat-raised-button 
+      color="warn"
+      type="button"
+      class="delete-btn"
+      (click)="onConfirmDelete()"
+      [disabled]="isDeleting">
+      @if (isDeleting) {
+        <mat-icon class="spinning">hourglass_empty</mat-icon>
+        Deleting...
+      } @else {
+        <mat-icon>delete</mat-icon>
+        Delete Box
+      }
+    </button>
+  </mat-dialog-actions>
+</div> 
