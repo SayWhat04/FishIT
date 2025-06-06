@@ -26,10 +26,10 @@ import { ReviewFlashcard } from '@shared/types/reviewTypes';
 })
 export class ReviewListComponent {
   @Input() set suggestions(value: ReviewFlashcard[]) {
-    // Map the suggestions to add the status field
+    // Map the suggestions to add the status field if not present
     this._suggestions = value.map(suggestion => ({
       ...suggestion,
-      status: suggestion.status || 'accepted',
+      status: suggestion.status || undefined, // Keep undefined for pending state
     }));
   }
 
@@ -49,8 +49,16 @@ export class ReviewListComponent {
     return this._suggestions.filter(s => s.status === 'editing').length;
   }
 
+  get pendingCount(): number {
+    return this._suggestions.filter(s => !s.status || s.status === undefined).length;
+  }
+
   onStatusChange(suggestion: ReviewFlashcard, status: 'accepted' | 'rejected' | 'editing'): void {
-    suggestion.status = status;
+    this._suggestions = this._suggestions.map(s => 
+      s.id === suggestion.id 
+        ? { ...s, status } 
+        : s
+    );
     this.suggestionsChange.emit(this._suggestions);
   }
 

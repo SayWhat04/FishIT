@@ -1,80 +1,152 @@
-<mat-card [ngClass]="{
-  'border-green-500 border-2': isAccepted,
-  'border-red-500 border-2': isRejected,
-  'border-purple-500 border-2': isEditing
-}" class="mb-4">
-  <mat-card-content>
+<mat-card class="review-card" [ngClass]="{
+  'accepted': isAccepted,
+  'rejected': isRejected,
+  'editing': isEditing,
+  'pending': isPending
+}">
+  <mat-card-header class="card-header">
+    <mat-card-title class="card-title">
+      <div class="title-content">
+        <mat-icon class="review-icon">auto_awesome</mat-icon>
+        <span class="card-label">AI Generated Suggestion</span>
+        
+        <!-- Status chip -->
+        @if (isAccepted) {
+          <mat-chip class="status-chip accepted-chip" selected>
+            <mat-icon matChipAvatar>check_circle</mat-icon>
+            Accepted
+          </mat-chip>
+        } @else if (isRejected) {
+          <mat-chip class="status-chip rejected-chip" selected>
+            <mat-icon matChipAvatar>cancel</mat-icon>
+            Rejected
+          </mat-chip>
+        } @else if (isEditing) {
+          <mat-chip class="status-chip editing-chip" selected>
+            <mat-icon matChipAvatar>edit</mat-icon>
+            Editing
+          </mat-chip>
+        } @else {
+          <mat-chip class="status-chip pending-chip" selected>
+            <mat-icon matChipAvatar>schedule</mat-icon>
+            Pending
+          </mat-chip>
+        }
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="card-content">
     @if (isEditing && editedSuggestion) {
       <!-- Editing Form -->
-      <div class="flex flex-col gap-4">
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Front (Question)</mat-label>
-          <textarea 
-            matInput 
-            [(ngModel)]="editedSuggestion.front" 
-            rows="2"
-            placeholder="Question">
-          </textarea>
-        </mat-form-field>
+      <div class="editing-form">
+        <div class="form-section">
+          <div class="form-header">
+            <mat-icon class="form-icon">help_outline</mat-icon>
+            <span class="form-label">Question</span>
+          </div>
+          <mat-form-field appearance="outline" class="form-field">
+            <textarea 
+              matInput 
+              [(ngModel)]="editedSuggestion.front" 
+              rows="3"
+              placeholder="Enter question...">
+            </textarea>
+          </mat-form-field>
+        </div>
         
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Back (Answer)</mat-label>
-          <textarea 
-            matInput 
-            [(ngModel)]="editedSuggestion.back" 
-            rows="3"
-            placeholder="Answer">
-          </textarea>
-        </mat-form-field>
+        <mat-divider class="form-divider"></mat-divider>
         
-        <div class="flex justify-end gap-2">
-          <button mat-button (click)="cancelEditing()">Cancel</button>
-          <button mat-raised-button color="primary" (click)="saveEditing()">Save</button>
+        <div class="form-section">
+          <div class="form-header">
+            <mat-icon class="form-icon">lightbulb_outline</mat-icon>
+            <span class="form-label">Answer</span>
+          </div>
+          <mat-form-field appearance="outline" class="form-field">
+            <textarea 
+              matInput 
+              [(ngModel)]="editedSuggestion.back" 
+              rows="4"
+              placeholder="Enter answer...">
+            </textarea>
+          </mat-form-field>
+        </div>
+        
+        <div class="form-actions">
+          <button mat-button (click)="cancelEditing()" class="cancel-btn">
+            <mat-icon>close</mat-icon>
+            Cancel
+          </button>
+          <button mat-raised-button color="primary" (click)="saveEditing()" class="save-btn">
+            <mat-icon>save</mat-icon>
+            Save Changes
+          </button>
         </div>
       </div>
     } @else {
       <!-- Flashcard Preview -->
-      <div class="flex flex-col gap-4">
-        <div>
-          <h3 class="text-lg font-medium mb-1">Front (Question):</h3>
-          <p class="bg-gray-100 p-3 rounded">{{ suggestion.front }}</p>
+      <div class="flashcard-preview">
+        <!-- Front side (Question) -->
+        <div class="flashcard-side front-side">
+          <div class="side-header">
+            <mat-icon class="side-icon">help_outline</mat-icon>
+            <span class="side-label">Question</span>
+          </div>
+          <div class="side-content">
+            <p class="flashcard-text">{{ suggestion.front }}</p>
+          </div>
         </div>
-        
-        <div>
-          <h3 class="text-lg font-medium mb-1">Back (Answer):</h3>
-          <p class="bg-gray-100 p-3 rounded">{{ suggestion.back }}</p>
+
+        <mat-divider class="sides-divider" vertical></mat-divider>
+
+        <!-- Back side (Answer) -->
+        <div class="flashcard-side back-side">
+          <div class="side-header">
+            <mat-icon class="side-icon">lightbulb_outline</mat-icon>
+            <span class="side-label">Answer</span>
+          </div>
+          <div class="side-content">
+            <p class="flashcard-text">{{ suggestion.back }}</p>
+          </div>
         </div>
       </div>
     }
   </mat-card-content>
   
-  <mat-card-actions align="end">
+  <mat-card-actions class="card-actions">
     @if (isEditing) {
-      <!-- Already showing editing UI in the content section -->
-    } @else if (isRejected) {
-      <button mat-button color="primary" (click)="accept()">
-        <mat-icon>check</mat-icon> Accept
-      </button>
-      <button mat-button color="accent" (click)="startEditing()">
-        <mat-icon>edit</mat-icon> Edit
-      </button>
-    } @else if (isAccepted) {
-      <button mat-button color="warn" (click)="reject()">
-        <mat-icon>close</mat-icon> Reject
-      </button>
-      <button mat-button color="accent" (click)="startEditing()">
-        <mat-icon>edit</mat-icon> Edit
-      </button>
+      <!-- Editing actions are already in the form -->
     } @else {
-      <button mat-button color="primary" (click)="accept()">
-        <mat-icon>check</mat-icon> Accept
-      </button>
-      <button mat-button color="warn" (click)="reject()">
-        <mat-icon>close</mat-icon> Reject
-      </button>
-      <button mat-button color="accent" (click)="startEditing()">
-        <mat-icon>edit</mat-icon> Edit
-      </button>
+      <div class="action-buttons">
+        <button 
+          mat-stroked-button 
+          [color]="isAccepted ? 'primary' : 'basic'"
+          [class.selected]="isAccepted"
+          (click)="accept()"
+          class="action-btn accept-btn">
+          <mat-icon>check_circle</mat-icon>
+          Accept
+        </button>
+        
+        <button 
+          mat-stroked-button 
+          [color]="isRejected ? 'warn' : 'basic'"
+          [class.selected]="isRejected"
+          (click)="reject()"
+          class="action-btn reject-btn">
+          <mat-icon>cancel</mat-icon>
+          Reject
+        </button>
+        
+        <button 
+          mat-stroked-button 
+          color="accent" 
+          (click)="startEditing()"
+          class="action-btn edit-btn">
+          <mat-icon>edit</mat-icon>
+          Edit
+        </button>
+      </div>
     }
   </mat-card-actions>
 </mat-card> 

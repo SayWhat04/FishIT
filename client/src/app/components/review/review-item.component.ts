@@ -6,6 +6,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
 import { ReviewFlashcard } from '@shared/types/reviewTypes';
 
 @Component({
@@ -19,8 +21,11 @@ import { ReviewFlashcard } from '@shared/types/reviewTypes';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatChipsModule,
+    MatDividerModule,
   ],
   templateUrl: './review-item.component.html',
+  styleUrls: ['./review-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewItemComponent {
@@ -65,5 +70,9 @@ export class ReviewItemComponent {
 
   get isRejected(): boolean {
     return this.suggestion.status === 'rejected';
+  }
+
+  get isPending(): boolean {
+    return !this.suggestion.status || this.suggestion.status === undefined;
   }
 }
