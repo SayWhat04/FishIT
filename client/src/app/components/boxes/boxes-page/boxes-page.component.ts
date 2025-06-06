@@ -118,8 +118,10 @@ export class BoxesPageComponent implements OnInit {
   }
 
   onStartStudy(boxId: string): void {
-    // TODO: Implement study session routing when component is ready
-    this.router.navigate(['/boxes', boxId, 'study']);
+    // TODO: Implement study session functionality
+    this.snackBar.open('Study functionality is not yet implemented.', 'OK', { 
+      duration: 3000 
+    });
   }
 
   onEditBox(box: BoxDto): void {

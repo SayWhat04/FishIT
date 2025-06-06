@@ -6,11 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
-import { AddBoxDialogComponent } from '../boxes/add-box-dialog/add-box-dialog.component';
 import { AuthService } from '../../services/auth.service';
-import { BoxService } from '../../services/box.service';
 
 @Component({
   selector: 'app-header',
@@ -21,33 +18,11 @@ import { BoxService } from '../../services/box.service';
 })
 export class HeaderComponent {
   private router = inject(Router);
-  private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
   private authService = inject(AuthService);
-  private boxService = inject(BoxService);
 
   // Check if user is authenticated using the AuthService signal
   protected isAuthenticated = this.authService.isLoggedIn;
-
-  openAddBoxDialog(): void {
-    const dialogRef = this.dialog.open(AddBoxDialogComponent, {
-      width: '500px',
-      maxWidth: '95vw',
-      maxHeight: '90vh',
-      autoFocus: true,
-      restoreFocus: true,
-      panelClass: 'custom-dialog-container',
-      disableClose: false,
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.showSuccess('Box created successfully!');
-        // Box service automatically updates cache when creating box
-        // No need to reload the page or clear cache manually
-      }
-    });
-  }
 
   navigateToGenerate(): void {
     this.router.navigate(['/generate']);

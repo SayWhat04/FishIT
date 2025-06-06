@@ -188,8 +188,10 @@ export class BoxDetailsComponent implements OnInit, OnDestroy {
     const box = this.box();
     if (!box) return;
 
-    // TODO: Implement study session routing
-    this.router.navigate(['/boxes', box.id, 'study']);
+    // TODO: Implement study session functionality
+    this.snackBar.open('Study functionality is not yet implemented.', 'OK', { 
+      duration: 3000 
+    });
   }
 
   onEditFlashcard(flashcard: FlashcardDto): void {
