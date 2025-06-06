@@ -4,7 +4,7 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BoxService } from '../../services/box.service';
+import { BoxService } from '../../../services/box.service';
 import { BoxDto } from '@shared/types/dto';
 
 export interface DeleteConfirmDialogData {

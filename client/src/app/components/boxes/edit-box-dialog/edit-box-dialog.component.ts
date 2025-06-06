@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BoxService } from '../../services/box.service';
+import { BoxService } from '../../../services/box.service';
 import { UpdateBoxCommand } from '@shared/types/commands';
 import { BoxDto } from '@shared/types/dto';
 import { MatIconModule } from '@angular/material/icon';

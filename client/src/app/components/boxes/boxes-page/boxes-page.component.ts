@@ -14,10 +14,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BoxService } from '../../services/box.service';
-import { AddBoxDialogComponent } from './add-box-dialog.component';
-import { EditBoxDialogComponent } from './edit-box-dialog.component';
-import { DeleteConfirmDialogComponent } from './delete-confirm-dialog.component';
+import { BoxService } from '../../../services/box.service';
+import { AddBoxDialogComponent } from '../add-box-dialog/add-box-dialog.component';
+import { EditBoxDialogComponent } from '../edit-box-dialog/edit-box-dialog.component';
+import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
 import { BoxDto } from '@shared/types/dto';
 
 @Component({

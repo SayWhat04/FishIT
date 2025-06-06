@@ -15,9 +15,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject, takeUntil, forkJoin } from 'rxjs';
-import { BoxService } from '../../services/box.service';
-import { FlashcardService } from '../../services/flashcard.service';
-import { FlashcardItemComponent } from '../flashcards/flashcard-item.component';
+import { BoxService } from '../../../services/box.service';
+import { FlashcardService } from '../../../services/flashcard.service';
+import { FlashcardItemComponent } from '../../flashcards/flashcard-item.component';
 import { BoxDto, FlashcardDto } from '@shared/types/dto';
 
 @Component({

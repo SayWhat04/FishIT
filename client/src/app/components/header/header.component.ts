@@ -7,14 +7,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { AddBoxDialogComponent } from '../boxes/add-box-dialog.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { AddBoxDialogComponent } from '../boxes/add-box-dialog/add-box-dialog.component';
 import { AuthService } from '../../services/auth.service';
 import { BoxService } from '../../services/box.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule, MatTooltipModule, MatChipsModule],
+  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule, MatTooltipModule, MatChipsModule, MatMenuModule],
   templateUrl: './header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
