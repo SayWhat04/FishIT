@@ -22,6 +22,7 @@ import { ReviewFlashcard } from '@shared/types/reviewTypes';
     ReviewItemComponent,
   ],
   templateUrl: './review-list.component.html',
+  styleUrls: ['./review-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewListComponent {

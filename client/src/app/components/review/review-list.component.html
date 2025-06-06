@@ -1,44 +1,68 @@
-<div class="mb-4">
-  <div class="flex justify-between items-center mb-2">
-    <h2 class="text-xl font-semibold">Flashcards to Review</h2>
-    <div class="space-x-2">
-      <button 
-        mat-stroked-button 
-        color="primary" 
-        (click)="acceptAll()" 
-        [disabled]="_suggestions.length === 0">
-        Accept All
-      </button>
-      <button 
-        mat-stroked-button 
-        color="warn" 
-        (click)="rejectAll()" 
-        [disabled]="_suggestions.length === 0">
-        Reject All
-      </button>
-    </div>
+<div class="review-header">
+  <div class="header-title">
+    <mat-icon class="title-icon">rate_review</mat-icon>
+    <h2 class="title-text">Review AI Suggestions</h2>
   </div>
   
-  <div class="flex gap-3 mb-4">
-    <mat-chip color="accent" selected>{{ pendingCount }} Pending</mat-chip>
-    <mat-chip color="primary" selected>{{ acceptedCount }} Accepted</mat-chip>
-    <mat-chip color="warn" selected>{{ rejectedCount }} Rejected</mat-chip>
-    <mat-chip color="accent" selected>{{ editingCount }} Editing</mat-chip>
+  <div class="header-actions">
+    <button 
+      mat-stroked-button 
+      color="primary"
+      [class.selected]="acceptedCount > 0"
+      (click)="acceptAll()" 
+      [disabled]="_suggestions.length === 0"
+      class="bulk-action-btn accept-all-btn">
+      <mat-icon>check_circle</mat-icon>
+      Accept All
+    </button>
+    <button 
+      mat-stroked-button 
+      color="warn"
+      [class.selected]="rejectedCount > 0"
+      (click)="rejectAll()" 
+      [disabled]="_suggestions.length === 0"
+      class="bulk-action-btn reject-all-btn">
+      <mat-icon>cancel</mat-icon>
+      Reject All
+    </button>
   </div>
-  
-  @if (_suggestions.length === 0) {
-    <div class="p-6 text-center bg-gray-100 rounded-lg">
-      <p class="text-gray-600">No flashcards to review. Generate some first.</p>
-    </div>
-  } @else {
-    <div class="grid grid-cols-1 gap-4">
-      @for (suggestion of _suggestions; track suggestion.id) {
-        <app-review-item 
-          [suggestion]="suggestion" 
-          (statusChange)="onStatusChange(suggestion, $event)" 
-          (edit)="onFlashcardEdit(suggestion, $event)">
-        </app-review-item>
-      }
-    </div>
-  }
-</div> 
+</div>
+
+<div class="status-summary">
+  <div class="summary-chips">
+    <mat-chip class="summary-chip pending-chip" [class.highlighted]="pendingCount > 0">
+      <mat-icon matChipAvatar>schedule</mat-icon>
+      {{ pendingCount }} Pending
+    </mat-chip>
+    <mat-chip class="summary-chip accepted-chip" [class.highlighted]="acceptedCount > 0">
+      <mat-icon matChipAvatar>check_circle</mat-icon>
+      {{ acceptedCount }} Accepted
+    </mat-chip>
+    <mat-chip class="summary-chip rejected-chip" [class.highlighted]="rejectedCount > 0">
+      <mat-icon matChipAvatar>cancel</mat-icon>
+      {{ rejectedCount }} Rejected
+    </mat-chip>
+    <mat-chip class="summary-chip editing-chip" [class.highlighted]="editingCount > 0">
+      <mat-icon matChipAvatar>edit</mat-icon>
+      {{ editingCount }} Editing
+    </mat-chip>
+  </div>
+</div>
+
+@if (_suggestions.length === 0) {
+  <div class="empty-state">
+    <mat-icon class="empty-icon">auto_awesome</mat-icon>
+    <p class="empty-text">No flashcards to review</p>
+    <p class="empty-subtitle">Generate some AI suggestions first to get started</p>
+  </div>
+} @else {
+  <div class="suggestions-grid">
+    @for (suggestion of _suggestions; track suggestion.id) {
+      <app-review-item 
+        [suggestion]="suggestion" 
+        (statusChange)="onStatusChange(suggestion, $event)" 
+        (edit)="onFlashcardEdit(suggestion, $event)">
+      </app-review-item>
+    }
+  </div>
+} 
