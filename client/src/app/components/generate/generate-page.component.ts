@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GenerateFormComponent } from './generate-form.component';
 import { GenerationProgressComponent } from './generation-progress.component';
@@ -11,8 +16,19 @@ import { GenerateFlashcardsResponseDto } from '@shared/types/dto';
 @Component({
   selector: 'app-generate-page',
   standalone: true,
-  imports: [CommonModule, GenerateFormComponent, GenerationProgressComponent],
+  imports: [
+    CommonModule, 
+    RouterModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    GenerateFormComponent, 
+    GenerationProgressComponent
+  ],
   templateUrl: './generate-page.component.html',
+  styleUrls: ['./generate-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GeneratePageComponent {
@@ -20,10 +36,13 @@ export class GeneratePageComponent {
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
+  // State signals
   isLoading = signal<boolean>(false);
+  error = signal<string | null>(null);
 
   handleGenerate(request: GenerateFlashcardsCommand): void {
     this.isLoading.set(true);
+    this.error.set(null);
 
     this.generateService.generate(request).subscribe({
       next: (response: GenerateFlashcardsResponseDto) => {
@@ -33,20 +52,30 @@ export class GeneratePageComponent {
         });
       },
       error: error => {
+        console.error('Error generating flashcards:', error);
         this.isLoading.set(false);
 
+        let errorMessage = 'Server error occurred. Please try again.';
+        
         if (error.status === 429) {
-          this.snackBar.open('Too many requests. Please try again later.', 'OK', {
-            duration: 5000,
-          });
+          errorMessage = 'Too many requests. Please try again later.';
         } else if (error.status === 400) {
-          this.snackBar.open('Invalid form data. Please check your inputs.', 'OK', {
-            duration: 5000,
-          });
-        } else {
-          this.snackBar.open('Server error occurred. Please try again.', 'OK', { duration: 5000 });
+          errorMessage = 'Invalid form data. Please check your inputs.';
+        } else if (error.status === 401) {
+          errorMessage = 'Authentication required. Please log in again.';
+        } else if (error.status === 403) {
+          errorMessage = 'Access denied. Please check your permissions.';
         }
+
+        this.error.set(errorMessage);
+        this.snackBar.open(errorMessage, 'OK', {
+          duration: 5000,
+        });
       },
     });
+  }
+
+  onRetry(): void {
+    this.error.set(null);
   }
 }
