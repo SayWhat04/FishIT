@@ -1,24 +1,44 @@
-<div class="page-container">
+<div class="review-page-container">
+  <!-- Page Header -->
   <div class="page-header">
-    <h1>Review Generated Flashcards</h1>
-    
-    <div class="mb-6">
-      <p class="text-gray-600 mb-2">
-        Review the flashcards generated from your text. You can accept, edit, or reject each flashcard.
-      </p>
-      <p class="text-gray-600">
-        Accepted flashcards will be added to the selected box.
-      </p>
+    <div class="header-content">
+      <div class="title-section">
+        <h1 class="page-title">
+          <mat-icon class="title-icon">rate_review</mat-icon>
+          Review Generated Flashcards
+        </h1>
+        <p class="page-subtitle">
+          Review the flashcards generated from your text. Accept, edit, or reject each flashcard before adding them to your selected box.
+        </p>
+      </div>
+      
+      <div class="header-actions">
+        <button 
+          mat-icon-button 
+          routerLink="/generate"
+          matTooltip="Back to generate"
+          class="back-btn">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
-  
-  <mat-card>
-    <mat-card-content>
-      <div class="mb-4">
-        <label for="boxSelect" class="block text-sm font-medium text-gray-700 mb-1">
-          Select a box to add flashcards to:
-        </label>
-        <mat-form-field appearance="outline" class="w-full">
+
+  <!-- Box Selection Section -->
+  <div class="box-selection-section">
+    <mat-card class="box-selection-card">
+      <div class="section-header">
+        <h2 class="section-title">
+          <mat-icon class="section-icon">inventory_2</mat-icon>
+          Select Destination Box
+        </h2>
+        <p class="section-subtitle">
+          Choose which box to add your accepted flashcards to
+        </p>
+      </div>
+      
+      <div class="section-content">
+        <mat-form-field appearance="outline" class="box-select-field">
           <mat-label>Select Box</mat-label>
           <mat-select [value]="selectedBoxId()" (selectionChange)="onBoxSelected($event.value)">
             <mat-option value="">-- Choose a box --</mat-option>
@@ -28,25 +48,30 @@
           </mat-select>
         </mat-form-field>
       </div>
-    </mat-card-content>
-  </mat-card>
-  
-  <mat-card>
-    <mat-card-content>
-      <app-review-list 
-        [suggestions]="suggestions()"
-        (suggestionsChange)="suggestions.set($event)">
-      </app-review-list>
-      
-      <div class="action-container">
-        <button 
-          mat-raised-button 
-          color="primary" 
-          [disabled]="!selectedBoxId() || isLoading()"
-          (click)="saveAcceptedFlashcards()">
-          Save Accepted Flashcards
-        </button>
+    </mat-card>
+  </div>
+
+  <!-- Review Section -->
+  <div class="review-section">
+    <mat-card class="review-card">
+      <div class="section-content">
+        <app-review-list 
+          [suggestions]="suggestions()"
+          (suggestionsChange)="suggestions.set($event)">
+        </app-review-list>
+        
+        <div class="action-container">
+          <button 
+            mat-raised-button 
+            color="primary" 
+            [disabled]="!selectedBoxId() || isLoading()"
+            (click)="saveAcceptedFlashcards()"
+            class="save-btn">
+            <mat-icon>save</mat-icon>
+            Save Accepted Flashcards
+          </button>
+        </div>
       </div>
-    </mat-card-content>
-  </mat-card>
+    </mat-card>
+  </div>
 </div> 

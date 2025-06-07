@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReviewListComponent } from './review-list.component';
 import { BoxService } from '../../services/box.service';
 import { BoxDto } from '@shared/types/dto';
@@ -16,13 +18,17 @@ import { ReviewFlashcard } from '@shared/types/reviewTypes';
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
     MatCardModule,
+    MatIconModule,
+    MatTooltipModule,
     ReviewListComponent,
   ],
   templateUrl: './review-page.component.html',
+  styleUrls: ['./review-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewPageComponent implements OnInit {
