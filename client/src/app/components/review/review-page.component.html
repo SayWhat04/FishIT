@@ -20,7 +20,8 @@
         </label>
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Select Box</mat-label>
-          <mat-select (selectionChange)="onBoxSelected($event.value)">
+          <mat-select [value]="selectedBoxId()" (selectionChange)="onBoxSelected($event.value)">
+            <mat-option value="">-- Choose a box --</mat-option>
             <mat-option *ngFor="let box of boxes()" [value]="box.id">
               {{ box.name }}
             </mat-option>

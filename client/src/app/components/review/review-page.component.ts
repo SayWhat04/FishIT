@@ -63,9 +63,10 @@ export class ReviewPageComponent implements OnInit {
     this.boxService.getBoxes(true).subscribe({
       next: boxes => {
         this.boxes.set(boxes);
-        if (boxes.length > 0) {
-          this.selectedBoxId.set(boxes[0].id);
-        }
+        // Remove automatic selection - user must explicitly choose a box
+        // if (boxes.length > 0) {
+        //   this.selectedBoxId.set(boxes[0].id);
+        // }
       },
       error: error => {
         console.error('Error loading boxes:', error);
@@ -75,12 +76,12 @@ export class ReviewPageComponent implements OnInit {
   }
 
   onBoxSelected(boxId: string): void {
-    this.selectedBoxId.set(boxId);
+    this.selectedBoxId.set(boxId || null);
   }
 
   saveAcceptedFlashcards(): void {
     if (!this.selectedBoxId()) {
-      this.snackBar.open('Please select a box to save the flashcards.', 'OK', { duration: 5000 });
+      this.snackBar.open('Proszę wybrać box, do którego mają zostać zapisane fiszki.', 'OK', { duration: 5000 });
       return;
     }
 
