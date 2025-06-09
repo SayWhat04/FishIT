@@ -2,10 +2,8 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
 
-// Include the common styles
 @include mat.core();
 
-// Global styles with Magenta & Violet theme (using prebuilt theme)
 html, body { 
   height: 100%; 
 }
@@ -17,7 +15,6 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-// COMPREHENSIVE HEADER BUTTONS STYLING - Multiple selectors for maximum coverage
 .header-actions button.header-btn-elegant,
 .header-actions .header-btn-elegant,
 button.header-btn-elegant,
@@ -27,26 +24,22 @@ button.header-btn-elegant,
   border-color: rgba(255, 255, 255, 0.9) !important;
   background: transparent !important;
   
-  // Text styling
   .mdc-button__label,
   .mat-button-wrapper,
   span {
     color: white !important;
   }
   
-  // Icon styling  
   .mat-icon,
   mat-icon,
   .material-icons {
     color: white !important;
   }
   
-  // Ripple effect
   .mdc-button__ripple {
     color: white !important;
   }
   
-  // Border styling
   .mdc-outlined-button__outline {
     border-color: rgba(255, 255, 255, 0.9) !important;
   }
@@ -87,7 +80,6 @@ button.header-btn-elegant,
   }
 }
 
-// Enhanced Card styles
 .mat-mdc-card {
   margin-bottom: 1rem;
   border-radius: 12px !important;
@@ -101,7 +93,6 @@ button.header-btn-elegant,
   }
 }
 
-// Enhanced Form field styles
 .mat-mdc-form-field {
   width: 100%;
   margin-bottom: 1rem;
@@ -119,7 +110,6 @@ button.header-btn-elegant,
   }
 }
 
-// Generate card specific styles
 .generate-card {
   max-width: 800px;
   margin: 2rem auto;
@@ -135,7 +125,6 @@ button.header-btn-elegant,
   }
 }
 
-// Progress card styles
 .progress-card {
   text-align: center;
   margin: 2rem auto;
@@ -166,7 +155,6 @@ button.header-btn-elegant,
   }
 }
 
-// Dialog enhancements
 .dialog-container {
   .dialog-header {
     text-align: center;
@@ -198,7 +186,6 @@ button.header-btn-elegant,
   }
 }
 
-// Page container enhanced
 .page-container {
   background-color: white;
   border-radius: 12px;
@@ -208,7 +195,6 @@ button.header-btn-elegant,
   border-top: 4px solid #9c27b0;
 }
 
-// Enhanced responsive adjustments
 @media (max-width: 768px) {
   .page-container {
     padding: 1.5rem;
@@ -284,7 +270,6 @@ button.header-btn-elegant,
   }
 }
 
-// Snackbar styles
 .success-snackbar {
   background-color: #4caf50 !important;
   color: white !important;
@@ -295,7 +280,6 @@ button.header-btn-elegant,
   color: white !important;
 }
 
-// Animations
 @keyframes pulse {
   0%, 100% {
     opacity: 1;
@@ -307,7 +291,6 @@ button.header-btn-elegant,
   }
 }
 
-// Additional utility classes
 .full-width {
   width: 100% !important;
 }
@@ -328,7 +311,6 @@ button.header-btn-elegant,
   background: linear-gradient(135deg, #9c27b0 0%, #673ab7 100%) !important;
 }
 
-// Enhanced dialog panel styling to prevent scrollbar issues
 .custom-dialog-container {
   .mat-mdc-dialog-container {
     padding: 0 !important;
@@ -343,7 +325,6 @@ button.header-btn-elegant,
   }
 }
 
-// Fix for dialog overlay scrolling
 .cdk-overlay-pane {
   &:has(.custom-dialog-container) {
     max-height: 90vh !important;

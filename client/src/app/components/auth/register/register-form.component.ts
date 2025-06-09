@@ -40,7 +40,6 @@ export class RegisterFormComponent implements OnInit {
     private router: Router
   ) {
     this.registerForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required]],
@@ -127,10 +126,10 @@ export class RegisterFormComponent implements OnInit {
       this.loading = true;
       this.errorMessage = null;
 
-      const { email, password, username } = this.registerForm.value;
+      const { email, password } = this.registerForm.value;
 
       this.authService
-        .register(email, password, username)
+        .register(email, password)
         .pipe(finalize(() => (this.loading = false)))
         .subscribe({
           next: () => {

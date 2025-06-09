@@ -1,19 +1,6 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
   <div class="form-field">
     <app-auth-input
-      formControlName="username"
-      label="Username"
-      type="text"
-      placeholder="Choose a username"
-      [errorMessage]="getErrorMessage('username')"
-    ></app-auth-input>
-    <div *ngIf="isFieldInvalid('username')" class="text-xs text-red-500 -mt-3 mb-2">
-      {{ getErrorMessage('username') }}
-    </div>
-  </div>
-
-  <div class="form-field">
-    <app-auth-input
       formControlName="email"
       label="Email"
       type="email"
@@ -33,9 +20,6 @@
       placeholder="Create a password"
       [errorMessage]="getErrorMessage('password')"
     ></app-auth-input>
-    <div class="text-xs text-gray-600 -mt-3 mb-2">
-      {{ passwordHint }}
-    </div>
     <div *ngIf="isFieldInvalid('password')" class="text-xs text-red-500 -mt-3 mb-2">
       {{ getErrorMessage('password') }}
     </div>
