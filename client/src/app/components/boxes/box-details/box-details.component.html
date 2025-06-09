@@ -1,12 +1,10 @@
 <div class="box-details-container">
   @if (isLoading()) {
-    <!-- Loading state -->
     <div class="loading-container">
       <mat-spinner diameter="40"></mat-spinner>
       <p class="loading-text">Loading box details...</p>
     </div>
   } @else if (error()) {
-    <!-- Error state -->
     <div class="error-container">
       <mat-icon class="error-icon">error</mat-icon>
       <h3>Error Loading Box</h3>
@@ -16,9 +14,7 @@
       </button>
     </div>
   } @else if (box()) {
-    <!-- Box details content -->
     <div class="box-details-content">
-      <!-- Header with breadcrumb and actions -->
       <div class="box-header">
         <div class="breadcrumb">
           <button 
@@ -66,7 +62,6 @@
         </div>
       </div>
 
-      <!-- Box information card -->
       <mat-card class="box-info-card">
         <mat-card-header>
           <mat-card-title class="box-title">
@@ -124,7 +119,7 @@
 
         <mat-card-actions class="box-actions">
           <button 
-            mat-raised-button 
+            mat-button 
             color="primary"
             (click)="onStartStudy()"
             [disabled]="getFlashcardCount() === 0"
@@ -134,7 +129,7 @@
           </button>
           
           <button 
-            mat-stroked-button 
+            mat-button 
             color="accent"
             (click)="onAddFlashcard()"
             class="add-flashcard-btn">
@@ -144,7 +139,6 @@
         </mat-card-actions>
       </mat-card>
 
-      <!-- Flashcards section -->
       <div class="flashcards-section">
         <div class="section-header">
           <h2 class="section-title">
@@ -173,13 +167,11 @@
         </div>
 
         @if (isLoadingFlashcards()) {
-          <!-- Loading flashcards state -->
           <div class="loading-flashcards">
             <mat-spinner diameter="30"></mat-spinner>
             <p>Loading flashcards...</p>
           </div>
         } @else if (getFlashcardCount() === 0) {
-          <!-- Empty state -->
           <div class="empty-state">
             <mat-icon class="empty-icon">quiz</mat-icon>
             <h3>No Flashcards Yet</h3>
@@ -194,7 +186,6 @@
             </button>
           </div>
         } @else if (filteredFlashcards().length === 0) {
-          <!-- No search results state -->
           <div class="no-results-state">
             <mat-icon class="no-results-icon">search_off</mat-icon>
             <h3>No Matching Flashcards</h3>
@@ -207,7 +198,6 @@
             </button>
           </div>
         } @else {
-          <!-- Flashcards list -->
           <div class="flashcards-list">
             @for (flashcard of filteredFlashcards(); track flashcard.id) {
               <app-flashcard-item

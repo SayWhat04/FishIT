@@ -3,16 +3,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
   padding: 1.5rem;
 }
 
 .auth-container {
   width: 100%;
   max-width: 420px;
-  background-color: white;
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   transition: transform 0.2s ease-in-out;
   
@@ -32,14 +29,11 @@
 
 .title {
   font-size: 1.75rem;
-  font-weight: 700;
-  color: #1f2937;
   margin-bottom: 0.75rem;
   letter-spacing: -0.025em;
 }
 
 .subtitle {
-  color: #6b7280;
   font-size: 1rem;
   line-height: 1.5;
 }

@@ -1,5 +1,4 @@
 <div class="generate-page-container">
-  <!-- Page Header -->
   <div class="page-header">
     <div class="header-content">
       <div class="title-section">
@@ -24,7 +23,6 @@
     </div>
   </div>
 
-  <!-- Error State -->
   @if (error() && !isLoading()) {
     <div class="error-container">
       <mat-icon class="error-icon">error_outline</mat-icon>
@@ -37,7 +35,6 @@
     </div>
   }
 
-  <!-- Content Section -->
   @if (!error()) {
     <div class="content-section">
       <div class="form-container">

@@ -1,4 +1,3 @@
-// Flashcard card styling
 .flashcard-card {
   margin-bottom: 1rem;
   border-radius: 12px;
@@ -29,7 +28,6 @@
   }
 }
 
-// Card header styling
 .card-header {
   padding: 1rem 1.5rem 0.5rem 1.5rem;
   
@@ -56,8 +54,6 @@
       
       .card-id {
         font-size: 1rem;
-        font-weight: 600;
-        color: #333;
         flex-shrink: 0;
       }
       
@@ -94,7 +90,6 @@
       }
       
       .expand-btn {
-        color: #666;
         
         &:hover {
           color: #2196f3;
@@ -103,10 +98,8 @@
       }
       
       .menu-btn {
-        color: #666;
         
         &:hover {
-          color: #333;
           background-color: rgba(0, 0, 0, 0.05);
         }
       }
@@ -114,14 +107,12 @@
   }
   
   .card-subtitle {
-    color: #666;
     font-size: 0.8rem;
     margin: 0;
     line-height: 1.4;
   }
 }
 
-// Card content styling
 .card-content {
   padding: 0.5rem 1.5rem 1rem 1.5rem;
   
@@ -146,13 +137,11 @@
           font-size: 18px;
           width: 18px;
           height: 18px;
-          color: #666;
         }
         
         .side-label {
           font-size: 0.85rem;
           font-weight: 600;
-          color: #666;
           text-transform: uppercase;
           letter-spacing: 0.5px;
         }
@@ -167,7 +156,6 @@
           margin: 0;
           font-size: 0.95rem;
           line-height: 1.5;
-          color: #333;
           word-wrap: break-word;
           overflow-wrap: break-word;
         }
@@ -199,16 +187,12 @@
       height: auto;
       margin: 0.5rem 0;
       align-self: stretch;
-      background-color: #e0e0e0;
     }
   }
 }
 
-// Card footer styling (expanded actions)
 .card-footer {
   padding: 0.75rem 1.5rem 1rem 1.5rem;
-  border-top: 1px solid #f0f0f0;
-  background-color: #fafafa;
   display: flex;
   gap: 1rem;
   justify-content: flex-start;
@@ -216,7 +200,6 @@
   .action-btn {
     min-width: 120px;
     height: 36px;
-    border-radius: 8px;
     font-weight: 500;
     
     .mat-icon {
@@ -242,7 +225,6 @@
   }
 }
 
-// Menu styling
 ::ng-deep .flashcard-menu {
   .delete-item {
     color: #f44336;
@@ -252,8 +234,6 @@
     }
   }
 }
-
-// Responsive adjustments
 @media (max-width: 768px) {
   .flashcard-card {
     margin-bottom: 0.75rem;
@@ -329,7 +309,6 @@
   }
 }
 
-// Animation for expand/collapse
 .flashcard-sides {
   transition: all 0.3s ease;
 }
@@ -338,7 +317,6 @@
   transition: all 0.3s ease;
 }
 
-// Hover states for better UX
 .flashcard-side {
   transition: background-color 0.2s ease;
   border-radius: 8px;

@@ -176,12 +176,10 @@ button.header-btn-elegant,
       font-size: 3rem;
       height: 3rem;
       width: 3rem;
-      color: #9c27b0;
       margin-bottom: 1rem;
     }
     
     .dialog-subtitle {
-      color: #666;
       margin-bottom: 0;
       font-size: 0.95rem;
     }
@@ -222,13 +220,6 @@ button.header-btn-elegant,
   }
 }
 
-// Enhanced button styles
-.mat-mdc-raised-button.mat-primary {
-  margin-left: 0.5rem;
-  border-radius: 8px;
-}
-
-// App layout styles
 .app-container {
   height: 100vh;
   
@@ -283,14 +274,12 @@ button.header-btn-elegant,
 
 .app-footer {
   height: 48px;
-  background-color: #faf5ff !important;
-  border-top: 1px solid #f3e8ff !important;
   display: flex;
+  background: linear-gradient(135deg, #9c27b0 0%, #673ab7 100%) !important;
   align-items: center;
   justify-content: center;
   
   .footer-content {
-    color: #6b7280;
     font-size: 0.875rem;
   }
 }

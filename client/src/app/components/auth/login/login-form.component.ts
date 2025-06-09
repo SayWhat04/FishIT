@@ -38,11 +38,9 @@ export class LoginFormComponent {
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
 
-    // Sprawdź czy użytkownik został przekierowany po rejestracji
     this.route.queryParams.subscribe(params => {
       if (params['registered'] === 'true') {
-        this.successMessage = 'Registration successful! Please check your email to confirm your account, then sign in.';
-        // Usuń parametr z URL
+        this.successMessage = 'Registration successful!';
         this.router.navigate(['/login'], { replaceUrl: true });
       }
     });

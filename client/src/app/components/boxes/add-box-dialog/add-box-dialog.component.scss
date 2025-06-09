@@ -1,4 +1,3 @@
-// Dialog container improvements
 .dialog-container {
   display: flex;
   flex-direction: column;
@@ -6,7 +5,6 @@
   max-height: 80vh; // Limits dialog height
 }
 
-// Dialog content styling
 .dialog-content {
   padding: 1.5rem !important;
   margin: 0 !important;
@@ -15,7 +13,6 @@
   min-height: 0;
 }
 
-// Dialog header styling consistent with app design
 .dialog-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -24,7 +21,6 @@
     font-size: 3rem;
     height: 3rem;
     width: 3rem;
-    color: #9c27b0;
     margin-bottom: 1rem;
     display: block;
   }
@@ -33,19 +29,16 @@
     margin: 0 0 0.5rem 0;
     font-size: 1.5rem;
     font-weight: 600;
-    color: #7b1fa2;
     line-height: 1.3;
   }
   
   .dialog-subtitle {
-    color: #666;
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.4;
   }
 }
 
-// Form styling
 .dialog-form {
   display: flex;
   flex-direction: column;
@@ -58,25 +51,20 @@
       width: 100%;
     }
     
-    // Consistent field styling with app design
     .mat-mdc-text-field-wrapper {
       border-radius: 8px;
     }
     
-    // Icon prefix styling
     .mat-mdc-form-field-icon-prefix {
-      color: #9c27b0;
       margin-right: 0.5rem;
     }
     
-    // Error styling
     .mat-mdc-form-field-error {
       font-size: 0.75rem;
       margin-top: 0.25rem;
     }
   }
   
-  // Textarea specific styling
   textarea {
     resize: vertical;
     min-height: 60px;
@@ -84,7 +72,6 @@
   }
 }
 
-// Dialog actions styling - fixes button spacing and positioning
 .dialog-actions {
   padding: 1.5rem 1.5rem 1rem 1.5rem !important;
   margin: 0 !important;
@@ -94,7 +81,6 @@
   gap: 1rem;
   flex-shrink: 0; // Prevents actions from shrinking
   
-  // Button styling
   .cancel-btn {
     min-width: 80px;
     height: 40px;
@@ -132,7 +118,6 @@
   }
 }
 
-// Responsive adjustments
 @media (max-width: 600px) {
   .dialog-content {
     padding: 1rem !important;
@@ -169,7 +154,6 @@
   }
 }
 
-// Animation for smooth dialog opening
 .dialog-container {
   animation: dialogFadeIn 0.3s ease-out;
 }
@@ -185,12 +169,10 @@
   }
 }
 
-// Fix for overlay scrolling issues
 ::ng-deep .cdk-overlay-pane {
   max-height: 90vh !important;
 }
 
-// Ensure proper dialog sizing
 ::ng-deep .mat-mdc-dialog-container {
   padding: 0 !important;
   overflow: hidden !important;

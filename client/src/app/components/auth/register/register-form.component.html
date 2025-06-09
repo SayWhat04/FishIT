@@ -56,12 +56,6 @@
 
   <app-auth-error [message]="errorMessage"></app-auth-error>
 
-  <div class="form-status mt-4">
-    <p class="text-xs" [ngClass]="{'text-green-500': registerForm.valid, 'text-red-500': !registerForm.valid}">
-      Form status: {{ registerForm.valid ? 'VALID' : 'INVALID' }}
-    </p>
-  </div>
-
   <app-auth-button
     text="Create Account"
     color="primary"

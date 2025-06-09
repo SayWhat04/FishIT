@@ -9,7 +9,6 @@
   }
 }
 
-// Page Header
 .page-header {
   margin-bottom: 2rem;
 
@@ -35,13 +34,11 @@
       margin: 0 0 0.5rem 0;
       font-size: 2rem;
       font-weight: 600;
-      color: #7b1fa2;
 
       .title-icon {
         font-size: 2rem;
         width: 2rem;
         height: 2rem;
-        color: #9c27b0;
       }
 
       @media (max-width: 768px) {
@@ -57,7 +54,6 @@
 
     .page-subtitle {
       margin: 0;
-      color: #666;
       font-size: 1rem;
       line-height: 1.4;
     }
@@ -73,7 +69,6 @@
     }
 
     .back-btn {
-      color: #666;
 
       &:hover {
         color: #9c27b0;
@@ -83,7 +78,6 @@
   }
 }
 
-// Box Selection Section
 .box-selection-section {
   margin-bottom: 2rem;
 
@@ -99,10 +93,8 @@
         margin: 0 0 0.5rem 0;
         font-size: 1.125rem;
         font-weight: 600;
-        color: #333;
 
         .section-icon {
-          color: #2196f3;
           font-size: 20px;
           width: 20px;
           height: 20px;
@@ -111,7 +103,6 @@
 
       .section-subtitle {
         margin: 0;
-        color: #666;
         font-size: 0.875rem;
         line-height: 1.4;
       }
@@ -128,7 +119,6 @@
   }
 }
 
-// Review Section
 .review-section {
   .review-card {
     .section-content {

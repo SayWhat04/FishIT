@@ -1,5 +1,4 @@
 <div class="boxes-page-container">
-  <!-- Page Header -->
   <div class="page-header">
     <div class="header-content">
       <div class="title-section">
@@ -14,7 +13,7 @@
       
       <div class="header-actions">
         <button 
-          mat-raised-button 
+          mat-stroked-button
           color="primary" 
           (click)="onCreateBox()"
           class="create-box-btn">
@@ -33,7 +32,6 @@
     </div>
   </div>
 
-  <!-- Search Bar -->
   <div class="search-section">
     <mat-form-field appearance="outline" class="search-field">
       <mat-label>Search boxes</mat-label>
@@ -56,7 +54,6 @@
     </mat-form-field>
   </div>
 
-  <!-- Loading State -->
   @if (isLoading()) {
     <div class="loading-container">
       <mat-spinner diameter="50"></mat-spinner>
@@ -64,7 +61,6 @@
     </div>
   }
 
-  <!-- Error State -->
   @if (error() && !isLoading()) {
     <div class="error-container">
       <mat-icon class="error-icon">error_outline</mat-icon>
@@ -77,7 +73,6 @@
     </div>
   }
 
-  <!-- Empty State -->
   @if (!isLoading() && !error() && filteredBoxes().length === 0 && !searchQuery()) {
     <div class="empty-state">
       <mat-icon class="empty-icon">inventory_2</mat-icon>
@@ -94,7 +89,6 @@
     </div>
   }
 
-  <!-- No Search Results -->
   @if (!isLoading() && !error() && filteredBoxes().length === 0 && searchQuery()) {
     <div class="no-results">
       <mat-icon class="no-results-icon">search_off</mat-icon>
@@ -107,7 +101,6 @@
     </div>
   }
 
-  <!-- Boxes Grid -->
   @if (!isLoading() && !error() && filteredBoxes().length > 0) {
     <div class="boxes-grid">
       @for (box of filteredBoxes(); track box.id) {
@@ -152,23 +145,22 @@
             <div class="box-stats">
               <div class="stat-item">
                 <mat-icon class="stat-icon">quiz</mat-icon>
-                <span class="stat-label">Flashcards:</span>
-                <span class="stat-value">{{ getFlashcardCount(box) }}</span>
+                <span>Flashcards:</span>
+                <span>{{ getFlashcardCount(box) }}</span>
               </div>
               
               <div class="stat-item">
                 <mat-icon class="stat-icon">schedule</mat-icon>
-                <span class="stat-label">Created:</span>
-                <span class="stat-value">{{ formatDate(box.created_at) }}</span>
+                <span>Created:</span>
+                <span>{{ formatDate(box.created_at) }}</span>
               </div>
             </div>
           </mat-card-content>
-
+          <mat-divider></mat-divider>
           <mat-card-actions class="box-actions">
             <button 
               mat-button 
-              (click)="onViewBox(box.id)"
-              class="action-btn view-btn">
+              (click)="onViewBox(box.id)">
               <mat-icon>visibility</mat-icon>
               View
             </button>
@@ -187,7 +179,7 @@
       }
     </div>
 
-    <!-- Results Summary -->
+    <mat-divider></mat-divider>
     <div class="results-summary">
       @if (searchQuery()) {
         <p class="results-text">

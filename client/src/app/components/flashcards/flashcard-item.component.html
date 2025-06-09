@@ -56,7 +56,6 @@
 
   <mat-card-content class="card-content">
     <div class="flashcard-sides">
-      <!-- Front side (Question) -->
       <div class="flashcard-side front-side">
         <div class="side-header">
           <mat-icon class="side-icon">help_outline</mat-icon>
@@ -69,7 +68,6 @@
 
       <mat-divider class="sides-divider" [vertical]="!expanded"></mat-divider>
 
-      <!-- Back side (Answer) -->
       <div class="flashcard-side back-side">
         <div class="side-header">
           <mat-icon class="side-icon">lightbulb_outline</mat-icon>
@@ -85,7 +83,7 @@
   @if (expanded && showActions) {
     <mat-card-actions class="card-footer">
       <button 
-        mat-stroked-button 
+        mat-button 
         color="primary"
         (click)="onEdit()"
         class="action-btn edit-btn">
@@ -94,7 +92,7 @@
       </button>
       
       <button 
-        mat-stroked-button 
+        mat-button 
         color="warn"
         (click)="onDelete()"
         class="action-btn delete-btn">

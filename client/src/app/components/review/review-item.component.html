@@ -10,7 +10,6 @@
         <mat-icon class="review-icon">auto_awesome</mat-icon>
         <span class="card-label">AI Generated Suggestion</span>
         
-        <!-- Status chip -->
         @if (isAccepted) {
           <mat-chip class="status-chip accepted-chip" selected>
             <mat-icon matChipAvatar>check_circle</mat-icon>
@@ -38,7 +37,6 @@
 
   <mat-card-content class="card-content">
     @if (isEditing && editedSuggestion) {
-      <!-- Editing Form -->
       <div class="editing-form">
         <div class="form-section">
           <div class="form-header">
@@ -84,9 +82,7 @@
         </div>
       </div>
     } @else {
-      <!-- Flashcard Preview -->
       <div class="flashcard-preview">
-        <!-- Front side (Question) -->
         <div class="flashcard-side front-side">
           <div class="side-header">
             <mat-icon class="side-icon">help_outline</mat-icon>
@@ -99,7 +95,6 @@
 
         <mat-divider class="sides-divider" vertical></mat-divider>
 
-        <!-- Back side (Answer) -->
         <div class="flashcard-side back-side">
           <div class="side-header">
             <mat-icon class="side-icon">lightbulb_outline</mat-icon>
@@ -115,7 +110,6 @@
   
   <mat-card-actions class="card-actions">
     @if (isEditing) {
-      <!-- Editing actions are already in the form -->
     } @else {
       <div class="action-buttons">
         <button 

@@ -9,7 +9,6 @@
   }
 }
 
-// Page Header
 .page-header {
   margin-bottom: 2rem;
 
@@ -35,13 +34,11 @@
       margin: 0 0 0.5rem 0;
       font-size: 2rem;
       font-weight: 600;
-      color: #7b1fa2;
 
       .title-icon {
         font-size: 2rem;
         width: 2rem;
         height: 2rem;
-        color: #9c27b0;
       }
 
       @media (max-width: 768px) {
@@ -57,7 +54,6 @@
 
     .page-subtitle {
       margin: 0;
-      color: #666;
       font-size: 1rem;
       line-height: 1.4;
     }
@@ -73,17 +69,14 @@
     }
 
     .back-btn {
-      color: #666;
 
       &:hover {
-        color: #9c27b0;
         background-color: rgba(156, 39, 176, 0.1);
       }
     }
   }
 }
 
-// Loading State
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -94,7 +87,6 @@
 
   .loading-text {
     margin-top: 1rem;
-    color: #666;
     font-size: 1rem;
   }
 
@@ -103,7 +95,6 @@
   }
 }
 
-// Error State
 .error-container {
   display: flex;
   flex-direction: column;
@@ -122,13 +113,11 @@
 
   h3 {
     margin: 0 0 0.5rem 0;
-    color: #333;
     font-size: 1.5rem;
   }
 
   p {
     margin: 0 0 2rem 0;
-    color: #666;
     max-width: 400px;
   }
 
@@ -137,7 +126,6 @@
   }
 }
 
-// Content Section
 .content-section {
   margin-bottom: 2rem;
 
@@ -152,18 +140,14 @@
   }
 }
 
-// Form styles
 .form-container {
-  background: white;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
 }
 
-// Progress styles
 .progress-container {
-  background: white;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -173,19 +157,16 @@
     font-size: 3rem;
     width: 3rem;
     height: 3rem;
-    color: #9c27b0;
     margin-bottom: 1rem;
   }
 
   .progress-title {
     font-size: 1.5rem;
     font-weight: 500;
-    color: #333;
     margin-bottom: 0.5rem;
   }
 
   .progress-text {
-    color: #666;
     margin-bottom: 2rem;
   }
 
@@ -193,7 +174,6 @@
     color: #9c27b0;
   }
 
-  // Progress component content
   .progress-content {
     margin-top: 1rem;
 
@@ -213,14 +193,12 @@
 
     .progress-time {
       margin: 0;
-      color: #666;
       font-size: 0.9rem;
       font-style: italic;
     }
   }
 }
 
-// Responsive design
 @media (max-width: 768px) {
   .form-container,
   .progress-container {

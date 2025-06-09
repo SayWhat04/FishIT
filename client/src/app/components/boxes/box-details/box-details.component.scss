@@ -1,7 +1,5 @@
-// Container styling
 .box-details-container {
   min-height: 100vh;
-  background-color: #f8f9fa;
   padding: 1rem;
 }
 
@@ -13,7 +11,6 @@
   gap: 1.5rem;
 }
 
-// Loading and error states
 .loading-container,
 .error-container {
   display: flex;
@@ -25,7 +22,6 @@
   
   .loading-text {
     margin-top: 1rem;
-    color: #666;
     font-size: 1rem;
   }
   
@@ -39,26 +35,19 @@
   
   h3 {
     margin: 0 0 0.5rem 0;
-    color: #333;
   }
   
   p {
     margin: 0 0 1.5rem 0;
-    color: #666;
   }
 }
 
-// Header styling
 .box-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
-  border-bottom: 1px solid #e0e0e0;
-  background-color: white;
-  border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   
   .breadcrumb {
     display: flex;
@@ -66,7 +55,6 @@
     gap: 0.5rem;
     
     .back-btn {
-      color: #2196f3;
       font-weight: 500;
       
       .mat-icon {
@@ -82,15 +70,12 @@
     }
     
     .breadcrumb-separator {
-      color: #999;
       font-size: 18px;
       width: 18px;
       height: 18px;
     }
     
     .current-page {
-      font-weight: 600;
-      color: #333;
       max-width: 300px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -113,17 +98,14 @@
     }
     
     .menu-btn {
-      color: #666;
       
       &:hover {
         color: #333;
-        background-color: rgba(0, 0, 0, 0.05);
       }
     }
   }
 }
 
-// Box info card styling
 .box-info-card {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -134,11 +116,9 @@
     align-items: center;
     gap: 0.75rem;
     font-size: 1.5rem;
-    font-weight: 600;
     margin: 0;
     
     .box-icon {
-      color: #2196f3;
       font-size: 28px;
       width: 28px;
       height: 28px;
@@ -147,7 +127,6 @@
   
   .box-subtitle {
     margin-top: 0.5rem;
-    color: #666;
     line-height: 1.5;
     font-style: italic;
   }
@@ -166,9 +145,7 @@
       align-items: center;
       gap: 1rem;
       padding: 1rem;
-      background-color: #f8f9fa;
       border-radius: 8px;
-      border: 1px solid #e9ecef;
       
       .stat-icon {
         font-size: 24px;
@@ -193,17 +170,14 @@
         
         .stat-value {
           font-size: 1.25rem;
-          font-weight: 600;
-          color: #333;
+          font-weight: 500;
           line-height: 1.2;
         }
         
         .stat-label {
           font-size: 0.85rem;
-          color: #666;
           text-transform: uppercase;
           letter-spacing: 0.5px;
-          font-weight: 500;
         }
       }
     }
@@ -211,7 +185,6 @@
   
   .box-actions {
     padding: 1rem 1.5rem;
-    background-color: #f8f9fa;
     border-top: 1px solid #e9ecef;
     display: flex;
     gap: 1rem;
@@ -247,15 +220,12 @@
       
       &:hover {
         background-color: rgba(156, 39, 176, 0.05);
-        border-color: #9c27b0;
       }
     }
   }
 }
 
-// Flashcards section styling
 .flashcards-section {
-  background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
@@ -274,8 +244,6 @@
       gap: 0.75rem;
       margin: 0;
       font-size: 1.25rem;
-      font-weight: 600;
-      color: #333;
       flex-shrink: 0;
       
       .section-icon {
@@ -305,7 +273,6 @@
     
     p {
       margin: 0;
-      color: #666;
     }
   }
   
@@ -322,19 +289,16 @@
       font-size: 4rem;
       width: 4rem;
       height: 4rem;
-      color: #bbb;
       margin-bottom: 1.5rem;
     }
     
     h3 {
       margin: 0 0 0.75rem 0;
-      color: #333;
       font-size: 1.25rem;
     }
     
     p {
       margin: 0 0 2rem 0;
-      color: #666;
       max-width: 400px;
       line-height: 1.5;
     }
@@ -361,11 +325,9 @@
   .flashcards-list {
     padding: 1rem 1.5rem 1.5rem 1.5rem;
     
-    // FlashcardItemComponent is styled in its own file
   }
 }
 
-// Menu styling
 ::ng-deep .mat-mdc-menu-panel {
   .delete-item {
     color: #f44336;
@@ -376,7 +338,6 @@
   }
 }
 
-// Responsive adjustments
 @media (max-width: 768px) {
   .box-details-container {
     padding: 0.5rem;
@@ -526,7 +487,6 @@
   }
 }
 
-// Animations
 .flashcards-list {
   animation: fadeIn 0.3s ease-out;
 }
@@ -542,7 +502,6 @@
   }
 }
 
-// Smooth transitions
 .box-info-card,
 .flashcards-section {
   transition: box-shadow 0.3s ease;

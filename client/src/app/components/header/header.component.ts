@@ -21,7 +21,6 @@ export class HeaderComponent {
   private snackBar = inject(MatSnackBar);
   private authService = inject(AuthService);
 
-  // Check if user is authenticated using the AuthService signal
   protected isAuthenticated = this.authService.isLoggedIn;
 
   navigateToGenerate(): void {
