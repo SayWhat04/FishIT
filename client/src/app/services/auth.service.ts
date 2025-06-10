@@ -33,14 +33,12 @@ export class AuthService {
   private boxService = inject(BoxService);
   private authToken = signal<string | null>(localStorage.getItem('authToken'));
   
-  // Public signal for UI reactivity
   public isLoggedIn = signal<boolean>(false);
 
   constructor() {
     this.refreshAuthState();
   }
 
-  // Refresh authentication state based on localStorage
   private refreshAuthState(): void {
     const token = localStorage.getItem('authToken');
     const hasValidToken = !!token && token.trim() !== '';
@@ -48,14 +46,11 @@ export class AuthService {
     this.isLoggedIn.set(hasValidToken);
   }
 
-  // Getter dla tokenu do wykorzystania w interceptorze HTTP
   getToken(): string | null {
     return this.authToken();
   }
 
-  // Sprawdzenie czy użytkownik jest zalogowany
   isAuthenticated(): Observable<boolean> {
-    // Jeśli mamy token w pamięci, uznajemy użytkownika za zalogowanego
     if (this.authToken()) {
       return this.http
         .get<{ authenticated: boolean }>('/api/auth/session', {
@@ -64,23 +59,19 @@ export class AuthService {
         .pipe(
           map(response => response.authenticated),
           catchError(() => {
-            // W przypadku błędu weryfikacji tokena, wylogowujemy użytkownika
             this.clearSession();
             return of(false);
           })
         );
     }
 
-    // W przeciwnym razie nie jesteśmy zalogowani
     return of(false);
   }
 
-  // Logowanie użytkownika
   login(email: string, password: string): Observable<boolean> {
     return this.http.post<AuthResponse>('/api/auth/login', { email, password }).pipe(
       tap(response => {
         if (response.token) {
-          // Clear all cached data before setting new session
           this.boxService.clearCache();
           this.setSession(response);
         } else {
@@ -95,12 +86,9 @@ export class AuthService {
     );
   }
 
-  // Rejestracja nowego użytkownika
   register(email: string, password: string, username?: string): Observable<boolean> {
     return this.http.post<RegistrationResponse>('/api/auth/register', { email, password, username }).pipe(
       tap(response => {
-        // Po rejestracji nie zapisujemy sesji - użytkownik musi się zalogować osobno
-        // Token nie powinien być zwracany po rejestracji
         console.log('Registration successful:', response.message);
       }),
       map(() => true),
@@ -111,9 +99,7 @@ export class AuthService {
     );
   }
 
-  // Wylogowanie użytkownika
   logout(): Observable<void> {
-    // Nagłówki z aktualnym tokenem
     const headers = this.getAuthHeaders();
 
     return this.http.post<void>('/api/auth/logout', {}, { headers }).pipe(
@@ -123,14 +109,12 @@ export class AuthService {
       }),
       catchError(error => {
         console.error('Logout error:', error);
-        // Nawet w przypadku błędu, czyścimy lokalną sesję
         this.clearSession();
         return throwError(() => error);
       })
     );
   }
 
-  // Tworzenie nagłówków z tokenem autoryzacji
   private getAuthHeaders(): HttpHeaders {
     const token = this.authToken();
     return new HttpHeaders({
@@ -138,7 +122,6 @@ export class AuthService {
     });
   }
 
-  // Zapisanie sesji po pomyślnym logowaniu
   private setSession(authResult: AuthResponse): void {
     if (authResult.token && authResult.user) {
       localStorage.setItem('authToken', authResult.token);
@@ -147,12 +130,10 @@ export class AuthService {
     }
   }
 
-  // Wyczyszczenie sesji po wylogowaniu
   private clearSession(): void {
     localStorage.removeItem('authToken');
     this.authToken.set(null);
     this.isLoggedIn.set(false);
-    // Clear all cached data when clearing session
     this.boxService.clearCache();
   }
 }

@@ -47,7 +47,6 @@ export class RegisterFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Dodajemy walidator po inicjalizacji, aby uniknąć problemów z cyklem walidacji
     this.registerForm.addValidators(this.passwordMatchValidator());
     this.registerForm.updateValueAndValidity();
   }
@@ -64,18 +63,14 @@ export class RegisterFormComponent implements OnInit {
       const password = passwordControl.value;
       const confirmPassword = confirmPasswordControl.value;
 
-      // Sprawdzamy tylko jeśli oba pola mają wartości
       if (password && confirmPassword && password !== confirmPassword) {
-        // Bezpośrednio ustawiamy błąd na polu potwierdzenia hasła
         confirmPasswordControl.setErrors({
           ...confirmPasswordControl.errors,
           passwordMismatch: true,
         });
         return { passwordMismatch: true };
       }
-
-      // Jeśli hasła się zgadzają, a była ustawiona błąd, czyścimy go
-      // ale zachowujemy inne potencjalne błędy
+      
       if (confirmPasswordControl.errors) {
         const { passwordMismatch, ...otherErrors } = confirmPasswordControl.errors;
         confirmPasswordControl.setErrors(Object.keys(otherErrors).length > 0 ? otherErrors : null);
@@ -109,12 +104,10 @@ export class RegisterFormComponent implements OnInit {
       return 'Passwords do not match';
     }
 
-    // Pokaż pierwsze znalezione błędy, jeśli nie dopasowano konkretnych przypadków
     return Object.keys(control.errors)[0];
   }
 
   onSubmit() {
-    // Oznacz wszystkie pola jako dotknięte, aby wyświetlić błędy
     Object.keys(this.registerForm.controls).forEach(key => {
       const control = this.registerForm.get(key);
       control?.markAsDirty();
@@ -133,7 +126,6 @@ export class RegisterFormComponent implements OnInit {
         .pipe(finalize(() => (this.loading = false)))
         .subscribe({
           next: () => {
-            // Przekierowanie do strony logowania po pomyślnej rejestracji z komunikatem
             this.router.navigate(['/login'], { 
               queryParams: { registered: 'true' } 
             });

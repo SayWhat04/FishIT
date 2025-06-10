@@ -75,7 +75,7 @@ export class LoginFormComponent {
         .pipe(finalize(() => (this.loading = false)))
         .subscribe({
           next: () => {
-            this.router.navigate(['/generate']); // Przekierowanie do generowania fiszek po zalogowaniu
+            this.router.navigate(['/generate']);
           },
           error: err => {
             this.errorMessage =

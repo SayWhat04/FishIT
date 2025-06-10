@@ -20,7 +20,7 @@
       placeholder="Create a password"
       [errorMessage]="getErrorMessage('password')"
     ></app-auth-input>
-    <div *ngIf="isFieldInvalid('password')" class="text-xs text-red-500 -mt-3 mb-2">
+    <div *ngIf="isFieldInvalid('password')">
       {{ getErrorMessage('password') }}
     </div>
   </div>
@@ -33,7 +33,7 @@
       placeholder="Confirm your password"
       [errorMessage]="getErrorMessage('confirmPassword')"
     ></app-auth-input>
-    <div *ngIf="isFieldInvalid('confirmPassword')" class="text-xs text-red-500 -mt-3 mb-2">
+    <div *ngIf="isFieldInvalid('confirmPassword')">
       {{ getErrorMessage('confirmPassword') }}
     </div>
   </div>
