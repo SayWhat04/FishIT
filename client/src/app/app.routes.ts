@@ -48,7 +48,7 @@ export const routes: Routes = [
   },
   {
     path: 'boxes/:id/study',
-    redirectTo: 'boxes/:id', // TODO: Replace with StudySessionComponent when ready
+    redirectTo: 'boxes/:id',
     pathMatch: 'full',
   },
   {

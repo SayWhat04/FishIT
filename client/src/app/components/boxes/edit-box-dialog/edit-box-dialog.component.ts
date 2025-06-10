@@ -60,7 +60,6 @@ export class EditBoxDialogComponent {
         description: this.form.get('description')?.value,
       };
 
-      // Check if anything actually changed
       if (command.name === this.originalBox.name && 
           command.description === (this.originalBox.description || '')) {
         this.snackBar.open('No changes were made', 'OK', { duration: 3000 });
@@ -82,7 +81,6 @@ export class EditBoxDialogComponent {
   }
 
   onCancel(): void {
-    // Check if form has been modified
     const hasChanges = this.form.get('name')?.value !== this.originalBox.name ||
                       this.form.get('description')?.value !== (this.originalBox.description || '');
     

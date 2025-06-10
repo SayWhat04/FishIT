@@ -119,7 +119,7 @@
 
         <mat-card-actions class="box-actions">
           <button 
-            mat-button 
+            mat-stroked-button
             color="primary"
             (click)="onStartStudy()"
             [disabled]="getFlashcardCount() === 0"
@@ -129,7 +129,7 @@
           </button>
           
           <button 
-            mat-button 
+            mat-stroked-button
             color="accent"
             (click)="onAddFlashcard()"
             class="add-flashcard-btn">

@@ -6,14 +6,10 @@ export const guestGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Używamy lokalnego sygnału isLoggedIn zamiast HTTP requesta
   const isAuthenticated = authService.isLoggedIn();
   
   if (isAuthenticated) {
-    // Jeśli użytkownik jest zalogowany, przekieruj do boxes
     router.navigate(['/boxes']);
-    return false; // Blokuj dostęp do guest routes
+    return false;
   }
-  
-  return true; // Pozwól na dostęp niezalogowanym
-}; 
+  return true;

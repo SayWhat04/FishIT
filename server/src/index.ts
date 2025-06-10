@@ -8,7 +8,6 @@ import { config } from './config/environment';
 import { Request, Response, NextFunction } from 'express';
 import authRoutes from './api/auth.routes';
 
-// Konfiguracja Winston logger
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
@@ -26,32 +25,26 @@ const logger = winston.createLogger({
 const app = express();
 const PORT = config.server.port;
 
-// Middleware
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-// Request logging middleware
 app.use((req: Request, res: Response, next: NextFunction) => {
   logger.info(`${req.method} ${req.url}`);
   next();
 });
 
-// API routes
 app.use("/api", apiRoutes);
 app.use('/api/auth', authRoutes);
 
-// Health check endpoint
 app.get("/health", (req, res) => {
   logger.info('===== HEALTH CHECK ENDPOINT CALLED =====');
   res.json({ status: "ok" });
 });
 
-// Error handling middleware
 app.use((err: Error & { statusCode?: number }, req: Request, res: Response, next: NextFunction) => {
   logger.error(`Error: ${err.message}`, { error: err });
   
-  // Don't expose internal server errors to client
   const statusCode = err.statusCode || 500;
   const message = statusCode === 500 
     ? 'Internal server error' 
@@ -63,7 +56,6 @@ app.use((err: Error & { statusCode?: number }, req: Request, res: Response, next
   });
 });
 
-// Start server
 app.listen(PORT, () => {
   logger.info(`Server running on port ${PORT}`);
   logger.info(`Health check available at: http://localhost:${PORT}/health`);

@@ -1,5 +1,5 @@
 -- Migration: 20250424233900_initial_schema_setup.sql
--- Purpose: Initialize database schema for FishIT application
+-- Purpose: Initialize database schema for FlashCardz application
 -- Tables: boxes, flashcards, tags, box_tags, generation_log
 -- Author: System Generated
 

@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.use(auth as unknown as RequestHandler);
 
-// Get a specific flashcard by ID
 router.get("/:id", (async (req, res) => {
   try {
     const userId = req.user?.id;
@@ -17,7 +16,6 @@ router.get("/:id", (async (req, res) => {
       return;
     }
 
-    // Get flashcard with box verification (ensure user owns the box)
     const { data: flashcard, error } = await supabase
       .from('flashcards')
       .select(`
@@ -39,7 +37,6 @@ router.get("/:id", (async (req, res) => {
       return;
     }
 
-    // Remove the nested boxes data before returning
     const { boxes, ...flashcardData } = flashcard;
     res.json(flashcardData);
     return;
@@ -50,7 +47,6 @@ router.get("/:id", (async (req, res) => {
   }
 }) as RequestHandler);
 
-// Update a flashcard
 router.put("/:id", (async (req, res) => {
   try {
     const userId = req.user?.id;
@@ -62,13 +58,11 @@ router.put("/:id", (async (req, res) => {
       return;
     }
 
-    // Validate input
     if (!front || !back) {
       res.status(400).json({ error: 'Front and back are required' });
       return;
     }
 
-    // First verify the flashcard exists and user owns the box
     const { data: existingFlashcard, error: checkError } = await supabase
       .from('flashcards')
       .select(`
@@ -90,7 +84,6 @@ router.put("/:id", (async (req, res) => {
       return;
     }
 
-    // Update the flashcard
     const { data: flashcard, error: updateError } = await supabase
       .from('flashcards')
       .update({
@@ -116,7 +109,6 @@ router.put("/:id", (async (req, res) => {
   }
 }) as RequestHandler);
 
-// Delete a flashcard (soft delete)
 router.delete("/:id", (async (req, res) => {
   try {
     const userId = req.user?.id;
@@ -127,7 +119,6 @@ router.delete("/:id", (async (req, res) => {
       return;
     }
 
-    // First verify the flashcard exists and user owns the box
     const { data: existingFlashcard, error: checkError } = await supabase
       .from('flashcards')
       .select(`
@@ -149,7 +140,6 @@ router.delete("/:id", (async (req, res) => {
       return;
     }
 
-    // Soft delete the flashcard
     const { error: deleteError } = await supabase
       .from('flashcards')
       .update({

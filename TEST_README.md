@@ -1,6 +1,6 @@
-# FishIT Testing Guide
+# FlashCardz Testing Guide
 
-This document outlines how to run tests for the FishIT application.
+This document outlines how to run tests for the FlashCardz application.
 
 ## Prerequisites
 

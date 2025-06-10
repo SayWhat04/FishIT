@@ -19,7 +19,6 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // Express middleware to handle JWT auth
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // Get the token from the Authorization header
     const authHeader = req.headers.authorization;
     
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -28,14 +27,12 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     
     const token = authHeader.split(' ')[1];
     
-    // Verify the JWT with Supabase
     const { data, error } = await supabase.auth.getUser(token);
     
     if (error || !data?.user) {
       return res.status(401).json({ error: 'Unauthorized: Invalid token' });
     }
     
-    // Add user data to request for downstream handlers
     (req as any).user = {
       id: data.user.id,
       email: data.user.email

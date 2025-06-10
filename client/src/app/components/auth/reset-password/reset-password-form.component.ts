@@ -76,7 +76,6 @@ export class ResetPasswordFormComponent {
       this.loading = true;
       this.errorMessage = null;
       // TODO: Implement reset password logic
-      console.log(this.resetPasswordForm.value);
     }
   }
 }

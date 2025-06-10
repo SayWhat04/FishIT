@@ -6,13 +6,11 @@ export const authGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Używamy lokalnego sygnału isLoggedIn zamiast HTTP requesta
   const isAuthenticated = authService.isLoggedIn();
   
   if (!isAuthenticated) {
     router.navigate(['/login']);
-    return false; // Blokuj dostęp niezalogowanym
+    return false;
   }
-  
-  return true; // Pozwól na dostęp zalogowanym
+  return true;
 };

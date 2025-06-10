@@ -13,7 +13,7 @@ export class BoxService {
   // Cache the boxes to avoid multiple requests within the same user session
   private boxesCache = signal<BoxDto[]>([]);
   private cacheTimestamp = 0;
-  private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+  private readonly CACHE_DURATION = 5 * 60 * 1000;
 
   /**
    * Get all boxes for the current user
@@ -23,12 +23,10 @@ export class BoxService {
     const isCacheValid = this.boxesCache().length > 0 && 
                          (now - this.cacheTimestamp) < this.CACHE_DURATION;
 
-    // If we have valid cached boxes and no force refresh, return them
     if (!forceRefresh && isCacheValid) {
       return of(this.boxesCache());
     }
 
-    // Otherwise fetch from API
     return this.http.get<BoxesListResponseDto>('/api/boxes').pipe(
       map(response => response.items),
       tap(boxes => {
@@ -60,7 +58,6 @@ export class BoxService {
   createBox(command: CreateBoxCommand): Observable<BoxDto> {
     return this.http.post<BoxDto>('/api/boxes', command).pipe(
       tap(newBox => {
-        // Update cache with the new box
         this.boxesCache.update(boxes => [...boxes, newBox]);
       }),
       catchError(error => {
@@ -76,7 +73,6 @@ export class BoxService {
   updateBox(boxId: string, command: UpdateBoxCommand): Observable<BoxDto> {
     return this.http.put<BoxDto>(`/api/boxes/${boxId}`, command).pipe(
       tap(updatedBox => {
-        // Update the box in cache
         this.boxesCache.update(boxes => boxes.map(box => (box.id === boxId ? updatedBox : box)));
       }),
       catchError(error => {
@@ -92,7 +88,6 @@ export class BoxService {
   deleteBox(boxId: string): Observable<void> {
     return this.http.delete<void>(`/api/boxes/${boxId}`).pipe(
       tap(() => {
-        // Remove the box from cache
         this.boxesCache.update(boxes => boxes.filter(box => box.id !== boxId));
       }),
       catchError(error => {

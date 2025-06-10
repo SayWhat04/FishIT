@@ -1,7 +1,7 @@
 describe('App E2E', () => {
   it('should visit the home page', () => {
     cy.visit('/');
-    cy.contains('FishIT');
+    cy.contains('FlashCardz');
   });
 
   it('should have basic navigation', () => {

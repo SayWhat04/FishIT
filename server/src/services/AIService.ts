@@ -25,14 +25,8 @@ export class AIService {
     
       
     try {
-      // if (!this.apiKey) {
-      //   throw new Error('OPENROUTER_API_KEY is not configured');
-      // }
-
-      // Prepare the prompt for the AI model
       const prompt = this.buildPrompt(command.text, command.count);
       
-      // Make API request to OpenRouter
       const response = await axios.post(
         `${this.apiUrl}/chat/completions`,
         {
@@ -53,7 +47,7 @@ export class AIService {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${this.apiKey}`,
-            'HTTP-Referer': 'https://10xcards.com', // Replace with your actual domain
+            'HTTP-Referer': 'https://flashcardz.com', // Replace with your actual domain
           },
         }
       );
@@ -62,10 +56,8 @@ export class AIService {
         throw new Error('Invalid response from AI service');
       }
 
-      // Parse AI response
       const aiResponse = JSON.parse(response.data.choices[0].message.content);
       
-      // Map AI response to FlashcardSuggestionDto array
       return {
         suggestions: this.parseFlashcards(aiResponse, response.data),
       };
@@ -120,7 +112,6 @@ Respond with a JSON object in this exact format:
       throw new Error('Invalid AI response format: missing flashcards array');
     }
 
-    // Extract useful metadata
     const metadata = {
       model: rawResponse.model,
       created: rawResponse.created,
@@ -128,7 +119,6 @@ Respond with a JSON object in this exact format:
       usage: rawResponse.usage,
     };
 
-    // Map to DTO format
     return aiResponse.flashcards.map((card: any, index: number) => ({
       id: `tmp-${index + 1}`,
       front: card.front,

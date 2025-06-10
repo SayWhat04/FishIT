@@ -51,7 +51,6 @@ export class BoxDetailsComponent implements OnInit, OnDestroy {
   private snackBar = inject(MatSnackBar);
   private destroy$ = new Subject<void>();
 
-  // State signals
   box = signal<BoxDto | null>(null);
   flashcards = signal<FlashcardDto[]>([]);
   searchQuery = signal<string>('');
@@ -60,7 +59,6 @@ export class BoxDetailsComponent implements OnInit, OnDestroy {
   error = signal<string | null>(null);
   expandedFlashcards = signal<Set<string>>(new Set());
 
-  // Computed filtered flashcards based on search query
   filteredFlashcards = computed(() => {
     const query = this.searchQuery().toLowerCase().trim();
     if (!query) {
@@ -72,7 +70,6 @@ export class BoxDetailsComponent implements OnInit, OnDestroy {
     );
   });
 
-  // Computed statistics
   stats = computed(() => {
     const allFlashcards = this.flashcards();
     const aiGenerated = allFlashcards.filter(f => f.is_ai_generated).length;
@@ -103,7 +100,6 @@ export class BoxDetailsComponent implements OnInit, OnDestroy {
     this.isLoading.set(true);
     this.error.set(null);
 
-    // Load both box and flashcards in parallel
     forkJoin({
       box: this.boxService.getBox(boxId),
       flashcards: this.flashcardService.getFlashcards(boxId, true)
@@ -122,7 +118,6 @@ export class BoxDetailsComponent implements OnInit, OnDestroy {
         this.snackBar.open('Failed to load box details. Please try again.', 'OK', { 
           duration: 5000 
         });
-        // Navigate back to boxes list on error
         this.router.navigate(['/boxes']);
       },
     });
@@ -230,7 +225,6 @@ export class BoxDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Helper methods for template
   formatDate(dateString: string): string {
     return new Date(dateString).toLocaleDateString('pl-PL', {
       year: 'numeric',

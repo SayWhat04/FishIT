@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.use(auth as unknown as RequestHandler);
 
-// Get all boxes for the current user
 router.get("/", (async (req, res) => {
   try {
     const userId = req.user?.id;
@@ -38,7 +37,6 @@ router.get("/", (async (req, res) => {
   }
 }) as RequestHandler);
 
-// Get a specific box by ID
 router.get("/:id", (async (req, res) => {
   try {
     const userId = req.user?.id;
@@ -75,7 +73,6 @@ router.get("/:id", (async (req, res) => {
   }
 }) as RequestHandler);
 
-// Create a new box
 router.post("/", (async (req, res) => {
   try {
     const userId = req.user?.id;
@@ -107,7 +104,6 @@ router.post("/", (async (req, res) => {
   }
 }) as RequestHandler);
 
-// Update a box
 router.put("/:id", (async (req, res) => {
   try {
     const userId = req.user?.id;
@@ -146,7 +142,6 @@ router.put("/:id", (async (req, res) => {
   }
 }) as RequestHandler);
 
-// Delete a box
 router.delete("/:id", (async (req, res) => {
   try {
     const userId = req.user?.id;
@@ -172,7 +167,6 @@ router.delete("/:id", (async (req, res) => {
   }
 }) as RequestHandler);
 
-// Bulk create flashcards for a box
 router.post("/:id/flashcards/bulk", (async (req, res) => {
   try {
     const userId = req.user?.id;
@@ -184,13 +178,11 @@ router.post("/:id/flashcards/bulk", (async (req, res) => {
       return;
     }
 
-    // Validate input
     if (!Array.isArray(flashcards)) {
       res.status(400).json({ error: 'Flashcards must be an array' });
       return;
     }
 
-    // First verify the box exists and belongs to the user
     const { data: box, error: boxError } = await supabase
       .from('boxes')
       .select('id')
@@ -208,7 +200,6 @@ router.post("/:id/flashcards/bulk", (async (req, res) => {
       return;
     }
 
-    // Prepare flashcards data with box_id
     const flashcardsData = flashcards.map(flashcard => ({
       ...flashcard,
       box_id: boxId,
@@ -216,7 +207,6 @@ router.post("/:id/flashcards/bulk", (async (req, res) => {
       updated_at: new Date().toISOString()
     }));
 
-    // Insert flashcards
     const { data: createdFlashcards, error: insertError } = await supabase
       .from('flashcards')
       .insert(flashcardsData)
@@ -241,7 +231,6 @@ router.post("/:id/flashcards/bulk", (async (req, res) => {
   }
 }) as RequestHandler);
 
-// Get all flashcards for a specific box
 router.get("/:id/flashcards", (async (req, res) => {
   try {
     const userId = req.user?.id;
@@ -252,7 +241,6 @@ router.get("/:id/flashcards", (async (req, res) => {
       return;
     }
 
-    // First verify the box exists and belongs to the user
     const { data: box, error: boxError } = await supabase
       .from('boxes')
       .select('id')
@@ -270,7 +258,6 @@ router.get("/:id/flashcards", (async (req, res) => {
       return;
     }
 
-    // Get flashcards for the box
     const { data: flashcards, error: flashcardsError } = await supabase
       .from('flashcards')
       .select('*')
@@ -299,7 +286,6 @@ router.get("/:id/flashcards", (async (req, res) => {
   }
 }) as RequestHandler);
 
-// Create a single flashcard for a box
 router.post("/:id/flashcards", (async (req, res) => {
   try {
     const userId = req.user?.id;
@@ -311,13 +297,11 @@ router.post("/:id/flashcards", (async (req, res) => {
       return;
     }
 
-    // Validate input
     if (!front || !back) {
       res.status(400).json({ error: 'Front and back are required' });
       return;
     }
 
-    // First verify the box exists and belongs to the user
     const { data: box, error: boxError } = await supabase
       .from('boxes')
       .select('id')
@@ -335,7 +319,6 @@ router.post("/:id/flashcards", (async (req, res) => {
       return;
     }
 
-    // Create flashcard
     const { data: flashcard, error: insertError } = await supabase
       .from('flashcards')
       .insert([{

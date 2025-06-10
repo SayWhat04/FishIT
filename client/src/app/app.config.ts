@@ -4,7 +4,7 @@ import { provideHttpClient, withInterceptors, HttpInterceptorFn } from '@angular
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 
-// Funkcja interceptora (nowy styl Angular 16+)
+
 const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = localStorage.getItem('authToken');
   if (token) {

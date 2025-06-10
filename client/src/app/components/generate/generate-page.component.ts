@@ -36,7 +36,6 @@ export class GeneratePageComponent {
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
-  // State signals
   isLoading = signal<boolean>(false);
   error = signal<string | null>(null);
 

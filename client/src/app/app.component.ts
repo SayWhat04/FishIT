@@ -27,7 +27,7 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'FishIT';
+  title = 'FlashCardz';
 
   private breakpointObserver = inject(BreakpointObserver);
   private destroy$ = new Subject<void>();

@@ -48,7 +48,6 @@ export class ForgotPasswordFormComponent {
       this.loading = true;
       this.errorMessage = null;
       // TODO: Implement forgot password logic
-      console.log(this.forgotPasswordForm.value);
     }
   }
 }

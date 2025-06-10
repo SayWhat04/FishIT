@@ -1,4 +1,4 @@
-# FishIT
+# FlashCardz
 
 > AI-powered flashcard generation and spaced repetition learning tool
 
@@ -15,11 +15,11 @@
 
 ## Project Description
 
-FishIT is a web application designed to solve a common problem in education - the time-consuming process of creating high-quality flashcards for effective learning.
+FlashCardz is a web application designed to solve a common problem in education - the time-consuming process of creating high-quality flashcards for effective learning.
 
 **The Problem:** Spaced repetition is a scientifically proven, effective learning method that uses flashcards to memorize information at optimal time intervals. However, the main barrier to its widespread use is the time-consuming process of creating high-quality educational flashcards.
 
-**The Solution:** FishIT leverages artificial intelligence (Claude-3.7-sonnet) to automatically generate question-answer flashcards from text input by the user, significantly reducing the time needed to create effective learning materials.
+**The Solution:** FlashCardz leverages artificial intelligence (Claude-3.7-sonnet) to automatically generate question-answer flashcards from text input by the user, significantly reducing the time needed to create effective learning materials.
 
 ### Key Features
 
@@ -78,8 +78,8 @@ FishIT is a web application designed to solve a common problem in education - th
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/FishIT.git
-   cd FishIT
+   git clone https://github.com/yourusername/FlashCardz.git
+   cd FlashCardz
    ```
 
 2. Install dependencies:
@@ -106,7 +106,7 @@ FishIT is a web application designed to solve a common problem in education - th
 
 ## Testing Strategy
 
-FishIT implements a comprehensive testing approach covering all layers of the application:
+FlashCardz implements a comprehensive testing approach covering all layers of the application:
 
 ### Types of Tests
 

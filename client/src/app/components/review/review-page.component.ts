@@ -42,10 +42,8 @@ export class ReviewPageComponent implements OnInit {
   isLoading = signal<boolean>(false);
 
   ngOnInit(): void {
-    // Load boxes
     this.loadBoxes();
 
-    // Get suggestions from router state
     const state = this.router.getCurrentNavigation()?.extras.state as
       | { suggestions: ReviewFlashcard[] }
       | undefined;
@@ -65,14 +63,9 @@ export class ReviewPageComponent implements OnInit {
   }
 
   private loadBoxes(): void {
-    // Force refresh to ensure we get boxes for the current user
     this.boxService.getBoxes(true).subscribe({
       next: boxes => {
         this.boxes.set(boxes);
-        // Remove automatic selection - user must explicitly choose a box
-        // if (boxes.length > 0) {
-        //   this.selectedBoxId.set(boxes[0].id);
-        // }
       },
       error: error => {
         console.error('Error loading boxes:', error);

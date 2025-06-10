@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "FishIT": {
+    "FlashCardz": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/fish-it",
+            "outputPath": "dist/flash-cardz",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -73,10 +73,10 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "FishIT:build:production"
+              "buildTarget": "FlashCardz:build:production"
             },
             "development": {
-              "buildTarget": "FishIT:build:development"
+              "buildTarget": "FlashCardz:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -109,11 +109,11 @@
         "cypress-run": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "FishIT:serve"
+            "devServerTarget": "FlashCardz:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "FishIT:serve:production"
+              "devServerTarget": "FlashCardz:serve:production"
             }
           }
         },
@@ -127,27 +127,27 @@
         "ct": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "FishIT:serve",
+            "devServerTarget": "FlashCardz:serve",
             "watch": true,
             "headless": false,
             "testingType": "component"
           },
           "configurations": {
             "development": {
-              "devServerTarget": "FishIT:serve:development"
+              "devServerTarget": "FlashCardz:serve:development"
             }
           }
         },
         "e2e": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "FishIT:serve",
+            "devServerTarget": "FlashCardz:serve",
             "watch": true,
             "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "FishIT:serve:production"
+              "devServerTarget": "FlashCardz:serve:production"
             }
           }
         },

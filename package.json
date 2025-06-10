@@ -1,5 +1,5 @@
 {
-  "name": "fish-it",
+  "name": "flash-cardz",
   "version": "0.0.0",
   "scripts": {
     "install:all": "npm run install:client && npm run install:server",

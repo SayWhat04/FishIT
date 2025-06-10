@@ -47,13 +47,11 @@ export class BoxesPageComponent implements OnInit {
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
 
-  // State signals
   boxes = signal<BoxDto[]>([]);
   searchQuery = signal<string>('');
   isLoading = signal<boolean>(false);
   error = signal<string | null>(null);
 
-  // Computed filtered boxes based on search query
   filteredBoxes = computed(() => {
     const query = this.searchQuery().toLowerCase().trim();
     if (!query) {
@@ -107,8 +105,7 @@ export class BoxesPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.snackBar.open('Box created successfully!', 'OK', { duration: 3000 });
-        // Box service automatically updates cache when creating box
-        this.loadBoxes(); // Refresh the list to ensure consistency
+        this.loadBoxes();
       }
     });
   }
@@ -139,8 +136,7 @@ export class BoxesPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.snackBar.open('Box updated successfully!', 'OK', { duration: 3000 });
-        // Box service automatically updates cache when updating box
-        this.loadBoxes(); // Refresh the list to ensure consistency
+        this.loadBoxes();
       }
     });
   }
@@ -159,7 +155,6 @@ export class BoxesPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Box was successfully deleted, refresh the list
         this.loadBoxes();
       }
     });
@@ -169,7 +164,6 @@ export class BoxesPageComponent implements OnInit {
     this.loadBoxes();
   }
 
-  // Helper methods for template
   getFlashcardCount(box: BoxDto): number {
     return box.flashcard_count || 0;
   }

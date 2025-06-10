@@ -11,7 +11,6 @@ import { CreateFlashcardCommand, UpdateFlashcardCommand } from '@shared/types/co
 export class FlashcardService {
   private http = inject(HttpClient);
   
-  // Cache for flashcards by box ID
   private flashcardsCache = new Map<string, FlashcardDto[]>();
   private flashcardsSubject = new BehaviorSubject<Map<string, FlashcardDto[]>>(new Map());
   
@@ -21,7 +20,6 @@ export class FlashcardService {
    * Get all flashcards for a specific box
    */
   getFlashcards(boxId: string, forceRefresh = false): Observable<FlashcardDto[]> {
-    // Return cached data if available and not forcing refresh
     if (!forceRefresh && this.flashcardsCache.has(boxId)) {
       return new Observable(observer => {
         observer.next(this.flashcardsCache.get(boxId)!);
@@ -60,7 +58,6 @@ export class FlashcardService {
   createFlashcard(boxId: string, command: CreateFlashcardCommand): Observable<FlashcardDto> {
     return this.http.post<FlashcardDto>(`/api/boxes/${boxId}/flashcards`, command).pipe(
       tap(flashcard => {
-        // Update cache
         const existingFlashcards = this.flashcardsCache.get(boxId) || [];
         const updatedFlashcards = [flashcard, ...existingFlashcards];
         this.flashcardsCache.set(boxId, updatedFlashcards);
@@ -79,7 +76,6 @@ export class FlashcardService {
   updateFlashcard(flashcardId: string, command: UpdateFlashcardCommand): Observable<FlashcardDto> {
     return this.http.put<FlashcardDto>(`/api/flashcards/${flashcardId}`, command).pipe(
       tap(updatedFlashcard => {
-        // Update cache for all boxes that might contain this flashcard
         for (const [boxId, flashcards] of this.flashcardsCache.entries()) {
           const index = flashcards.findIndex(f => f.id === flashcardId);
           if (index >= 0) {
@@ -103,7 +99,6 @@ export class FlashcardService {
   deleteFlashcard(flashcardId: string): Observable<void> {
     return this.http.delete<void>(`/api/flashcards/${flashcardId}`).pipe(
       tap(() => {
-        // Remove from cache
         for (const [boxId, flashcards] of this.flashcardsCache.entries()) {
           const index = flashcards.findIndex(f => f.id === flashcardId);
           if (index >= 0) {
@@ -127,7 +122,6 @@ export class FlashcardService {
   bulkCreateFlashcards(boxId: string, flashcards: CreateFlashcardCommand[]): Observable<FlashcardDto[]> {
     return this.http.post<FlashcardDto[]>(`/api/boxes/${boxId}/flashcards/bulk`, flashcards).pipe(
       tap(createdFlashcards => {
-        // Update cache
         const existingFlashcards = this.flashcardsCache.get(boxId) || [];
         const updatedFlashcards = [...createdFlashcards, ...existingFlashcards];
         this.flashcardsCache.set(boxId, updatedFlashcards);
