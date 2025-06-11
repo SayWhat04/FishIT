@@ -49,7 +49,7 @@
         <div class="danger-notice">
           <mat-icon class="danger-icon">error</mat-icon>
           <p class="danger-text">
-            <strong>Warning:</strong> This box contains {{ getFlashcardCount() }} 
+            Warning: This box contains {{ getFlashcardCount() }} 
             {{ getFlashcardText() }}. All flashcards and your learning progress will be lost forever.
           </p>
         </div>
@@ -72,16 +72,9 @@
       mat-raised-button 
       color="warn"
       type="button"
-      class="delete-btn"
       (click)="onConfirmDelete()"
       [disabled]="isDeleting">
-      @if (isDeleting) {
-        <mat-icon class="spinning">hourglass_empty</mat-icon>
-        Deleting...
-      } @else {
-        <mat-icon>delete</mat-icon>
         Delete Box
-      }
     </button>
   </mat-dialog-actions>
 </div> 

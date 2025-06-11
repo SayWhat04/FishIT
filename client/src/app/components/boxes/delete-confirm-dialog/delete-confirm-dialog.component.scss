@@ -21,7 +21,6 @@
     font-size: 3.5rem;
     height: 3.5rem;
     width: 3.5rem;
-    color: #f44336; // Red warning color
     margin-bottom: 1rem;
     display: block;
     animation: warningPulse 2s infinite;
@@ -36,7 +35,6 @@
   }
   
   .dialog-subtitle {
-    color: #666;
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.4;
@@ -51,10 +49,9 @@
 }
 
 .box-info {
-  background: #f8f9fa;
   border-radius: 8px;
   padding: 1rem;
-  border-left: 4px solid #2196f3;
+  border: 2px solid #2196f3;
   
   .box-name,
   .box-description,
@@ -78,29 +75,23 @@
   }
   
   .box-name-text {
-    font-weight: 600;
-    color: #333;
     font-size: 1rem;
   }
   
   .description-text {
-    color: #666;
     font-size: 0.9rem;
     line-height: 1.4;
   }
   
   .count-text {
-    color: #555;
     font-size: 0.9rem;
-    font-weight: 500;
   }
 }
 
 .warning-section {
-  background: #fff3e0;
   border-radius: 8px;
   padding: 1rem;
-  border-left: 4px solid #ff9800;
+  border: 2px solid #ff9800;
   
   .warning-item {
     display: flex;
@@ -122,16 +113,13 @@
     }
     
     span {
-      color: #e65100;
       font-size: 0.9rem;
       line-height: 1.4;
-      font-weight: 500;
     }
   }
 }
 
 .danger-notice {
-  background: #ffebee;
   border-radius: 8px;
   padding: 1rem;
   border: 2px solid #f44336;
@@ -142,8 +130,8 @@
   .danger-icon {
     font-size: 24px;
     width: 24px;
+    color: #f44336;
     height: 24px;
-    color: #d32f2f;
     flex-shrink: 0;
     margin-top: 0.1rem;
     animation: warningPulse 2s infinite;
@@ -151,14 +139,8 @@
   
   .danger-text {
     margin: 0;
-    color: #c62828;
     font-size: 0.9rem;
     line-height: 1.5;
-    
-    strong {
-      font-weight: 600;
-      color: #b71c1c;
-    }
   }
 }
 
@@ -174,7 +156,6 @@
   .cancel-btn {
     min-width: 100px;
     height: 40px;
-    border-radius: 8px;
     font-weight: 500;
     
     .mat-icon {
@@ -198,8 +179,6 @@
     min-width: 120px;
     height: 40px;
     border-radius: 8px;
-    font-weight: 600;
-    background-color: #f44336 !important;
     color: white !important;
     box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
     

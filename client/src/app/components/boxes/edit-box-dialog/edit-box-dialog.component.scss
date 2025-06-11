@@ -21,7 +21,6 @@
     font-size: 3rem;
     height: 3rem;
     width: 3rem;
-    color: #ff9800;
     margin-bottom: 1rem;
     display: block;
   }
@@ -30,12 +29,10 @@
     margin: 0 0 0.5rem 0;
     font-size: 1.5rem;
     font-weight: 600;
-    color: #e65100;
     line-height: 1.3;
   }
   
   .dialog-subtitle {
-    color: #666;
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.4;
@@ -59,7 +56,6 @@
     }
     
     .mat-mdc-form-field-icon-prefix {
-      color: #ff9800;
       margin-right: 0.5rem;
     }
     
@@ -79,7 +75,6 @@
 .dialog-actions {
   padding: 1.5rem 1.5rem 1rem 1.5rem !important;
   margin: 0 !important;
-  border-top: 1px solid #e0e0e0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -90,7 +85,6 @@
     height: 40px;
     border-radius: 8px;
     font-weight: 500;
-    color: #666;
     
     .mat-icon {
       margin-right: 0.5rem;
@@ -101,7 +95,6 @@
     
     &:hover {
       background-color: rgba(255, 152, 0, 0.1);
-      color: #ff9800;
     }
   }
   
@@ -125,8 +118,6 @@
       height: 40px;
       border-radius: 8px;
       font-weight: 500;
-      background-color: #ff9800; // Orange theme for edit
-      box-shadow: 0 2px 8px rgba(255, 152, 0, 0.2);
       
       .mat-icon {
         margin-right: 0.5rem;
@@ -135,16 +126,8 @@
         height: 18px;
       }
       
-      &:hover:not(:disabled) {
-        background-color: #f57c00;
-        box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
-        transform: translateY(-1px);
-      }
-      
       &:disabled {
-        opacity: 0.6;
         cursor: not-allowed;
-        background-color: #ccc;
         box-shadow: none;
       }
     }
@@ -226,14 +209,4 @@
   overflow: hidden !important;
 }
 
-::ng-deep .mat-mdc-dialog-surface {
-  border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
-}
 
-.dialog-header .dialog-icon {
-  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
-  border-radius: 50%;
-  padding: 0.5rem;
-  color: white !important;
-} 

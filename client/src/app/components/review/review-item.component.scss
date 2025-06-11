@@ -13,22 +13,18 @@
   
   &.pending {
     border-color: #ffc107;
-    background: linear-gradient(135deg, #fff9c4 0%, #ffffff 100%);
   }
   
   &.accepted {
     border-color: #4caf50;
-    background: linear-gradient(135deg, #e8f5e8 0%, #ffffff 100%);
   }
   
   &.rejected {
     border-color: #f44336;
-    background: linear-gradient(135deg, #ffebee 0%, #ffffff 100%);
   }
   
   &.editing {
     border-color: #9c27b0;
-    background: linear-gradient(135deg, #f3e5f5 0%, #ffffff 100%);
   }
 }
 
@@ -58,8 +54,6 @@
       
       .card-label {
         font-size: 1rem;
-        font-weight: 600;
-        color: #333;
         flex-shrink: 0;
       }
       
@@ -68,7 +62,6 @@
         
         &.accepted-chip {
           background-color: #4caf50;
-          color: white;
           
           .mat-mdc-chip-avatar {
             color: white;
@@ -140,8 +133,6 @@
         
         .side-label {
           font-size: 0.85rem;
-          font-weight: 600;
-          color: #666;
           text-transform: uppercase;
           letter-spacing: 0.5px;
         }
@@ -152,54 +143,25 @@
         display: flex;
         align-items: flex-start;
         padding: 1rem;
-        background-color: #f8f9fa;
-        border-radius: 8px;
         border-left: 4px solid #e0e0e0;
         
         .flashcard-text {
           margin: 0;
           font-size: 0.95rem;
           line-height: 1.5;
-          color: #333;
           word-wrap: break-word;
           overflow-wrap: break-word;
         }
       }
       
-      &.front-side {
-        .side-icon {
-          color: #2196f3;
-        }
-        
-        .side-label {
-          color: #2196f3;
-        }
-        
-        .side-content {
-          border-left-color: #2196f3;
-        }
-      }
+     
       
-      &.back-side {
-        .side-icon {
-          color: #4caf50;
-        }
-        
-        .side-label {
-          color: #4caf50;
-        }
-        
-        .side-content {
-          border-left-color: #4caf50;
-        }
-      }
     }
     
     .sides-divider {
       width: 1px;
       height: auto;
       margin: 0.5rem 0;
-      background-color: #e0e0e0;
     }
   }
   
@@ -217,13 +179,10 @@
           font-size: 18px;
           width: 18px;
           height: 18px;
-          color: #666;
         }
         
         .form-label {
           font-size: 0.85rem;
-          font-weight: 600;
-          color: #666;
           text-transform: uppercase;
           letter-spacing: 0.5px;
         }
@@ -232,9 +191,6 @@
       .form-field {
         width: 100%;
         
-        ::ng-deep .mat-mdc-text-field-wrapper {
-          background-color: #f8f9fa;
-        }
         
         ::ng-deep textarea {
           resize: vertical;
@@ -277,7 +233,6 @@
 
 .card-actions {
   padding: 1rem 1.5rem;
-  background-color: #fafafa;
   border-top: 1px solid #e0e0e0;
   
   .action-buttons {
@@ -307,8 +262,6 @@
         }
         
         &.selected {
-          background-color: #4caf50;
-          color: white;
           border-color: #4caf50;
           
           &:hover {
