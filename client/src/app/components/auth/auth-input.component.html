@@ -7,12 +7,15 @@
     [required]="required"
     [value]="value"
     (input)="onInput($event)"
+    (blur)="onBlur()"
     [disabled]="disabled"
   >
-  @if (icon) {
-    <mat-icon matSuffix>{{ icon }}</mat-icon>
-  }
-  @if (errorMessage) {
-    <mat-error>{{ errorMessage }}</mat-error>
-  }
-</mat-form-field> 
+</mat-form-field>
+
+@if (shouldShowError) {
+  <div class="error-message">
+    {{ errorMessage }}
+  </div>
+}
+
+ 

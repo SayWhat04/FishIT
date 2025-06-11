@@ -6,7 +6,7 @@ import {
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatError, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule,
+    MatIconModule
   ],
   providers: [
     {
@@ -29,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
     },
   ],
   templateUrl: './auth-input.component.html',
+  styleUrls: ['./auth-input.component.scss']
 })
 export class AuthInputComponent implements ControlValueAccessor {
   @Input() label = '';
@@ -37,6 +38,7 @@ export class AuthInputComponent implements ControlValueAccessor {
   @Input() required = false;
   @Input() icon = '';
   @Input() errorMessage: string | null = null;
+  @Input() showError = false;
 
   value = '';
   disabled = false;
@@ -63,6 +65,13 @@ export class AuthInputComponent implements ControlValueAccessor {
     const value = (event.target as HTMLInputElement).value;
     this.value = value;
     this.onChange(value);
+  }
+
+  onBlur(): void {
     this.onTouched();
+  }
+
+  get shouldShowError(): boolean {
+    return this.showError && !!this.errorMessage;
   }
 }

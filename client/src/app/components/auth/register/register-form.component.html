@@ -1,4 +1,4 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="form-field">
     <app-auth-input
       formControlName="email"
@@ -6,10 +6,8 @@
       type="email"
       placeholder="Enter your email"
       [errorMessage]="getErrorMessage('email')"
+      [showError]="isFieldInvalid('email')"
     ></app-auth-input>
-    <div *ngIf="isFieldInvalid('email')" class="text-xs text-red-500 -mt-3 mb-2">
-      {{ getErrorMessage('email') }}
-    </div>
   </div>
 
   <div class="form-field">
@@ -19,10 +17,8 @@
       type="password"
       placeholder="Create a password"
       [errorMessage]="getErrorMessage('password')"
+      [showError]="isFieldInvalid('password')"
     ></app-auth-input>
-    <div *ngIf="isFieldInvalid('password')">
-      {{ getErrorMessage('password') }}
-    </div>
   </div>
 
   <div class="form-field">
@@ -32,10 +28,8 @@
       type="password"
       placeholder="Confirm your password"
       [errorMessage]="getErrorMessage('confirmPassword')"
+      [showError]="isFieldInvalid('confirmPassword')"
     ></app-auth-input>
-    <div *ngIf="isFieldInvalid('confirmPassword')">
-      {{ getErrorMessage('confirmPassword') }}
-    </div>
   </div>
 
   <app-auth-error [message]="errorMessage"></app-auth-error>
