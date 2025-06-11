@@ -142,22 +142,25 @@ export class BoxesPageComponent implements OnInit {
   }
 
   onDeleteBox(box: BoxDto): void {
-    const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
-      width: '500px',
-      maxWidth: '95vw',
-      maxHeight: '90vh',
-      autoFocus: true,
-      restoreFocus: true,
-      panelClass: 'custom-dialog-container',
-      disableClose: false,
-      data: { box }
+    this.snackBar.open('Box delete functionality is not yet implemented.', 'OK', { 
+      duration: 3000 
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.loadBoxes();
-      }
-    });
+    // const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
+    //   width: '500px',
+    //   maxWidth: '95vw',
+    //   maxHeight: '90vh',
+    //   autoFocus: true,
+    //   restoreFocus: true,
+    //   panelClass: 'custom-dialog-container',
+    //   disableClose: false,
+    //   data: { box }
+    // });
+// 
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result) {
+    //     this.loadBoxes();
+    //   }
+    // });
   }
 
   onRefresh(): void {
