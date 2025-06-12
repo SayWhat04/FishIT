@@ -145,6 +145,7 @@ export class BoxesPageComponent implements OnInit {
     this.snackBar.open('Box delete functionality is not yet implemented.', 'OK', { 
       duration: 3000 
     });
+    // TODO: Re-implement boxes deletion functionality with soft-delete
     // const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
     //   width: '500px',
     //   maxWidth: '95vw',

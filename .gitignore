@@ -11,6 +11,10 @@
 .eslintcache
 .nyc_output/
 
+# Test coverage reports
+coverage/
+**/coverage/
+
 # Environment files
 .env
 .env.local
