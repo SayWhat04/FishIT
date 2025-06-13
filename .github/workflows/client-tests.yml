@@ -1,0 +1,44 @@
+name: Client Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'client/**'
+      - 'shared/**'
+      - '.github/workflows/client-tests.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'client/**'
+      - 'shared/**'
+
+jobs:
+  test:
+    name: Run Client Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install client dependencies
+        run: npm run install:client
+
+      - name: Lint client code
+        run: cd client && npm run lint
+
+      - name: Run unit tests
+        run: cd client && npm run test -- --watch=false --browsers=ChromeHeadless
+
+      - name: Build client
+        run: npm run build:client 
