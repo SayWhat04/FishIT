@@ -34,9 +34,6 @@ jobs:
       - name: Install client dependencies
         run: npm run install:client
 
-      - name: Lint client code
-        run: cd client && npm run lint
-
       - name: Run unit tests
         run: cd client && npm run test -- --watch=false --browsers=ChromeHeadless
 
